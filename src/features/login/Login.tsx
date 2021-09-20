@@ -1,7 +1,6 @@
 import React, { CSSProperties, useRef, useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import { setPassword, setUsername } from "./loginSlice";
-
 interface Props {}
 const loginStyle: CSSProperties = {
 	marginLeft: "80%",
