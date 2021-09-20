@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react";
+import Login from "../../features/login/Login";
 
 interface Props {}
 const headerStyle: CSSProperties = {
@@ -31,6 +32,7 @@ const Header = (props: Props) => {
 				<button style={buttonStyle}>test</button>
 				<button style={buttonStyle}>test</button>
 				<button style={buttonStyle}>kill cade?</button>
+				<Login />
 			</div>
 		</React.Fragment>
 	);
