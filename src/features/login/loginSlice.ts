@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 export interface LoginState {
 	username: string;
 	password: string;
@@ -19,6 +20,8 @@ export const loginSlice: Slice = createSlice({
 		},
 	},
 });
+export const selectLogin = (state: RootState) => state.login;
+
 export const { setPassword, setUsername } = loginSlice.actions;
 
 export default loginSlice.reducer;

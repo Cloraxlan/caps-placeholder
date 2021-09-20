@@ -35,17 +35,23 @@ const loginInputCSS: CSSProperties = {
 };
 
 const Login = (props: Props) => {
+	//Access Store
 	const dispatch = useAppDispatch();
 
 	const [showOverlay, setShowOverlay] = useState(false);
 	const username = useRef(null);
 	const password = useRef(null);
+
 	const login = () => {
+		//Updates username and password in store and clears inputs
 		if (username.current && password.current) {
 			let usernameValue: string = (username.current as any).value;
 			let passwordValue: string = (password.current as any).value;
 			dispatch(setUsername(usernameValue));
 			dispatch(setPassword(passwordValue));
+			setShowOverlay(false);
+			(username.current as any).value = "";
+			(password.current as any).value = "";
 		}
 	};
 	return (
@@ -66,7 +72,7 @@ const Login = (props: Props) => {
 						</div>
 						<div style={loginInputCSS}>
 							<p>Password: </p>
-							<input ref={password} type="text"></input>
+							<input ref={password} type="password"></input>
 						</div>
 						<button onClick={login}>Login</button>
 					</div>

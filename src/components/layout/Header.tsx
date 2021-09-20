@@ -1,5 +1,7 @@
 import React, { CSSProperties } from "react";
+import { useAppSelector } from "../../app/hooks";
 import Login from "../../features/login/Login";
+import { LoginState, selectLogin } from "../../features/login/loginSlice";
 
 interface Props {}
 const headerStyle: CSSProperties = {
@@ -19,6 +21,18 @@ const title: CSSProperties = {
 	fontFamily: "Prompt",
 };
 const Header = (props: Props) => {
+	//Access store's login state
+	const login: LoginState = useAppSelector(selectLogin);
+
+	const loginStatus = () => {
+		switch (login.username) {
+			case "":
+				return "Not Logged In";
+
+			default:
+				return "Logged in as " + login.username;
+		}
+	};
 	return (
 		<React.Fragment>
 			{/*Font for title */}
@@ -32,6 +46,7 @@ const Header = (props: Props) => {
 				<button style={buttonStyle}>test</button>
 				<button style={buttonStyle}>test</button>
 				<button style={buttonStyle}>kill cade?</button>
+				<p>{loginStatus()}</p>
 				<Login />
 			</div>
 		</React.Fragment>
