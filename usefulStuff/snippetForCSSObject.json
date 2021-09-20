@@ -1,0 +1,6 @@
+{
+  "Create CSS object for component": {
+    "prefix": "cssobj",
+    "body": ["const $1 : CSSProperties = {", "\t$2", "}"]
+  }
+}
