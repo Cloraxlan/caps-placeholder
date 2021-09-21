@@ -41,11 +41,11 @@ const Header = (props: Props) => {
 				url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,200&display=swap');
 			</style>
 
-			<h1 style={title}>CAPS PLACEHOLDER</h1>
+			<h1 style={title}>Caps placeholder</h1>
 			<div style={headerStyle}>
-				<button style={buttonStyle}>test</button>
-				<button style={buttonStyle}>test</button>
-				<button style={buttonStyle}>kill cade?</button>
+				<button style={buttonStyle}>hello jeremy</button>
+				<button style={buttonStyle}>test hello konrad</button>
+				<button style={buttonStyle}>jeremy?</button>
 				<p>{loginStatus()}</p>
 				<Login />
 			</div>
