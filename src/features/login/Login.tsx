@@ -3,7 +3,8 @@ import { useAppDispatch } from "../../app/hooks";
 import { setPassword, setUsername } from "./loginSlice";
 interface Props {}
 const loginStyle: CSSProperties = {
-	marginLeft: "80%",
+	left: "80%",
+	position: "fixed"
 };
 const overlay: CSSProperties = {
 	position: "fixed",
