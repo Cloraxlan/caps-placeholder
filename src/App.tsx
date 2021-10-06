@@ -1,10 +1,12 @@
 import React from "react";
-import Header from "./components/layout/Header";
-
+import Header from "./components/Header";
+import Layout from "./components/Layout/Layout";
 function App() {
 	return (
 		<div>
-			<Header />
+			<Layout>
+				<div>test</div>
+			</Layout>
 		</div>
 	);
 }
