@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./components/layout/Header";
-import Login from "./components/layout/Login";
 import Logout from "./components/layout/Logout";
 function App() {
 	return (
