@@ -10,13 +10,11 @@ const navItemsStyling : CSSProperties = {
     height: "100%"
 }
 
-function NavItems() {
-    return (
-        <ul style={navItemsStyling}>
-            <NavItem link="/" active={true}>Test</NavItem>
-            <NavItem link="/" active={false}>Test2</NavItem>
-        </ul>
-    )
-}
+const NavItems = () => (
+    <ul style={navItemsStyling}>
+        <NavItem link="/" active={true}>Test</NavItem>
+        <NavItem link="/" active={false}>Test2</NavItem>
+    </ul>
+);
 
 export default NavItems;
