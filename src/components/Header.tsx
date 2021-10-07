@@ -1,7 +1,7 @@
 import React, { CSSProperties } from "react";
-import { useAppSelector } from "../../app/hooks";
-import Login from "../../features/login/Login";
-import { LoginState, selectLogin } from "../../features/login/loginSlice";
+import { useAppSelector } from "../app/hooks";
+import Login from "../features/login/Login";
+import { LoginState, selectLogin } from "../features/login/loginSlice";
 
 interface Props {}
 const headerStyle: CSSProperties = {
@@ -9,10 +9,13 @@ const headerStyle: CSSProperties = {
 	flexDirection: "row",
 };
 const buttonStyle: CSSProperties = {
-	padding: "10px",
-	backgroundColor: "green",
-	borderRadius: "3px",
+	padding: "0.5rem 1.5rem",
+	background: "#8b005d",
+	border: "1px solid #8b005d",
+	boxShadow: "0 0 4px rgba(0, 0, 0, 0.26)",
+	// borderRadius: "3px",
 	color: "white",
+	cursor: "pointer",
 };
 const title: CSSProperties = {
 	display: "flex",
