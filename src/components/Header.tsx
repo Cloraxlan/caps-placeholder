@@ -21,7 +21,7 @@ const title: CSSProperties = {
 	display: "flex",
 	alignContent: "center",
 	justifyContent: "center",
-	fontFamily: "Prompt",
+	fontFamily: "Creepster",
 };
 const Header = (props: Props) => {
 	//Access store's login state
@@ -41,14 +41,17 @@ const Header = (props: Props) => {
 			{/*Font for title */}
 			<style>
 				@import
-				url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,200&display=swap');
+				url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 			</style>
 
 			<h1 style={title}>Caps placeholder</h1>
 			<div style={headerStyle}>
-				<button style={buttonStyle}>hello jeremy</button>
-				<button style={buttonStyle}>test hello konrad</button>
-				<button style={buttonStyle}>jeremy?</button>
+				<button style={buttonStyle}>Poggers</button>
+				<button style={buttonStyle}>Fortnite</button>
+				<button style={buttonStyle}>Keanu</button>
+				<button style={buttonStyle}>Chungus</button>
+				<button style={buttonStyle}>Wholesome</button>
+				<button style={buttonStyle}>100</button>
 				<p>{loginStatus()}</p>
 				<Login />
 			</div>
