@@ -6,7 +6,7 @@ import './Toolbar.css';
 function Toolbar() {
     return (
         <header className="Toolbar">
-            <div>MENU</div>
+            <div>TOOLBAR</div>
             <nav>
                 <NavItems />
             </nav>
