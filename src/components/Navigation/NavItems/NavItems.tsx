@@ -13,8 +13,9 @@ const navItemsStyling : CSSProperties = {
 function NavItems() {
     return (
         <ul style={navItemsStyling}>
-            <NavItem link="/" active={true}>Test</NavItem>
-            <NavItem link="/" active={false}>Test2</NavItem>
+            <NavItem link="/" active={true}>Home</NavItem>
+            <NavItem link="/" active={false}>Feature</NavItem>
+            <NavItem link="/" active={false}>Future Login Page</NavItem>
         </ul>
     )
 }
