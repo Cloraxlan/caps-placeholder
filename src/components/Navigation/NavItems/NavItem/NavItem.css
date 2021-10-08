@@ -7,7 +7,7 @@
 }
 
 .NavItem a {
-    color: white;
+    color: black;
     text-decoration: none;
     height: 100%;
     padding: 16px 10px;
@@ -20,6 +20,6 @@
 .NavItem a:active,
 .NavItem a.active {
     background-color: #32a852;
-    border-bottom: 4px solid #40a4c8;
-    color: white;
+    border-bottom: 4px solid #03f4fc;
+    color: #03f4fc;
 }

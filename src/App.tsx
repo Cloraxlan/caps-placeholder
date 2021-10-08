@@ -1,12 +1,21 @@
 import React from "react";
-import Header from "./components/Header";
+// import Header from "./components/Header";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+
 import Layout from "./components/Layout/Layout";
+
 function App() {
 	return (
 		<div>
 			<Layout>
-				<div>test</div>
+				<ul style={{listStyle: "none"}}>
+					<li><Login /></li>
+					<br />
+					<li><Logout/></li>
+				</ul>
 			</Layout>
+			{/* <Header />*/}
 		</div>
 	);
 }
