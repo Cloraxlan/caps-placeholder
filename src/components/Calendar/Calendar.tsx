@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Day } from "../../Interfaces/Day";
-
+import CalendarDate from "./CalendarDay";
 interface Props {}
 const daysPre: Day[] = [
-	{ date: 1, events: [], month: 1 },
-	{ date: 2, events: [], month: 1 },
-	{ date: 3, events: [], month: 1 },
-	{ date: 4, events: [], month: 1 },
-	{ date: 5, events: [], month: 1 },
-	{ date: 6, events: [], month: 1 },
-	{ date: 7, events: [], month: 1 },
-	{ date: 8, events: [], month: 1 },
-	{ date: 9, events: [], month: 1 },
+	{ date: 1, events: ["Eat Food", "Eat More Food"], month: 1 },
+	{ date: 2, events: ["Eat Too much food"], month: 1 },
+	{ date: 3, events: ["EAT", "Become poor"], month: 1 },
+	{ date: 4, events: ["Poorer"], month: 1 },
+	{ date: 5, events: ["Help no more monies"], month: 1 },
+	{ date: 6, events: ["Pantry empty", "Stomach growls"], month: 1 },
+	{ date: 7, events: ["Dont Eat"], month: 1 },
+	{ date: 8, events: ["Suffer"], month: 1 },
+	{ date: 9, events: ["Starve"], month: 1 },
 ];
 const Calendar = (props: Props) => {
 	const [days, setDays] = useState<Array<Day> | null>(daysPre);
@@ -47,7 +47,12 @@ const Calendar = (props: Props) => {
 						<table>
 							<tr>
 								{row.map((day, j) => {
-									return <td key={i.toString() + j.toString()}>{day.date}</td>;
+									return (
+										<CalendarDate
+											key={i.toString() + ":" + j.toString()}
+											day={day}
+										></CalendarDate>
+									);
 								})}
 							</tr>
 						</table>
