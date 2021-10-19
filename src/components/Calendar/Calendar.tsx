@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Day } from "../../Interfaces/Day";
+import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
+
+import "./Calendar.css";
+
 interface Props {}
 const daysPre: Day[] = [
 	{ date: 1, events: ["Eat Food", "Eat More Food"], month: 1 },
@@ -40,11 +44,11 @@ const Calendar = (props: Props) => {
 	};
 	console.log(generateRows(7));
 	return (
-		<div>
+		<Card className="">
 			<ul>
 				{generateRows(7).map((row, i) => {
 					return (
-						<table>
+						<table className="styled-table">
 							<tr>
 								{row.map((day, j) => {
 									return (
@@ -59,7 +63,7 @@ const Calendar = (props: Props) => {
 					);
 				})}
 			</ul>
-		</div>
+		</Card>
 	);
 };
 
