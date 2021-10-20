@@ -1,39 +1,27 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
-import SearchQuery, { Query } from "./SearchQuery";
+import SearchBox from "./SearchBox";
 
 interface Props {}
-const recipes = [
-	new Recipe("cade", "yes"),
-	new Recipe("obama", "yes"),
-	new Recipe("obamacade", "yes"),
-];
-const Search = (props: Props) => {
-	const searchBox = useRef(null);
-	const getSearchValue: () => string = () => {
-		let r = (searchBox.current as any).value;
-		(searchBox.current as any).value = "";
-		return r;
-	};
-	const search = () => {
-		let query: Query = {
-			searchString: getSearchValue(),
-		};
-		let searchQ = new SearchQuery(query);
 
-		console.log(searchQ.basicSearch(recipes));
-	};
+const Search = (props: Props) => {
+	const [results, setResults] = useState<Recipe[]>([]);
+
 	return (
 		<div>
-			<input
-				onKeyDown={(e) => {
-					if (e.key === "Enter") {
-						search();
-					}
-				}}
-				ref={searchBox}
-			></input>
-			<button onClick={search}>Submit</button>
+			<SearchBox setResults={setResults}></SearchBox>
+			<ul>
+				{results.map((result) => {
+					return (
+						<li>
+							{result.name}
+							<ul>
+								<li>{result.description}</li>
+							</ul>
+						</li>
+					);
+				})}
+			</ul>
 		</div>
 	);
 };
