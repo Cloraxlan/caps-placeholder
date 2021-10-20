@@ -10,19 +10,29 @@ const recipes = [
 ];
 const Search = (props: Props) => {
 	const searchBox = useRef(null);
+	const getSearchValue: () => string = () => {
+		let r = (searchBox.current as any).value;
+		(searchBox.current as any).value = "";
+		return r;
+	};
 	const search = () => {
-		if (searchBox.current) {
-			let query: Query = {
-				searchString: (searchBox.current as any).value,
-			};
-			let searchQ = new SearchQuery(query);
+		let query: Query = {
+			searchString: getSearchValue(),
+		};
+		let searchQ = new SearchQuery(query);
 
-			console.log(searchQ.basicSearch(recipes));
-		}
+		console.log(searchQ.basicSearch(recipes));
 	};
 	return (
 		<div>
-			<input ref={searchBox}></input>
+			<input
+				onKeyDown={(e) => {
+					if (e.key === "Enter") {
+						search();
+					}
+				}}
+				ref={searchBox}
+			></input>
 			<button onClick={search}>Submit</button>
 		</div>
 	);
