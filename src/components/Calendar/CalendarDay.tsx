@@ -28,7 +28,7 @@ const CalendarDay = (props: Props) => {
 		<td>
 			<div className="day">
 				{/* <li>{monthNumToName(props.day.month)}</li> */}
-				<div>{props.day.date}</div>
+				<div>{props.day.date.getDate()}</div>
 				<div className="notes">
 					{props.day.events.map((event) => {
 						return <div>{event}</div>;
