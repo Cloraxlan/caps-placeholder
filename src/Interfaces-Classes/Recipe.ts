@@ -1,14 +1,20 @@
 export default class Recipe {
 	private _name: string;
 	private _description: string;
-	constructor(name: string, description: string) {
+	//Only a string for now to be kept simple, will later be expanded into new class
+	private _ingredientList: Array<string>;
+	constructor(name: string, description: string, ingridents: Array<string>) {
 		this._name = name;
 		this._description = description;
+		this._ingredientList = ingridents;
 	}
 	public get name() {
 		return this._name;
 	}
 	public get description() {
 		return this._description;
+	}
+	public get ingredientList() {
+		return this._ingredientList;
 	}
 }

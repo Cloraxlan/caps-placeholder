@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchBox from "./SearchBox";
-
+import SaveRecipe from "./SaveRecipe";
 interface Props {}
-
+//idrc enough to style this rn, its all gonna be remade anyway. enjoy funny flexbox
+const style: CSSProperties = {
+	display: "flex",
+	flexDirection: "row",
+};
 const Search = (props: Props) => {
 	const [results, setResults] = useState<Recipe[]>([]);
 
@@ -13,12 +17,23 @@ const Search = (props: Props) => {
 			<ul>
 				{results.map((result) => {
 					return (
-						<li>
-							{result.name}
-							<ul>
-								<li>{result.description}</li>
-							</ul>
-						</li>
+						<div style={style}>
+							<SaveRecipe></SaveRecipe>
+							<li>
+								<div>
+									<p>{result.name}</p>
+								</div>
+								<ul>
+									<li>{result.description}</li>
+
+									<ul>
+										{result.ingredientList.map((ingredient) => {
+											return <li>{ingredient}</li>;
+										})}
+									</ul>
+								</ul>
+							</li>
+						</div>
 					);
 				})}
 			</ul>

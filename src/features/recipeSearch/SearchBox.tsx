@@ -6,9 +6,9 @@ interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
-	new Recipe("cade", "yes"),
-	new Recipe("obama", "yes"),
-	new Recipe("obamacade", "yes"),
+	new Recipe("cade", "yes", ["apple", "bananna"]),
+	new Recipe("obama", "yes", ["keyboard", "monkey"]),
+	new Recipe("obamacade", "yes", ["water"]),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
