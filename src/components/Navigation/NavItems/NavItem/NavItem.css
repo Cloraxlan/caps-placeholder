@@ -1,25 +1,39 @@
+/*eggColor: "#faf3ddff",
+	brownGreenColor: "#c8d5b9ff",
+	dyingPlantGreenColor: "#8fc0a9ff",
+	blueGreenColor: "#68b0abff",
+	deepGreenColor: "#4a7c59ff",*/
+
 .NavItem {
-    margin: 0;
-    box-sizing: border-box;
-    display: flex;
-    height: 100%;
-    align-items: center;
+	margin: 0;
+	box-sizing: border-box;
+	display: flex;
+	height: 100%;
+	align-items: center;
+	background-color: #8fc0a9ff;
+	/* border-bottom: 4px solid; */
+	color: #4a7c59ff;
 }
 
 .NavItem a {
-    color: black;
-    text-decoration: none;
-    height: 100%;
-    padding: 16px 10px;
-    border-bottom: 4px solid transparent;
-    box-sizing: border-box;
-    display: block;
+	color: black;
+	text-decoration: none;
+	font-family: "IBM Plex Serif", serif;
+	height: 100%;
+	padding: 14px 40px;
+	border-bottom: 14px solid #c8d5b9ff;
+	/* border-bottom: 14px solid rgb(255, 255, 255); */
+	box-sizing: border-box;
+	display: block;
+	background-color: transparent;
 }
-
+.NavItem a:hover {
+	/* border-bottom: 14px solid #faf3ddff; */
+	border-bottom: 14px solid #8fc0a9ff;
+}
 .NavItem a:hover,
 .NavItem a:active,
 .NavItem a.active {
-    background-color: #32a852;
-    border-bottom: 4px solid #03f4fc;
-    color: #03f4fc;
+	background-color: #4a7c59ff;
+	color: #c8d5b9ff;
 }
