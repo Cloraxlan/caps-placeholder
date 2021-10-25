@@ -1,5 +1,5 @@
 import React from "react";
-import { Day } from "../../Interfaces/Day";
+import { Day } from "../../Interfaces-Classes/Day";
 
 interface Props {
 	day: Day;

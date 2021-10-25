@@ -1,3 +1,8 @@
+export interface serialRecipe {
+	name: string;
+	description: string;
+	ingridentList: Array<string>;
+}
 export default class Recipe {
 	private _name: string;
 	private _description: string;
@@ -16,5 +21,12 @@ export default class Recipe {
 	}
 	public get ingredientList() {
 		return this._ingredientList;
+	}
+	public serialize(): serialRecipe {
+		return {
+			name: this._name,
+			description: this._description,
+			ingridentList: this._ingredientList,
+		};
 	}
 }

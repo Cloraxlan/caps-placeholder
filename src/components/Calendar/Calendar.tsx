@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Day } from "../../Interfaces/Day";
+import { Day } from "../../Interfaces-Classes/Day";
 import CalendarDate from "./CalendarDay";
 interface Props {}
 const daysPre: Day[] = [

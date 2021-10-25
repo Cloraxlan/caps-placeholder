@@ -18,7 +18,7 @@ const Search = (props: Props) => {
 				{results.map((result) => {
 					return (
 						<div style={style}>
-							<SaveRecipe></SaveRecipe>
+							<SaveRecipe recipe={result}></SaveRecipe>
 							<li>
 								<div>
 									<p>{result.name}</p>
