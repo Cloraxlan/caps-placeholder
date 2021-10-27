@@ -28,6 +28,8 @@ const SearchBox = (props: Props) => {
 	};
 	return (
 		<div>
+			<h1>Search For Recipe</h1>
+
 			<input
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
