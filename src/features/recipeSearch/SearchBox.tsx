@@ -7,7 +7,7 @@ interface Props {
 }
 const recipes = [
 	new Recipe("cade", "yes", ["apple", "bananna"]),
-	new Recipe("obama", "yes", ["keyboard", "monkey"]),
+	new Recipe("obama", "yes", ["keyboard", "yum"]),
 	new Recipe("obamacade", "yes", ["water"]),
 ];
 const SearchBox = (props: Props) => {
