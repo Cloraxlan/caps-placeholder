@@ -9,7 +9,7 @@ const Toolbar = () => (
 			url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap');
 		</style>
 		<header className="Toolbar">
-			<div>MENU</div>
+			<div>CAPS-PLACEHOLDER</div>
 			<nav>
 				<NavItems />
 			</nav>
