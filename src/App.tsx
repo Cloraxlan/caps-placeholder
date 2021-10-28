@@ -8,7 +8,7 @@ import Calendar from "./components/Calendar/Calendar";
 
 function App() {
 	return (
-		<div>
+		<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
 			<Layout>
 				<Calendar />
 				<ul style={{listStyle: "none"}}>
