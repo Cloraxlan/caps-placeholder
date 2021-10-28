@@ -1,0 +1,16 @@
+body {
+	background-color: #faf3ddff;
+}
+.Login {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-left: 80vw;
+	margin-top: 15vh;
+}
+
+.Logout {
+	display: flex;
+	flex-direction: row-reverse;
+	margin-left: 80vw;
+	margin-top: 2vh;
+}
