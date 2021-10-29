@@ -1,6 +1,8 @@
 import React from "react";
 import { Day } from "../../Interfaces-Classes/Day";
 
+import "./Calendar.css";
+
 interface Props {
 	day: Day;
 }
@@ -24,17 +26,15 @@ const CalendarDay = (props: Props) => {
 	};
 	return (
 		<td>
-			<ul>
-				<li>{monthNumToName(props.day.month)}</li>
-				<li> {props.day.date}</li>
-				<li>
-					<ul>
-						{props.day.events.map((event) => {
-							return <li>{event}</li>;
-						})}
-					</ul>
-				</li>
-			</ul>
+			<div className="day">
+				{/* <li>{monthNumToName(props.day.month)}</li> */}
+				<div>{props.day.date}</div>
+				<div className="notes">
+					{props.day.events.map((event) => {
+						return <div>{event}</div>;
+					})}
+				</div>
+			</div>
 		</td>
 	);
 };

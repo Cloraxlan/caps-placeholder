@@ -1,18 +1,21 @@
 .Toolbar {
-    height: 56px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #03fc88;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-sizing: border-box;
-    z-index: 90;
+	/* height: 56px; */
+	height: 66px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #c8d5b9ff;
+	/*00ff88*/
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	box-sizing: border-box;
+	z-index: 90;
+	font-family: "IBM Plex Serif", serif;
 }
 
 .Toolbar nav {
-    height: 100%;
+	height: 100%;
 }
