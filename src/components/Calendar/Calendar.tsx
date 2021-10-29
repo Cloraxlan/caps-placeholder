@@ -19,6 +19,21 @@ const testLeapYear = (year: number) => {
 	return 29;
 };
 
+const MONTHS = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
+];
+
 const MONTHSIZE = [
 	31,
 	testLeapYear(year),
@@ -41,11 +56,13 @@ const daysPre: Day[] = [
 	{ date: new Date("January 02, 2021 00:00:00"), events: ["Eat Too much food"] },
 	{ date: new Date("January 03, 2021 00:00:00"), events: ["EAT", "Become poor"] },
 	{ date: new Date("January 04, 2021 00:00:00"), events: ["Poorer"] },
-	{ date: new Date("January 05, 2021 00:00:00"), events: ["Help no more monies"] },
+	{ date: new Date("January 17, 2021 00:00:00"), events: ["Help no more monies"] },
 	{ date: new Date("January 06, 2021 00:00:00"), events: ["Pantry empty", "Stomach growls"] },
 	{ date: new Date("January 07, 2021 00:00:00"), events: ["Dont Eat"] },
 	{ date: new Date("January 08, 2021 00:00:00"), events: ["Suffer"] },
-	{ date: new Date("January 09, 2021 00:00:00"), events: ["Starve"] },
+	{ date: new Date("January 11, 2021 00:00:00"), events: ["Starve"] },
+	{ date: new Date("February 11, 2021 00:00:00"), events: ["Starve"] },
+	{ date: new Date("March 11, 2021 00:00:00"), events: ["Starve"] },
 ];
 
 const Calendar = (props: Props) => {
@@ -56,7 +73,7 @@ const Calendar = (props: Props) => {
 	) => {
 
 		const checkDay = (day: number) => {
-			return days.find(d => d.date.getDate()-1 === day);
+			return days.find(d => d.date.getDate()-1 === day && d.date.getMonth() === MONTH);
 		}
 
 		if (days) {
@@ -101,7 +118,7 @@ const Calendar = (props: Props) => {
 	return (
 		<Card className="card">
 			<table>
-				<caption>June</caption>
+				<caption>{MONTHS[MONTH]}</caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />
