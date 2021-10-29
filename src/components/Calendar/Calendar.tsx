@@ -65,18 +65,12 @@ const daysPre: Day[] = [
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
-	const [days, setDays] = useState<Array<Day> | null>(daysPre);
+	const [days, setDays] = useState<Array<Day>>(daysPre);
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
 		weekLength: number = 7,
 	) => {
 		const checkDay = (day: number) => {
-			if (days) {
-				days.forEach((d) => {
-					console.log(d.date.getDate() + " " + day);
-					if (d.date.getDate() === day) return d;
-				});
-			}
-			return undefined;
+			return days.find((d) => d.date.getDate() - 1 === day);
 		};
 
 		if (days) {
@@ -90,7 +84,7 @@ const Calendar = (props: Props) => {
 					// console.log(o + " " + i);
 					let foundDayObj = checkDay(day);
 					console.log(foundDayObj);
-					if (foundDayObj) {
+					if (foundDayObj != undefined) {
 						row.push(foundDayObj);
 					} else {
 						const newDate = new Date();
