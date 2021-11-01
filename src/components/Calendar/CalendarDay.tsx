@@ -31,7 +31,7 @@ const CalendarDay = (props: Props) => {
 				<div>{props.day.date.getDate()}</div>
 				<div className="notes">
 					{props.day.events.map((event) => {
-						return <div>{event}</div>;
+						return <div>{event.note}</div>;
 					})}
 				</div>
 			</div>

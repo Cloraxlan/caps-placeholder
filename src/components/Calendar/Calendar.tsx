@@ -4,6 +4,7 @@ import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 
 import "./Calendar.css";
+import Recipe from "../../Interfaces-Classes/Recipe";
 
 interface Props {}
 
@@ -39,36 +40,19 @@ const MONTH = 0;
 const daysPre: Day[] = [
 	{
 		date: new Date("January 01, 2021 00:00:00"),
-		events: ["Eat Food", "Eat More Food"],
+		events: [
+			{
+				recipe: new Recipe("Knuckle Sandwitch", "For cade", ["hand", "anger"]),
+				note: "when cade makes us :(",
+			},
+		],
 	},
-	{
-		date: new Date("January 02, 2021 00:00:00"),
-		events: ["Eat Too much food"],
-	},
-	{
-		date: new Date("January 03, 2021 00:00:00"),
-		events: ["EAT", "Become poor"],
-	},
-	{ date: new Date("January 04, 2021 00:00:00"), events: ["Poorer"] },
-	{
-		date: new Date("January 05, 2021 00:00:00"),
-		events: ["Help no more monies"],
-	},
-	{
-		date: new Date("January 06, 2021 00:00:00"),
-		events: ["Pantry empty", "Stomach growls"],
-	},
-	{ date: new Date("January 07, 2021 00:00:00"), events: ["Dont Eat"] },
-	{ date: new Date("January 08, 2021 00:00:00"), events: ["Suffer"] },
-	{ date: new Date("January 09, 2021 00:00:00"), events: ["Starve"] },
 ];
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	const [days, setDays] = useState<Array<Day>>(daysPre);
-	const generateRows: (weekLength: number) => Array<Array<Day>> = (
-		weekLength: number = 7,
-	) => {
+	const generateRows = (weekLength: number = 7) => {
 		const checkDay = (day: number) => {
 			return days.find((d) => d.date.getDate() - 1 === day);
 		};
@@ -140,7 +124,7 @@ const Calendar = (props: Props) => {
 									return (
 										<CalendarDate
 											key={i.toString() + ":" + j.toString()}
-											day={day}
+											day={day as Day}
 										></CalendarDate>
 									);
 								})}
