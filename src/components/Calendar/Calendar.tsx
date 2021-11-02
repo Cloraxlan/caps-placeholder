@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Day } from "../../Interfaces/Day";
+import { Day } from "../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 

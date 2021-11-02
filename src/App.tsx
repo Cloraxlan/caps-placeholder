@@ -6,6 +6,7 @@ import Layout from "./components/layout/Layout";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
+import Search from "./features/recipeSearch/Search";
 
 // const bodyStyling: CSSProperties = {
 // 	backgroundColor: "black",
@@ -17,6 +18,7 @@ function App() {
 				<Layout>
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />
+						<Route path="/Search" component={Search} />
 						<ul style={{ listStyle: "none" }}></ul>
 					</Switch>
 					{/* <ul style={{ listStyle: "none" }}>
