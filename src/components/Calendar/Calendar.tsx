@@ -49,7 +49,7 @@ const MONTHSIZE = [
 	31,
 ];
 
-const MONTH = 0;
+const MONTH = 9;
 
 const daysPre: Day[] = [
 	{ date: new Date("January 01, 2021 00:00:00"), events: ["Eat Food", "Eat More Food"] },
@@ -63,6 +63,7 @@ const daysPre: Day[] = [
 	{ date: new Date("January 11, 2021 00:00:00"), events: ["Starve"] },
 	{ date: new Date("February 11, 2021 00:00:00"), events: ["Starve"] },
 	{ date: new Date("March 11, 2021 00:00:00"), events: ["Starve"] },
+	{ date: new Date("October 20, 2021 00:00:00"), events: ["BDAY"] }
 ];
 
 const Calendar = (props: Props) => {
@@ -78,35 +79,55 @@ const Calendar = (props: Props) => {
 
 		if (days) {
 			// let weeks = days.length / weekLength;
-			let weeks = MONTHSIZE[MONTH] / weekLength;
+			// let weeks = MONTHSIZE[MONTH] / weekLength;
+			let weeks = 5;
 			let day = 0;
 			let rows = [];
 			for (let i: number = 0; i < weeks; i++) {
 				let row = [];
 				for (let o: number = 0; o < weekLength; o++) {
-					// console.log(o + " " + i);
 					let foundDayObj = checkDay(day);
-					console.log(foundDayObj);
-					if (foundDayObj != undefined) {
+					// console.log(day + " : " + foundDayObj + " : " + row.length + " : " + rows.length)
+					
+					//if there are events for this day of this month
+					if (foundDayObj !== undefined) {
+						//add the appropriate Day object to the end of this week
 						row.push(foundDayObj);
 					} else {
 						const newDate = new Date();
-						let oldDate;
+						let oldDate: Date;
+						//if not the first day in the week
 						if (row.length !== 0) {
+							//oldDate is equal to the previous day in the week
 							oldDate = new Date(row[row.length-1].date);
 						} else {
-							oldDate = new Date(rows[rows.length-1][weekLength-1].date);
+							//if first day in the month
+							if(rows.length===0) {
+								//oldDate is equal to the 1st day of MONTH
+								oldDate = new Date();
+								oldDate.setMonth(MONTH);
+								oldDate.setDate(1);
+								console.log(oldDate);
+							} else {
+								//oldDate is equal to the last day of previous week
+								oldDate = new Date(rows[rows.length-1][weekLength-1].date);
+							}
 						}
-						console.log(oldDate);
-						newDate.setDate(oldDate.getDate() + 1);
+
+						//find the day after the oldDate
+						if(rows.length===0&&row.length===0) {
+							newDate.setDate(oldDate.getDate())
+						} else {
+							newDate.setDate(oldDate.getDate() + 1);
+						}
 						const dateObj: { date: Date; events: Array<string> } = {
 							date: newDate,
 							events: [],
 						};
+						
 						row.push(dateObj);
 					}
 					day++;
-					console.log(day);
 				}
 				rows.push(row);
 			}
@@ -114,7 +135,6 @@ const Calendar = (props: Props) => {
 		}
 		return [];
 	};
-	console.log(generateRows(7));
 	return (
 		<Card className="card">
 			<table>
