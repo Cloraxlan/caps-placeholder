@@ -1,9 +1,8 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import Login from "../../components/Login";
 import Logout from "../../components/Logout";
-interface Props {}
 
-function LoginPage({}: Props): ReactElement {
+function LoginPage(): ReactElement {
 	return (
 		<div>
 			<div className="Login">
@@ -12,9 +11,6 @@ function LoginPage({}: Props): ReactElement {
 			<div className="Logout">
 				<Logout />
 			</div>
-			{/* <NavItem link="/LoginPage" active={false}>
-				Future Login Page
-			</NavItem> */}
 		</div>
 	);
 }
