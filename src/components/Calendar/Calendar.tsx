@@ -63,7 +63,7 @@ const daysPre: Day[] = [
 	{ date: new Date("January 11, 2021 00:00:00"), events: ["Starve"] },
 	{ date: new Date("February 11, 2021 00:00:00"), events: ["Starve"] },
 	{ date: new Date("March 11, 2021 00:00:00"), events: ["Starve"] },
-	{ date: new Date("October 20, 2021 00:00:00"), events: ["BDAY"] }
+	{ date: new Date("October 20, 2021 00:00:00"), events: ["Bday events"], holiday: "Birthday"}
 ];
 
 const Calendar = (props: Props) => {
