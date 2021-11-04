@@ -2,7 +2,7 @@
 // import Header from "./components/Header";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import Layout from "./components/layout/Layout";
+import Layout from "./components/Layout/Layout";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
