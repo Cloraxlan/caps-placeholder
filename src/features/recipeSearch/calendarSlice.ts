@@ -10,7 +10,12 @@ export interface CalendarState {
 	recipeDates: Array<RecipeDate>;
 }
 const initialState: CalendarState = {
-	recipeDates: [],
+	recipeDates: [
+		{
+			date: new Date("January 01, 2021 00:00:00"),
+			recipe: new Recipe("yum", "pie", ["yes"]),
+		},
+	],
 };
 export const calendarSlice: Slice = createSlice({
 	name: "calendar",

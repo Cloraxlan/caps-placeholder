@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Day } from "../../Interfaces-Classes/Day";
+import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 
 import "./Calendar.css";
 import Recipe from "../../Interfaces-Classes/Recipe";
+import {
+	addRecipeDate,
+	RecipeDate,
+	recipeDates,
+} from "../../features/recipeSearch/calendarSlice";
+import { useAppSelector } from "../../app/hooks";
 
 interface Props {}
 
@@ -51,10 +57,15 @@ const daysPre: Day[] = [
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
-	const [days, setDays] = useState<Array<Day>>(daysPre);
+	let recipeDateList = useAppSelector(recipeDates);
+	//convert to recipeDates into days
+	let days = convertToDays(recipeDateList);
+
+	//const [days, setDays] = useState(daysPre);
+	console.log(days);
 	const generateRows = (weekLength: number = 7) => {
 		const checkDay = (day: number) => {
-			return days.find((d) => d.date.getDate() - 1 === day);
+			return days.find((d: Day) => d.date.getDate() - 1 === day);
 		};
 
 		if (days) {
