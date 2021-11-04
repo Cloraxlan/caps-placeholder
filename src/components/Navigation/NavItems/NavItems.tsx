@@ -10,7 +10,6 @@ const navItemsStyling: CSSProperties = {
 };
 
 const NavItems = () => {
-	console.log(document.location.href);
 	return (
 		<ul style={navItemsStyling}>
 			<NavItem link="/" active={document.location.pathname === "/"}>
@@ -24,6 +23,9 @@ const NavItems = () => {
 				active={document.location.pathname === "/LoginPage"}
 			>
 				Future Login Page
+			</NavItem>
+			<NavItem link="/Search" active={document.location.pathname == "/Search"}>
+				Recipe Search
 			</NavItem>
 		</ul>
 	);

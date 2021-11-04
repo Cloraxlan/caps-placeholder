@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
+import Search from "./features/recipeSearch/Search";
 
 function App() {
 	return (
@@ -11,6 +12,7 @@ function App() {
 				<Layout>
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />
+						<Route path="/Search" component={Search} />
 						<ul style={{ listStyle: "none" }}></ul>
 					</Switch>
 				</Layout>

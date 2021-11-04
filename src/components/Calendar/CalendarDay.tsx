@@ -1,5 +1,5 @@
-import React from "react";
-import { Day } from "../../Interfaces/Day";
+import React, { useState } from "react";
+import { Day } from "../../Interfaces-Classes/Day";
 
 import "./Calendar.css";
 
@@ -20,22 +20,57 @@ const MONTHS = [
 	"November",
 	"December",
 ];
+
 const CalendarDay = (props: Props) => {
 	const monthNumToName: (num: number) => string = (num: number) => {
 		return MONTHS[num - 1];
 	};
+	const [overlayShown, setOverlayShown] = useState(false);
 	return (
-		<td>
-			<div className="day">
-				{/* <li>{monthNumToName(props.day.month)}</li> */}
-				<div>{props.day.date}</div>
-				<div className="notes">
-					{props.day.events.map((event) => {
-						return <div>{event}</div>;
-					})}
+		<React.Fragment>
+			<td>
+				<div
+					className="day"
+					onClick={() => {
+						setOverlayShown(true);
+					}}
+				>
+					{/* <li>{monthNumToName(props.day.month)}</li> */}
+					<div>{props.day.date.getDate()}</div>
+					<div className="notes">
+						{props.day.events.map((event) => {
+							return <div>{event.recipe.name}</div>;
+						})}
+					</div>
 				</div>
-			</div>
-		</td>
+				{overlayShown && (
+					<div className="calendarOverlay">
+						<button
+							className="recipeOverlayText"
+							onClick={() => {
+								setOverlayShown(false);
+							}}
+						>
+							X
+						</button>
+						{props.day.events.map((event) => {
+							return (
+								<div className="recipeOverlayText">
+									<h1>{event.recipe.name}</h1>
+									<p>Note: {event.note}</p>
+									<p>{event.recipe.description}</p>
+									<div className="ingrdientItem">
+										{event.recipe.ingredientList.map((ingredient) => {
+											return <li>{ingredient}</li>;
+										})}
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
+			</td>
+		</React.Fragment>
 	);
 };
 

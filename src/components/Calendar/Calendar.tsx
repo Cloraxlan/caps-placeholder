@@ -1,41 +1,104 @@
 import React, { useState } from "react";
-import { Day } from "../../Interfaces/Day";
+import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 
 import "./Calendar.css";
+import Recipe from "../../Interfaces-Classes/Recipe";
+import {
+	addRecipeDate,
+	RecipeDate,
+	recipeDates,
+} from "../../features/recipeSearch/calendarSlice";
+import { useAppSelector } from "../../app/hooks";
 
 interface Props {}
-const daysPre: Day[] = [
-	{ date: 1, events: ["Eat Food", "Eat More Food"], month: 1 },
-	{ date: 2, events: ["Eat Too much food"], month: 1 },
-	{ date: 3, events: ["EAT", "Become poor"], month: 1 },
-	{ date: 4, events: ["Poorer"], month: 1 },
-	{ date: 5, events: ["Help no more monies"], month: 1 },
-	{ date: 6, events: ["Pantry empty", "Stomach growls"], month: 1 },
-	{ date: 7, events: ["Dont Eat"], month: 1 },
-	{ date: 8, events: ["Suffer"], month: 1 },
-	{ date: 9, events: ["Starve"], month: 1 },
+
+const year = new Date().getFullYear();
+
+const testLeapYear = (year: number) => {
+	if (year % 4 === 0) {
+		if (year % 100 === 0 && year % 400 !== 0) {
+			return 29;
+		}
+		return 28;
+	}
+	return 29;
+};
+
+const MONTHSIZE = [
+	31,
+	testLeapYear(year),
+	31,
+	30,
+	31,
+	30,
+	31,
+	31,
+	30,
+	31,
+	30,
+	31,
 ];
+
+const MONTH = 0;
+
+const daysPre: Day[] = [
+	{
+		date: new Date("January 01, 2021 00:00:00"),
+		events: [
+			{
+				recipe: new Recipe("Knuckle Sandwitch", "For cade", ["hand", "anger"]),
+				note: "when cade makes us :(",
+			},
+		],
+	},
+];
+
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
-	const [days, setDays] = useState<Array<Day> | null>(daysPre);
-	const generateRows: (weekLength: number) => Array<Array<Day>> = (
-		weekLength: number = 7,
-	) => {
+	let recipeDateList = useAppSelector(recipeDates);
+	//convert to recipeDates into days
+	let days = convertToDays(recipeDateList);
+
+	//const [days, setDays] = useState(daysPre);
+	console.log(days);
+	const generateRows = (weekLength: number = 7) => {
+		const checkDay = (day: number) => {
+			return days.find((d: Day) => d.date.getDate() - 1 === day);
+		};
+
 		if (days) {
-			let weeks = days.length / weekLength;
-			let date = 0;
+			// let weeks = days.length / weekLength;
+			let weeks = MONTHSIZE[MONTH] / weekLength;
+			let day = 0;
 			let rows = [];
 			for (let i: number = 0; i < weeks; i++) {
 				let row = [];
 				for (let o: number = 0; o < weekLength; o++) {
-					if (days[date]) {
-						row.push(days[date]);
-						date++;
+					// console.log(o + " " + i);
+					let foundDayObj = checkDay(day);
+					console.log(foundDayObj);
+					if (foundDayObj != undefined) {
+						row.push(foundDayObj);
 					} else {
-						break;
+						const newDate = new Date();
+						let oldDate;
+						if (row.length !== 0) {
+							oldDate = new Date(row[row.length - 1].date);
+						} else {
+							oldDate = new Date(rows[rows.length - 1][weekLength - 1].date);
+						}
+						console.log(oldDate);
+						newDate.setDate(oldDate.getDate() + 1);
+						const dateObj: { date: Date; events: Array<string> } = {
+							date: newDate,
+							events: [],
+						};
+						row.push(dateObj);
 					}
+					day++;
+					console.log(day);
 				}
 				rows.push(row);
 			}
@@ -55,19 +118,24 @@ const Calendar = (props: Props) => {
 				</colgroup>
 				<thead>
 					<tr id="days">
-						<th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+						<th>Sun</th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wed</th>
+						<th>Thu</th>
+						<th>Fri</th>
+						<th>Sat</th>
 					</tr>
 				</thead>
 				<tbody>
 					{generateRows(7).map((row, i) => {
 						return (
-							
 							<tr>
 								{row.map((day, j) => {
 									return (
 										<CalendarDate
 											key={i.toString() + ":" + j.toString()}
-											day={day}
+											day={day as Day}
 										></CalendarDate>
 									);
 								})}
