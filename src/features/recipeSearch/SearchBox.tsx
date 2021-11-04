@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
+import "./SearchBox.css";
 
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
-	new Recipe("cade", "yes", ["apple", "bananna"]),
-	new Recipe("obama", "yes", ["keyboard", "yum"]),
-	new Recipe("obamacade", "yes", ["water"]),
+	new Recipe("Apple Pie", "It is very good takes like an hour to make", [
+		"apple",
+		"pie crust",
+	]),
+	new Recipe("Jeramisu", "Yummy Jeremy mmmmmm yummy", ["Jeremy", "yum powder"]),
+	new Recipe("obamacade", "yes", ["spunk", "konrad's love", "poptarts mostly"]),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
@@ -28,9 +32,9 @@ const SearchBox = (props: Props) => {
 	};
 	return (
 		<div>
-			<h1>Search For Recipe</h1>
-
+			<h1 className="Title">Search For Recipe</h1>
 			<input
+				className="SearchBox"
 				onKeyDown={(e) => {
 					if (e.key === "Enter") {
 						search();
@@ -38,7 +42,9 @@ const SearchBox = (props: Props) => {
 				}}
 				ref={searchBox}
 			></input>
-			<button onClick={search}>Submit</button>
+			<button onClick={search} className="Title">
+				Submit
+			</button>
 		</div>
 	);
 };

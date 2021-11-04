@@ -2,6 +2,7 @@ import React, { CSSProperties, useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchBox from "./SearchBox";
 import SaveRecipe from "./SaveRecipe";
+import "./Search.css";
 interface Props {}
 //idrc enough to style this rn, its all gonna be remade anyway. enjoy funny flexbox
 const style: CSSProperties = {
@@ -15,27 +16,37 @@ const Search = (props: Props) => {
 		<div>
 			<SearchBox setResults={setResults}></SearchBox>
 			<ul>
-				{results.map((result) => {
-					return (
-						<div style={style}>
-							<SaveRecipe recipe={result}></SaveRecipe>
-							<li>
-								<div>
-									<p>{result.name}</p>
-								</div>
-								<ul>
-									<li>{result.description}</li>
+				<React.Fragment>
+					{/* <div className="SideBox"></div> */}
+					{results.map((result) => {
+						return (
+							<div style={style}>
+								<div className="Font">
+									<div>
+										<p className="Name">{result.name}</p>
+									</div>
+									{/* <ul>
+									<div className="Description">{result.description}</div>
 
 									<ul>
 										{result.ingredientList.map((ingredient) => {
-											return <li>{ingredient}</li>;
+											return <div>{ingredient}</div>;
 										})}
 									</ul>
-								</ul>
-							</li>
-						</div>
-					);
-				})}
+								</ul> */}
+									<div className="Description">{result.description}</div>
+
+									<ul>
+										{result.ingredientList.map((ingredient) => {
+											return <li className="Ingredient">{ingredient}</li>;
+										})}
+									</ul>
+									<SaveRecipe recipe={result}></SaveRecipe>
+								</div>
+							</div>
+						);
+					})}
+				</React.Fragment>
 			</ul>
 		</div>
 	);

@@ -1,7 +1,6 @@
 import React, { CSSProperties } from "react";
 import NavItem from "./NavItem/NavItem";
-import LoginPage from "../../LoginPage/LoginPage";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 const navItemsStyling: CSSProperties = {
 	margin: "0",
 	padding: "0",
@@ -12,7 +11,6 @@ const navItemsStyling: CSSProperties = {
 };
 
 const NavItems = () => {
-	console.log(document.location.href);
 	return (
 		<ul style={navItemsStyling}>
 			<NavItem link="/" active={document.location.pathname == "/"}>
@@ -26,6 +24,9 @@ const NavItems = () => {
 				active={document.location.pathname == "/LoginPage"}
 			>
 				Future Login Page
+			</NavItem>
+			<NavItem link="/Search" active={document.location.pathname == "/Search"}>
+				Recipe Search
 			</NavItem>
 		</ul>
 	);

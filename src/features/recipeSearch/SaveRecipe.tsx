@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Recipe from "../../Interfaces-Classes/Recipe";
+import "./SaveRecipe.css";
 import calendarSlice, {
 	addRecipeDate,
 	CalendarState,
@@ -20,7 +21,9 @@ const SaveRecipe = (props: Props) => {
 	};
 	return (
 		<div>
-			<button onClick={save}>Save Recipe</button>
+			<button onClick={save} className="Save">
+				Save Recipe
+			</button>
 			{console.log(calendarr)}
 		</div>
 	);
