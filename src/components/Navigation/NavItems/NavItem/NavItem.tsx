@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import "./NavItem.css";
 
 const NavItem = (props: {
-	link: string | undefined;
+	link: any;
 	active: any;
 	children:
 		| boolean
@@ -12,9 +13,11 @@ const NavItem = (props: {
 		| undefined;
 }) => (
 	<li className="NavItem">
-		<a href={props.link} className={props.active ? "active" : undefined}>
-			{props.children}
-		</a>
+		{console.log(props.active)}
+
+		<div className={props.active ? "active" : undefined}>
+			<Link to={props.link}>{props.children}</Link>
+		</div>
 	</li>
 );
 

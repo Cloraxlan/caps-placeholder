@@ -8,7 +8,7 @@ import Recipe from "../../Interfaces-Classes/Recipe";
 import {
 	addRecipeDate,
 	RecipeDate,
-	recipeDates,
+	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
 
@@ -57,12 +57,12 @@ const daysPre: Day[] = [
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
-	let recipeDateList = useAppSelector(recipeDates);
+	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
+	console.log(recipeDateList);
 	let days = convertToDays(recipeDateList);
 
 	//const [days, setDays] = useState(daysPre);
-	console.log(days);
 	const generateRows = (weekLength: number = 7) => {
 		const checkDay = (day: number) => {
 			return days.find((d: Day) => d.date.getDate() - 1 === day);
@@ -78,7 +78,7 @@ const Calendar = (props: Props) => {
 				for (let o: number = 0; o < weekLength; o++) {
 					// console.log(o + " " + i);
 					let foundDayObj = checkDay(day);
-					console.log(foundDayObj);
+
 					if (foundDayObj != undefined) {
 						row.push(foundDayObj);
 					} else {
@@ -89,7 +89,6 @@ const Calendar = (props: Props) => {
 						} else {
 							oldDate = new Date(rows[rows.length - 1][weekLength - 1].date);
 						}
-						console.log(oldDate);
 						newDate.setDate(oldDate.getDate() + 1);
 						const dateObj: { date: Date; events: Array<string> } = {
 							date: newDate,
@@ -98,7 +97,6 @@ const Calendar = (props: Props) => {
 						row.push(dateObj);
 					}
 					day++;
-					console.log(day);
 				}
 				rows.push(row);
 			}
@@ -106,7 +104,6 @@ const Calendar = (props: Props) => {
 		}
 		return [];
 	};
-	console.log(generateRows(7));
 	return (
 		<Card className="card">
 			<table>
