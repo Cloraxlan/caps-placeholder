@@ -12,7 +12,17 @@ const recipes = [
 		"pie crust",
 	]),
 	new Recipe("Jeramisu", "Yummy Jeremy mmmmmm yummy", ["Jeremy", "yum powder"]),
-	new Recipe("Pizzella", "yes", ["spunk", "konrad's love", "poptarts mostly"]),
+	new Recipe("Pizzella", "yes", [
+		"poptarts mostly",
+		"Pizza",
+		"A kiss from Marcello",
+	]),
+	new Recipe("Popkornrad", "Pop pop!", [
+		"Konrad",
+		"oil",
+		"budder",
+		"souls of the dead",
+	]),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
@@ -31,20 +41,21 @@ const SearchBox = (props: Props) => {
 		props.setResults(searchQ.basicSearch(recipes));
 	};
 	return (
-		<div>
-			<h1 className="Title">Search For Recipe</h1>
-			<input
-				className="SearchBox"
-				onKeyDown={(e) => {
-					if (e.key === "Enter") {
-						search();
-					}
-				}}
-				ref={searchBox}
-			></input>
-			<button onClick={search} className="Title">
-				Submit
-			</button>
+		<div className="Title">
+			<h1>Search For Recipe</h1>
+			<div className="Flex">
+				<input
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							search();
+						}
+					}}
+					ref={searchBox}
+				></input>
+				<button className="Submit" onClick={search}>
+					Search
+				</button>
+			</div>
 		</div>
 	);
 };
