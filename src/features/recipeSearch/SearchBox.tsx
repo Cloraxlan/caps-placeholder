@@ -12,7 +12,7 @@ const recipes = [
 		"pie crust",
 	]),
 	new Recipe("Jeramisu", "Yummy Jeremy mmmmmm yummy", ["Jeremy", "yum powder"]),
-	new Recipe("obamacade", "yes", ["spunk", "konrad's love", "poptarts mostly"]),
+	new Recipe("Pizzella", "yes", ["spunk", "konrad's love", "poptarts mostly"]),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
