@@ -7,7 +7,7 @@ export default class SearchQuery {
 	private _searchString: string;
 
 	constructor(query: Query) {
-		this._searchString = query.searchString;
+		this._searchString = query.searchString.toLowerCase();
 	}
 	//Sees if recipe name ingidients or description contains the search term
 	public basicSearch(recipes: Array<Recipe>): Array<Recipe> {
@@ -16,13 +16,13 @@ export default class SearchQuery {
 			console.log(this._searchString);
 			let ingredientIncludes = false;
 			recipe.ingredientList.map((ingredient) => {
-				if (ingredient.includes(this._searchString)) {
+				if (ingredient.toLowerCase().includes(this._searchString)) {
 					ingredientIncludes = true;
 				}
 			});
 			if (
-				recipe.name.includes(this._searchString) ||
-				recipe.description.includes(this._searchString) ||
+				recipe.name.toLowerCase().includes(this._searchString) ||
+				recipe.description.toLowerCase().includes(this._searchString) ||
 				ingredientIncludes
 			) {
 				results.push(recipe);

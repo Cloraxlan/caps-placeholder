@@ -27,14 +27,17 @@ const recipes = [
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
 	//Gets value in input and clears it
-	const getSearchValue: () => string = () => {
+	const getSearchValue: (clear: boolean) => string = (clear: boolean) => {
 		let r = (searchBox.current as any).value;
-		(searchBox.current as any).value = "";
+		if(clear){
+					(searchBox.current as any).value = "";
+
+		}
 		return r;
 	};
-	const search = () => {
+	const search = (clear: boolean) => {
 		let query: Query = {
-			searchString: getSearchValue(),
+			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
 
@@ -47,12 +50,16 @@ const SearchBox = (props: Props) => {
 				<input
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
-							search();
+							search(true);
 						}
+						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
+						search(false)
 					}}
 					ref={searchBox}
 				></input>
-				<button className="Submit" onClick={search}>
+				<button className="Submit" onClick={()=>{
+					search(true)
+				}}>
 					Search
 				</button>
 			</div>
