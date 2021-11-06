@@ -1,7 +1,7 @@
 export interface serialRecipe {
 	name: string;
 	description: string;
-	ingridentList: Array<string>;
+	ingredientList: Array<string>;
 }
 export default class Recipe {
 	private _name: string;
@@ -26,7 +26,7 @@ export default class Recipe {
 		return {
 			name: this._name,
 			description: this._description,
-			ingridentList: this._ingredientList,
+			ingredientList: this._ingredientList,
 		};
 	}
 }

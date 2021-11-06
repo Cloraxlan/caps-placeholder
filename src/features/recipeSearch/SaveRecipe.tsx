@@ -6,7 +6,7 @@ import calendarSlice, {
 	addRecipeDate,
 	CalendarState,
 	RecipeDate,
-	recipeDates,
+	selectRecipeDates,
 } from "./calendarSlice";
 
 interface Props {
@@ -15,9 +15,12 @@ interface Props {
 
 const SaveRecipe = (props: Props) => {
 	const dispatch = useAppDispatch();
-	const calendarr: Array<RecipeDate> = useAppSelector(recipeDates);
+	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
 	let save = () => {
-		dispatch(addRecipeDate(props.recipe.serialize()));
+		let month = prompt("Month (as name)");
+		let day = prompt("Day(as number)");
+		let date = new Date(month + " " + day + ", 2021");
+		dispatch(addRecipeDate({ date: date, recipe: props.recipe.serialize() }));
 	};
 	return (
 		<div>
