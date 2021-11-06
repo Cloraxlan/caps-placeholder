@@ -15,13 +15,13 @@ export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 		let date = recipeDate.date;
 		let found = false;
 		for (let i = 0; i < days.length; i++) {
-			if (days[i].date == date) {
+			
+			if (days[i].date.toDateString()  == date.toDateString() ) {
 				found = true;
 				days[i].events.push({
 					recipe: recipeDate.recipe,
 					note: "TODO REMEBER OKAY!!",
 				});
-				break;
 			}
 		}
 		if (!found) {

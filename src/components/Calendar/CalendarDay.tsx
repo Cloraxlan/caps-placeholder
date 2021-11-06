@@ -25,21 +25,23 @@ const CalendarDay = (props: Props) => {
 	const monthNumToName: (num: number) => string = (num: number) => {
 		return MONTHS[num - 1];
 	};
-	const [overlayShown, setOverlayShown] = useState(false);
+	//Value is the name, or eventually id for the event
+	const [overlayShown, setOverlayShown] = useState("");
 	return (
 		<React.Fragment>
 			<td>
 				<div
 					className="day"
-					onClick={() => {
-						setOverlayShown(true);
-					}}
+				
 				>
 					{/* <li>{monthNumToName(props.day.month)}</li> */}
 					<div>{props.day.date.getDate()}</div>
 					<div className="notes">
 						{props.day.events.map((event) => {
-							return <div>{event.recipe.name}</div>;
+							return <div 	onClick={() => {
+						//Or whatever should be the id
+						setOverlayShown(event.recipe.name);
+					}}>{event.recipe.name}</div>;
 						})}
 					</div>
 				</div>
@@ -48,13 +50,15 @@ const CalendarDay = (props: Props) => {
 						<button
 							className="recipeOverlayText"
 							onClick={() => {
-								setOverlayShown(false);
+								setOverlayShown("");
 							}}
 						>
 							X
 						</button>
 						{props.day.events.map((event) => {
-							return (
+							//Again, check whatever identifies the overlay to show 
+							if(event.recipe.name == overlayShown){
+								return (
 								<div className="recipeOverlayText">
 									<h1>{event.recipe.name}</h1>
 									<p>Note: {event.note}</p>
@@ -66,6 +70,7 @@ const CalendarDay = (props: Props) => {
 									</div>
 								</div>
 							);
+							}
 						})}
 					</div>
 				)}
