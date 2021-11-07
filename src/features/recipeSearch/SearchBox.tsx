@@ -23,6 +23,12 @@ const recipes = [
 		"budder",
 		"souls of the dead",
 	]),
+	new Recipe("CadeDee Cane", "Run.", [
+		"Sugar",
+		"Anger",
+		"Red Food Coloring(blood)",
+		"Santa",
+	]),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
