@@ -23,7 +23,7 @@ const recipes = [
 		"budder",
 		"souls of the dead",
 	]),
-	new Recipe("CadeDee Cane", "Run.", [
+	new Recipe("CanDees Cade", "Run.", [
 		"Sugar",
 		"Anger",
 		"Red Food Coloring(blood)",
@@ -35,9 +35,8 @@ const SearchBox = (props: Props) => {
 	//Gets value in input and clears it
 	const getSearchValue: (clear: boolean) => string = (clear: boolean) => {
 		let r = (searchBox.current as any).value;
-		if(clear){
-					(searchBox.current as any).value = "";
-
+		if (clear) {
+			(searchBox.current as any).value = "";
 		}
 		return r;
 	};
@@ -59,13 +58,16 @@ const SearchBox = (props: Props) => {
 							search(true);
 						}
 						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
-						search(false)
+						search(false);
 					}}
 					ref={searchBox}
 				></input>
-				<button className="Submit" onClick={()=>{
-					search(true)
-				}}>
+				<button
+					className="Submit"
+					onClick={() => {
+						search(true);
+					}}
+				>
 					Search
 				</button>
 			</div>
