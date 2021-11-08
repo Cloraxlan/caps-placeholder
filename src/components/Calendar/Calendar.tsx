@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
@@ -79,7 +78,7 @@ const Calendar = (props: Props) => {
 					// console.log(o + " " + i);
 					let foundDayObj = checkDay(day);
 
-					if (foundDayObj != undefined) {
+					if (foundDayObj !== undefined) {
 						row.push(foundDayObj);
 					} else {
 						const newDate = new Date();

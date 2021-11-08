@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectRecipeDates } from "../../../features/recipeSearch/calendarSlice";
 import NavItem from "./NavItem/NavItem";
@@ -28,12 +28,12 @@ const NavItems = () => {
 			>
 				Future Login Page
 			</NavItem>
-			<NavItem link="/Search" active={document.location.pathname == "/Search"}>
+			<NavItem link="/Search" active={document.location.pathname === "/Search"}>
 				Recipe Search
 			</NavItem>
 			<NavItem
 				link={{ pathname: "/Calendar", state: { calendarState } }}
-				active={document.location.pathname == "/Calendar"}
+				active={document.location.pathname === "/Calendar"}
 			>
 				Calendar
 			</NavItem>

@@ -1,4 +1,3 @@
-import { Interface } from "readline";
 import { RecipeDate } from "../features/recipeSearch/calendarSlice";
 import Recipe from "./Recipe";
 
@@ -16,7 +15,7 @@ export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 		let found = false;
 		for (let i = 0; i < days.length; i++) {
 			
-			if (days[i].date.toDateString()  == date.toDateString() ) {
+			if (days[i].date.toDateString()  === date.toDateString() ) {
 				found = true;
 				days[i].events.push({
 					recipe: recipeDate.recipe,
