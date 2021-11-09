@@ -7,28 +7,36 @@ interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
-	new Recipe("Apple Pie", "It is very good takes like an hour to make", [
-		"apple",
-		"pie crust",
-	]),
-	new Recipe("Jeramisu", "Yummy Jeremy mmmmmm yummy", ["Jeremy", "yum powder"]),
-	new Recipe("Pizzella", "yes", [
-		"poptarts mostly",
-		"Pizza",
-		"A kiss from Marcello",
-	]),
-	new Recipe("Popkornrad", "Pop pop!", [
-		"Konrad",
-		"oil",
-		"budder",
-		"souls of the dead",
-	]),
-	new Recipe("CanDees Cade", "Run.", [
-		"Sugar",
-		"Anger",
-		"Red Food Coloring(blood)",
-		"Santa",
-	]),
+	new Recipe(
+		"Apple Pie",
+		"It is very good takes like an hour to make",
+		["apple", "pie crust"],
+		"make it",
+	),
+	new Recipe(
+		"Jeramisu",
+		"Yummy Jeremy mmmmmm yummy",
+		["Jeremy", "yum powder"],
+		"make it",
+	),
+	new Recipe(
+		"Pizzella",
+		"yes",
+		["poptarts mostly", "Pizza", "A kiss from Marcello"],
+		"make it",
+	),
+	new Recipe(
+		"Popkornrad",
+		"Pop pop!",
+		["Konrad", "oil", "budder", "souls of the dead"],
+		"make it",
+	),
+	new Recipe(
+		"CanDees Cade",
+		"Run.",
+		["Sugar", "Anger", "Red Food Coloring(blood)", "Santa"],
+		"make it",
+	),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);

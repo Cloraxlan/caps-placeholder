@@ -42,18 +42,6 @@ const MONTHSIZE = [
 
 const MONTH = 0;
 
-const daysPre: Day[] = [
-	{
-		date: new Date("January 01, 2021 00:00:00"),
-		events: [
-			{
-				recipe: new Recipe("Knuckle Sandwitch", "For cade", ["hand", "anger"]),
-				note: "when cade makes us :(",
-			},
-		],
-	},
-];
-
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	let recipeDateList = useAppSelector(selectRecipeDates);
