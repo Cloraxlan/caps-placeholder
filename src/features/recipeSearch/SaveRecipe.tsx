@@ -27,7 +27,6 @@ const SaveRecipe = (props: Props) => {
 			<button onClick={save} className="Save">
 				Save Recipe
 			</button>
-			{console.log(calendarr)}
 		</div>
 	);
 };

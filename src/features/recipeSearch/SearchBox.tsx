@@ -45,7 +45,7 @@ const SearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-
+		console.log(getSearchValue(false));
 		props.setResults(searchQ.basicSearch(recipes));
 	};
 	return (
@@ -57,10 +57,12 @@ const SearchBox = (props: Props) => {
 						if (e.key === "Enter") {
 							search(true);
 						}
+					}}
+					ref={searchBox}
+					onChange={() => {
 						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
 						search(false);
 					}}
-					ref={searchBox}
 				></input>
 				<button
 					className="Submit"
