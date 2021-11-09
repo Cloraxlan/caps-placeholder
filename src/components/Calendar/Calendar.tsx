@@ -77,62 +77,83 @@ const Calendar = (props: Props) => {
 			return days.find(d => d.date.getDate()-1 === day && d.date.getMonth() === MONTH);
 		}
 
-		if (days) {
-			// let weeks = days.length / weekLength;
-			// let weeks = MONTHSIZE[MONTH] / weekLength;
-			let weeks = 5;
-			let day = 0;
-			let rows = [];
-			for (let i: number = 0; i < weeks; i++) {
-				let row = [];
-				for (let o: number = 0; o < weekLength; o++) {
-					let foundDayObj = checkDay(day);
-					// console.log(day + " : " + foundDayObj + " : " + row.length + " : " + rows.length)
-					
-					//if there are events for this day of this month
-					if (foundDayObj !== undefined) {
-						//add the appropriate Day object to the end of this week
-						row.push(foundDayObj);
-					} else {
-						const newDate = new Date();
-						let oldDate: Date;
-						//if not the first day in the week
-						if (row.length !== 0) {
-							//oldDate is equal to the previous day in the week
-							oldDate = new Date(row[row.length-1].date);
-						} else {
-							//if first day in the month
-							if(rows.length===0) {
-								//oldDate is equal to the 1st day of MONTH
-								oldDate = new Date();
-								oldDate.setMonth(MONTH);
-								oldDate.setDate(1);
-								console.log(oldDate);
-							} else {
-								//oldDate is equal to the last day of previous week
-								oldDate = new Date(rows[rows.length-1][weekLength-1].date);
-							}
-						}
+		// Initialize an empty array of days to be populated with Day objects representing the days of MONTH
+		const dayObjArr: Array<Day> = [];
 
-						//find the day after the oldDate
-						if(rows.length===0&&row.length===0) {
-							newDate.setDate(oldDate.getDate())
-						} else {
-							newDate.setDate(oldDate.getDate() + 1);
-						}
-						const dateObj: { date: Date; events: Array<string> } = {
-							date: newDate,
-							events: [],
-						};
-						
-						row.push(dateObj);
-					}
-					day++;
-				}
-				rows.push(row);
-			}
-			return rows;
+		// Initialize a reference date set to the first day of the MONTH
+		const refDate: Date = new Date();
+		refDate.setMonth(MONTH);
+		refDate.setDate(1); 
+
+		for (let j: number = 0; j<refDate.getDay(); j++) {
+			const overflowDate = new Date();
+			overflowDate.setDate(refDate.getDate()-refDate.getDay());
+			const dateObj: { date: Date; events: Array<string> } = {
+				date: overflowDate,
+				events: [],
+			};
 		}
+
+		for (let i: number = 0; i<MONTHSIZE[MONTH]-refDate.getDay(); i++) {
+			
+		}
+
+		// if (days) {
+		// 	// let weeks = days.length / weekLength;
+		// 	// let weeks = MONTHSIZE[MONTH] / weekLength;
+		// 	let weeks = 5;
+		// 	let day = 0;
+		// 	let rows = [];
+		// 	for (let i: number = 0; i < weeks; i++) {
+		// 		let row = [];
+		// 		for (let o: number = 0; o < weekLength; o++) {
+		// 			let foundDayObj = checkDay(day);
+		// 			// console.log(day + " : " + foundDayObj + " : " + row.length + " : " + rows.length)
+					
+		// 			//if there are events for this day of this month
+		// 			if (foundDayObj !== undefined) {
+		// 				//add the appropriate Day object to the end of this week
+		// 				row.push(foundDayObj);
+		// 			} else {
+		// 				const newDate = new Date();
+		// 				let oldDate: Date;
+		// 				//if not the first day in the week
+		// 				if (row.length !== 0) {
+		// 					//oldDate is equal to the previous day in the week
+		// 					oldDate = new Date(row[row.length-1].date);
+		// 				} else {
+		// 					//if first day in the month
+		// 					if(rows.length===0) {
+		// 						//oldDate is equal to the 1st day of MONTH
+		// 						oldDate = new Date();
+		// 						oldDate.setMonth(MONTH);
+		// 						oldDate.setDate(1);
+		// 						console.log(oldDate);
+		// 					} else {
+		// 						//oldDate is equal to the last day of previous week
+		// 						oldDate = new Date(rows[rows.length-1][weekLength-1].date);
+		// 					}
+		// 				}
+
+		// 				//find the day after the oldDate
+		// 				if(rows.length===0&&row.length===0) {
+		// 					newDate.setDate(oldDate.getDate())
+		// 				} else {
+		// 					newDate.setDate(oldDate.getDate() + 1);
+		// 				}
+						// const dateObj: { date: Date; events: Array<string> } = {
+						// 	date: newDate,
+						// 	events: [],
+						// };
+						
+		// 				row.push(dateObj);
+		// 			}
+		// 			day++;
+		// 		}
+		// 		rows.push(row);
+		// 	}
+		// 	return rows;
+		// }
 		return [];
 	};
 	return (
