@@ -106,7 +106,7 @@ const Calendar = (props: Props) => {
 	return (
 		<Card className="card">
 			<table>
-				<caption>June</caption>
+				<caption>January </caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />
