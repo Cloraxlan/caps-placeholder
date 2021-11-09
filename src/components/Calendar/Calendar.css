@@ -1,55 +1,40 @@
 table {
-	margin: auto;
-	border: 1px solid #999;
-	border-collapse: collapse;
-	font-family: Georgia, Times, serif;
+    margin: auto;
+    border: 1px solid #999;
+    border-collapse: collapse;
+    font-family: Georgia, Times, serif;
 }
 th {
-	border: 1px solid #999;
-	font-size: 70%;
-	text-transform: uppercase;
+    border: 1px solid #999;
+    font-size: 70%;
+    text-transform: uppercase;
 }
 td {
-	border: 1px solid #999;
-	height: 5em;
-	width: 5em;
-	padding: 5px;
-	vertical-align: top;
+    border: 1px solid #999;
+    height: 5em;
+    width:5em;
+    padding: 5px;
+    vertical-align: top;
 }
 caption {
-	font-size: 300%;
-	font-style: italic;
+    font-size: 300%;
+    font-style: italic;
 }
 .card {
-	text-align: center;
+    text-align: center;
 }
 .day {
-	text-align: left;
+    text-align: left;
 }
 .notes {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 80%;
-	text-align: right;
-	padding-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    text-align: right;
+    padding-left: 20px;
 }
 .highlight {
-	background-color: #ece;
+    background-color: #ECE;
 }
 .weekend {
-	background-color: #f3f3f3;
+    background-color: #F3F3F3;
 }
-.calendarOverlay {
-	z-index: 5;
-	background-color: #999;
-	left: 20%;
-	top: 20%;
-	width: 60vw; /* Full width (cover the whole page) */
-	height: 60vh; /* Full height (cover the whole page) */
-	position: fixed;
-}
-.recipeOverlayText {
-	display: flex;
-	flex-direction: column;
-}
-/* .recipeOverlayText {
-} */
