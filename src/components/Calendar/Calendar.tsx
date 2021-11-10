@@ -76,6 +76,13 @@ const Calendar = (props: Props) => {
 		const checkDay = (day: number) => {
 			return days.find(d => d.date.getDate()-1 === day && d.date.getMonth() === MONTH);
 		}
+		const genDayObj = (date: Date) => {
+			const dayObj: { date: Date; events: Array<string> } = {
+				date: new Date(date),
+				events: [],
+			};
+			return dayObj;
+		}
 
 		// Initialize an empty array of days to be populated with Day objects representing the days of MONTH
 		const dayObjArr: Array<Day> = [];
@@ -88,14 +95,31 @@ const Calendar = (props: Props) => {
 		for (let j: number = 0; j<refDate.getDay(); j++) {
 			const overflowDate = new Date();
 			overflowDate.setDate(refDate.getDate()-refDate.getDay());
-			const dateObj: { date: Date; events: Array<string> } = {
-				date: overflowDate,
-				events: [],
-			};
+			dayObjArr.push(genDayObj(overflowDate));
 		}
 
+		const testDate: Date = new Date(refDate);
 		for (let i: number = 0; i<MONTHSIZE[MONTH]-refDate.getDay(); i++) {
-			
+			let dayObj: Day|undefined = checkDay(i);
+			if(dayObj === undefined) {
+				testDate.setDate(i+1)
+				dayObj = genDayObj(testDate);
+			}
+			dayObjArr.push(dayObj);
+		}
+
+		refDate.setDate(MONTHSIZE[MONTH]);
+		const remainderCount = (weekLength-1)-testDate.getDay();
+		for(let p: number = 0; p<remainderCount; p++) {
+			const remainderDate = new Date();
+			remainderDate.setDate(refDate.getDate()+p+1);
+			dayObjArr.push(genDayObj(remainderDate));
+		}
+
+		// const numWeeks = Math.ceil(MONTHSIZE[MONTH]/weekLength);
+		const weeks: Array<Array<Day>> = [];
+		for (let o: number = 0; o<5; o++) {
+			weeks.push(dayObjArr)
 		}
 
 		// if (days) {
