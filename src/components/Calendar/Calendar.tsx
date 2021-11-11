@@ -74,11 +74,18 @@ const Calendar = (props: Props) => {
 	) => {
 
 		const checkDay = (day: number) => {
-			return days.find(d => d.date.getDate()-1 === day && d.date.getMonth() === MONTH);
+			return days.find(d => d.date && (d.date.getDate()-1 === day && d.date.getMonth() === MONTH));
 		}
 		const genDayObj = (date: Date) => {
 			const dayObj: { date: Date; events: Array<string> } = {
 				date: new Date(date),
+				events: [],
+			};
+			return dayObj;
+		}
+
+		const genEmptyDayObj = () => {
+			const dayObj: { date?: Date; events: Array<string> } = {
 				events: [],
 			};
 			return dayObj;
@@ -95,11 +102,11 @@ const Calendar = (props: Props) => {
 		for (let j: number = 0; j<refDate.getDay(); j++) {
 			const overflowDate = new Date();
 			overflowDate.setDate(refDate.getDate()-refDate.getDay());
-			dayObjArr.push(genDayObj(overflowDate));
+			dayObjArr.push(genEmptyDayObj());
 		}
 
 		const testDate: Date = new Date(refDate);
-		for (let i: number = 0; i<MONTHSIZE[MONTH]-refDate.getDay(); i++) {
+		for (let i: number = 0; i<MONTHSIZE[MONTH]; i++) {
 			let dayObj: Day|undefined = checkDay(i);
 			if(dayObj === undefined) {
 				testDate.setDate(i+1)
@@ -108,19 +115,22 @@ const Calendar = (props: Props) => {
 			dayObjArr.push(dayObj);
 		}
 
-		refDate.setDate(MONTHSIZE[MONTH]);
-		const remainderCount = (weekLength-1)-testDate.getDay();
-		for(let p: number = 0; p<remainderCount; p++) {
-			const remainderDate = new Date();
-			remainderDate.setDate(refDate.getDate()+p+1);
-			dayObjArr.push(genDayObj(remainderDate));
-		}
+		// refDate.setDate(MONTHSIZE[MONTH]);
+		// const remainderCount = (weekLength-1)-testDate.getDay();
+		// for(let p: number = 0; p<remainderCount; p++) {
+		// 	const remainderDate = new Date();
+		// 	remainderDate.setDate(refDate.getDate()+p+1);
+		// 	dayObjArr.push(genDayObj(remainderDate));
+		// }
 
-		// const numWeeks = Math.ceil(MONTHSIZE[MONTH]/weekLength);
+		// const numWeeks = Math.ceil(MONTHSIZE[MONTH]+refDate.getDay()/weekLength);
+		// console.log(numWeeks)
 		const weeks: Array<Array<Day>> = [];
-		for (let o: number = 0; o<5; o++) {
-			weeks.push(dayObjArr)
+		for (let o: number = 0; o<6; o++) {
+			weeks.push(dayObjArr.slice(0+7*o, 7+7*o));
 		}
+		weeks[weeks.length-1].length = 7;
+		weeks[weeks.length-1].fill(genEmptyDayObj(), 1, 6)
 
 		// if (days) {
 		// 	// let weeks = days.length / weekLength;
@@ -178,7 +188,7 @@ const Calendar = (props: Props) => {
 		// 	}
 		// 	return rows;
 		// }
-		return [];
+		return weeks;
 	};
 	return (
 		<Card className="card">

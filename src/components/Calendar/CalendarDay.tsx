@@ -46,14 +46,25 @@ const CalendarDay = (props: Props) => {
 			</div>
 		);
 	}
-	return (
-		<td>
-			<div className="day">
-				<div>{props.day.date.getDate()}</div>
-				{checkHoliday()}
-			</div>
-		</td>
-	);
+	if(props.day.date) {
+		return (
+			<td>
+				<div className="day">
+					<div>{props.day.date.getDate()}</div>
+					{checkHoliday()}
+				</div>
+			</td>
+		);
+	} else {
+		return (
+			<td>
+				<div className="day">
+					<div> </div>
+				</div>
+			</td>
+		);
+	}
+	
 };
 
 export default CalendarDay;
