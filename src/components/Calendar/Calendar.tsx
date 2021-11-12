@@ -8,15 +8,16 @@ import "./Calendar.css";
 interface Props {}
 
 const year = new Date().getFullYear();
+console.log(year)
 
 const testLeapYear = (year: number) => {
 	if (year % 4 === 0) {
 		if (year % 100 === 0 && year % 400 !== 0) {
-			return 29;
+			return 28;
 		}
-		return 28;
+		return 29;
 	}
-	return 29;
+	return 28;
 };
 
 const MONTHS = [
@@ -49,7 +50,9 @@ const MONTHSIZE = [
 	31,
 ];
 
-const MONTH = 9;
+console.log(MONTHSIZE[1])
+
+const MONTH = 1;
 
 const daysPre: Day[] = [
 	{ date: new Date("January 01, 2021 00:00:00"), events: ["Eat Food", "Eat More Food"] },
@@ -126,11 +129,14 @@ const Calendar = (props: Props) => {
 		// const numWeeks = Math.ceil(MONTHSIZE[MONTH]+refDate.getDay()/weekLength);
 		// console.log(numWeeks)
 		const weeks: Array<Array<Day>> = [];
-		for (let o: number = 0; o<6; o++) {
+		for (let o: number = 0; o<dayObjArr.length/7; o++) {
 			weeks.push(dayObjArr.slice(0+7*o, 7+7*o));
 		}
-		weeks[weeks.length-1].length = 7;
-		weeks[weeks.length-1].fill(genEmptyDayObj(), 1, 6)
+		const finalWeek = weeks[weeks.length-1];
+		const finalElement = finalWeek[finalWeek.length-1];
+		finalWeek.length = 7;
+		finalWeek.fill(genEmptyDayObj(), finalWeek.indexOf(finalElement)+1, 6)
+		
 
 		// if (days) {
 		// 	// let weeks = days.length / weekLength;
