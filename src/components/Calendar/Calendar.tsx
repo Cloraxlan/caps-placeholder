@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Day } from "../../Interfaces/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
+import MonthsFilter from "./MonthsFilter/MonthsFilter";
 
 import "./Calendar.css";
 
@@ -50,9 +51,7 @@ const MONTHSIZE = [
 	31,
 ];
 
-console.log(MONTHSIZE[1])
-
-const MONTH = 1;
+const MONTH = new Date().getMonth();
 
 const daysPre: Day[] = [
 	{ date: new Date("January 01, 2021 00:00:00"), events: ["Eat Food", "Eat More Food"] },
@@ -71,7 +70,13 @@ const daysPre: Day[] = [
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
+	const [month, setMonth] = useState(MONTH)
 	const [days, setDays] = useState<Array<Day>>(daysPre);
+
+	const filterMonthHandler = (selectedMonth: number) => {
+		setMonth(selectedMonth);
+	}
+
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
 		weekLength: number = 7,
 	) => {
@@ -79,7 +84,7 @@ const Calendar = (props: Props) => {
 		// recieves a number representing the day of the month, and searches through the state 
 		// for a day object on that day of MONTH. Returns the found day object 
 		const checkDay = (day: number) => {
-			return days.find(d => d.date && (d.date.getDate()-1 === day && d.date.getMonth() === MONTH));
+			return days.find(d => d.date && (d.date.getDate()-1 === day && d.date.getMonth() === month));
 		}
 
 		// recieves a Date and returns the a Day object on that Date with no events
@@ -104,7 +109,7 @@ const Calendar = (props: Props) => {
 
 		// Initialize a reference date set to the first day of the MONTH
 		const refDate: Date = new Date();
-		refDate.setMonth(MONTH);
+		refDate.setMonth(month);
 		refDate.setDate(1); 
 
 		// refDate.getDay() is the day of the week that the first day of the MONTH starts on.
@@ -117,10 +122,10 @@ const Calendar = (props: Props) => {
 
 		// loops through every day of the month. testDate is initialized as a Date object on the same day as refDate (first of the MONTH)
 		const testDate: Date = new Date(refDate);
-		for (let i: number = 0; i<MONTHSIZE[MONTH]; i++) {
+		for (let i: number = 0; i<MONTHSIZE[month]; i++) {
 			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
 			let dayObj: Day|undefined = checkDay(i);
-			// if no Day is found, set testDate to the Date associated with this value of 'i', and
+			// if no Day is found, set testDate to the Date associated with this value of 'i', and generate a Day object with no events using testDate
 			if(dayObj === undefined) {
 				testDate.setDate(i+1)
 				dayObj = genDayObj(testDate);
@@ -128,10 +133,12 @@ const Calendar = (props: Props) => {
 			dayObjArr.push(dayObj);
 		}
 
+		// slice dayObjArr into 7 element long mini arrays and add to 2d array "weeks"
 		const weeks: Array<Array<Day>> = [];
 		for (let o: number = 0; o<dayObjArr.length/7; o++) {
 			weeks.push(dayObjArr.slice(0+7*o, 7+7*o));
 		}
+		//fill final week with empty days
 		const finalWeek = weeks[weeks.length-1];
 		const finalElement = finalWeek[finalWeek.length-1];
 		finalWeek.length = 7;
@@ -139,10 +146,12 @@ const Calendar = (props: Props) => {
 		
 		return weeks;
 	};
+
 	return (
 		<Card className="card">
+			<MonthsFilter onFilterMonth={filterMonthHandler} />
 			<table>
-				<caption>{MONTHS[MONTH]}</caption>
+				<caption>{MONTHS[month]}</caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />
