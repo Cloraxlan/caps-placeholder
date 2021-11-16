@@ -41,7 +41,7 @@ const CalendarDay = (props: Props) => {
 		return (
 			<div className="notes">
 				{props.day.events.map((event) => {
-					return <div>{event}</div>;
+					return <div key={Math.random().toString()}>{event}</div>;
 				})}
 			</div>
 		);
