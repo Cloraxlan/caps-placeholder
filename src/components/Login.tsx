@@ -6,7 +6,7 @@ import {
 } from "react-google-login";
 import { useAppDispatch } from "../app/hooks";
 import { setProfile } from "../features/login/loginSlice";
-
+import "../components/LoginPage/LoginPage.css";
 // refresh token
 import { refreshTokenSetup } from "./refreshTokenSetup";
 import Button from "./UI/Button/Button";
@@ -38,12 +38,14 @@ function LoginHooks() {
 
 	return (
 		<Button type="submit" onClick={signIn}>
-			<img
-				/*src="icons/google.svg"*/ /*alt="google login"*/ className="icon"
-				alt=""
-			></img>
+			<div className="Login">
+				<img
+					/*src="icons/google.svg"*/ /*alt="google login"*/ className="icon"
+					alt=""
+				></img>
 
-			<span>Sign in with Google</span>
+				<span>Sign in with Google</span>
+			</div>
 		</Button>
 	);
 }

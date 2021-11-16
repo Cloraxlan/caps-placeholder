@@ -1,16 +1,39 @@
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Login from "../../components/Login";
 import Logout from "../../components/Logout";
+import { selectLogin } from "../../features/login/loginSlice";
+import "../LoginPage/LoginPage.css";
 
 function LoginPage(): ReactElement {
+	const selector = useAppSelector(selectLogin);
+	const [status, setStatus] = useState(false);
+	useEffect(() => {
+		setStatus(selector.profile != undefined);
+	}, [selector]);
+	let getStatus = () => {
+		if (status) {
+			return "Signed In";
+		} else {
+			return "Signed Out";
+		}
+	};
+	let SignedInAs = () => {
+		if (selector.profile != undefined) {
+			return "Signed in as: " + selector.profile.name;
+		} else {
+			return "";
+		}
+	};
 	return (
 		<div>
-			<div>Status: ____</div>
-			<div>Signed in as: ______</div>
-			<div className="Login">
+			<div>Status: {getStatus()}</div>
+			<div>{SignedInAs()}</div>
+			<div></div>
+			<div className="LoginMargin">
 				<Login />
 			</div>
-			<div className="Logout">
+			<div className="LogoutMargin">
 				<Logout />
 			</div>
 		</div>

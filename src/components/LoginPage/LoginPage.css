@@ -1,13 +1,27 @@
 .Login {
-	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 15vh;
+	width: 15vw;
+	height: 5vh;
+	text-align: center;
+	padding-top: 2vh;
+	/* line-height: 1.1em; */
+	/* font-size: 1.1em; */
 }
 
 .Logout {
+	width: 15vw;
+	height: 5vh;
+	text-align: center;
+	padding-top: 2vh;
+	/* line-height: 1.1em; */
+	/* font-size: 1.1em; */
+}
+
+.LogoutMargin {
 	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 2vh;
+	margin-top: 5vh;
+}
+
+.LoginMargin {
+	display: flex;
+	margin-top: 15vh;
 }
