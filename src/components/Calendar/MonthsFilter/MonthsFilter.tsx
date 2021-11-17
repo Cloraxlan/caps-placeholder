@@ -10,7 +10,7 @@ const MonthsFilter = (props: { onFilterMonth: (arg0: any) => void; }) => {
         <div className='months-filter'>
             <div className='months-filter__control'>
                 <label>Filter by month</label>
-                <select onChange={filterChangeHandler} >
+                <select onChange={filterChangeHandler} defaultValue={new Date().getMonth().toString()} autoFocus>
                     <option value='0'>January</option>
                     <option value='1'>February</option>
                     <option value='2'>March</option>

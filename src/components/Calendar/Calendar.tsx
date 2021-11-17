@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Day } from "../../Interfaces/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
@@ -51,7 +51,7 @@ const MONTHSIZE = [
 	31,
 ];
 
-const MONTH = new Date().getMonth();
+let MONTH = new Date().getMonth();
 
 const daysPre: Day[] = [
 	{
@@ -92,12 +92,21 @@ const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	const [days, setDays] = useState<Array<Day>>(daysPre);
 
+	useEffect(() => {
+
+	});
+
+	// const filteredDays = days.filter(day => {
+	// 	if(day.date) return day.date.getMonth() === month;
+	// 	else return false;
+	// })
+
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
 	};
 
-	const generateRows: (weekLength: number, mth: number) => Array<Array<Day>> = (
-		weekLength: number = 7, mth: number,
+	const generateRows: (weekLength: number) => Array<Array<Day>> = (
+		weekLength: number = 7
 	) => {
 		// console.log(mth + ' ' + month)
 
@@ -106,7 +115,7 @@ const Calendar = (props: Props) => {
 		const checkDay = (day: number) => {
 			// console.log(days)
 			// console.log(day+1 + ' ' + mth)
-			return days.find(d => d.date && d.date.getDate() - 1 === day && d.date.getMonth() === mth);
+			return days.find(d => d.date && d.date.getDate() - 1 === day && d.date.getMonth() === month);
 		};
 
 		// recieves a Date and returns the a Day object on that Date with no events
@@ -131,7 +140,7 @@ const Calendar = (props: Props) => {
 
 		// Initialize a reference date set to the first day of the MONTH
 		const refDate: Date = new Date();
-		refDate.setMonth(mth);
+		refDate.setMonth(month);
 		refDate.setDate(1);
 
 		// refDate.getDay() is the day of the week that the first day of the MONTH starts on.
@@ -144,7 +153,7 @@ const Calendar = (props: Props) => {
 
 		// loops through every day of the month. testDate is initialized as a Date object on the same day as refDate (first of the MONTH)
 		const testDate: Date = new Date(refDate);
-		for (let i: number = 0; i < MONTHSIZE[mth]; i++) {
+		for (let i: number = 0; i < MONTHSIZE[month]; i++) {
 			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
 			let dayObj: Day | undefined = checkDay(i);
 			console.log(dayObj)
@@ -194,7 +203,7 @@ const Calendar = (props: Props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{generateRows(7, month).map((row, i) => {
+					{generateRows(7).map((row, i) => {
 						return (
 							<tr key={Math.random().toString()}>
 								{row.map((day, j) => {
