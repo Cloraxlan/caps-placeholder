@@ -92,14 +92,12 @@ const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	const [days, setDays] = useState<Array<Day>>(daysPre);
 
+	
+	// not sure how to use this hook as a fix to the rendering bug 
 	useEffect(() => {
 
 	});
 
-	// const filteredDays = days.filter(day => {
-	// 	if(day.date) return day.date.getMonth() === month;
-	// 	else return false;
-	// })
 
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
