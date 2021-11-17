@@ -8,8 +8,13 @@ import "../LoginPage/LoginPage.css";
 function LoginPage(): ReactElement {
 	const selector = useAppSelector(selectLogin);
 	const [status, setStatus] = useState(false);
+
 	useEffect(() => {
-		setStatus(selector.profile != undefined);
+		setStatus(() => {
+			console.log("changed");
+			return selector.profile != undefined || selector.profile != null;
+		});
+		console.log(selector.profile);
 	}, [selector]);
 	let getStatus = () => {
 		if (status) {
@@ -27,8 +32,8 @@ function LoginPage(): ReactElement {
 	};
 	return (
 		<div>
-			<div>Status: {getStatus()}</div>
-			<div>{SignedInAs()}</div>
+			<div className="Status">Status: {getStatus()}</div>
+			<div className="Status">{SignedInAs()}</div>
 			<div></div>
 			<div className="LoginMargin">
 				<Login />
