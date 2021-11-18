@@ -33,11 +33,6 @@ function LogoutHooks() {
 			}}
 		>
 			<div className="Logout">
-				<img
-					/*src="icons/google.svg" alt="google login"*/ className="icon"
-					alt=""
-				></img>
-
 				<span>Sign out</span>
 			</div>
 		</Button>

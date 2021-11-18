@@ -26,7 +26,7 @@ const NavItems = () => {
 				link="/LoginPage"
 				active={document.location.pathname === "/LoginPage"}
 			>
-				Future Login Page
+				Login Page
 			</NavItem>
 			<NavItem link="/Search" active={document.location.pathname === "/Search"}>
 				Recipe Search

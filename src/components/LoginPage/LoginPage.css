@@ -26,6 +26,29 @@
 	margin-top: 15vh;
 }
 
-.Status {
-	text-align: right;
+.StatusBox {
+	text-align: left;
+	position: relative;
+	left: 40vw;
+	background-color: #c8d5b9ff;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* word-wrap: break-word;
+	width: min-content;
+	max-width: 15vw;
+	width: fit-content; */
+	/* padding-right: 1vw; */
+	padding-bottom: .5vw;
+	padding-top: .5vw;
+	/* padding-left: 1vw; */
+	border: solid;
+	border-color: red;
+	border-width: .2vw;
+	border-radius: .5vw;
+	display: block;
+	width: min-content;
+	max-width: 10vw;
 }
+
+

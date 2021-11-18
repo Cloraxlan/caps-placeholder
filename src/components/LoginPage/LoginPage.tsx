@@ -8,13 +8,8 @@ import "../LoginPage/LoginPage.css";
 function LoginPage(): ReactElement {
 	const selector = useAppSelector(selectLogin);
 	const [status, setStatus] = useState(false);
-
 	useEffect(() => {
-		setStatus(() => {
-			console.log("changed");
-			return selector.profile != undefined || selector.profile != null;
-		});
-		console.log(selector.profile);
+		setStatus(selector.profile != undefined);
 	}, [selector]);
 	let getStatus = () => {
 		if (status) {
@@ -25,22 +20,23 @@ function LoginPage(): ReactElement {
 	};
 	let SignedInAs = () => {
 		if (selector.profile != undefined) {
-			return "Signed in as: " + selector.profile.name;
+			return "Signed in as: as das ds da " + selector.profile.name;
 		} else {
 			return "";
 		}
 	};
 	return (
 		<div>
-			<div className="Status">Status: {getStatus()}</div>
-			<div className="Status">{SignedInAs()}</div>
-			<div></div>
-			<div className="LoginMargin">
+			<div className="StatusBox">
+				<div>Status: {getStatus()}</div>
+				<div>{SignedInAs()}</div>
+			</div>
+			<ul className="LoginMargin">
 				<Login />
-			</div>
-			<div className="LogoutMargin">
+			</ul>
+			<ul className="LogoutMargin">
 				<Logout />
-			</div>
+			</ul>
 		</div>
 	);
 }
