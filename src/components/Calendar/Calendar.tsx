@@ -65,8 +65,10 @@ const daysPre: Day[] = [];
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
-	const [days, setDays] = useState<Array<Day>>(daysPre);
-
+	let recipeDateList = useAppSelector(selectRecipeDates);
+	//convert to recipeDates into days
+	console.log(recipeDateList);
+	let days = convertToDays(recipeDateList);
 	// not sure how to use this hook as a fix to the rendering bug
 	useEffect(() => {});
 
