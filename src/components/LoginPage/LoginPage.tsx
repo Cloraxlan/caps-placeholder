@@ -20,16 +20,34 @@ function LoginPage(): ReactElement {
 	};
 	let SignedInAs = () => {
 		if (selector.profile != undefined) {
-			return "Signed in as: as das ds da " + selector.profile.name;
+			return "Signed in as: " + selector.profile.name;
+		} else {
+			return "";
+		}
+	};
+
+	let getFirstName = () => {
+		if (selector.profile != undefined) {
+			return selector.profile.name.substring(
+				0,
+				selector.profile.name.indexOf(" "),
+			);
+		}
+	};
+
+	let statusMessage = () => {
+		if (selector.profile != undefined) {
+			return "Welcome back " + getFirstName() + "!";
 		} else {
 			return "";
 		}
 	};
 	return (
 		<div>
+			<div className="StatusMessage">{statusMessage()}</div>
 			<div className="StatusBox">
-				<div>Status: {getStatus()}</div>
-				<div>{SignedInAs()}</div>
+				<div className="Text">Status: {getStatus()}</div>
+				<div className="Text">{SignedInAs()}</div>
 			</div>
 			<ul className="LoginMargin">
 				<Login />
