@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../app/hooks";
 import { selectRecipeDates } from "../../../features/recipeSearch/calendarSlice";
 import NavItem from "./NavItem/NavItem";
 const navItemsStyling: CSSProperties = {
