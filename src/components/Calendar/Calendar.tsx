@@ -92,19 +92,15 @@ const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	const [days, setDays] = useState<Array<Day>>(daysPre);
 
-	
-	// not sure how to use this hook as a fix to the rendering bug 
-	useEffect(() => {
-
-	});
-
+	// not sure how to use this hook as a fix to the rendering bug
+	useEffect(() => {});
 
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
 	};
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
-		weekLength: number = 7
+		weekLength: number = 7,
 	) => {
 		// console.log(mth + ' ' + month)
 
@@ -113,7 +109,10 @@ const Calendar = (props: Props) => {
 		const checkDay = (day: number) => {
 			// console.log(days)
 			// console.log(day+1 + ' ' + mth)
-			return days.find(d => d.date && d.date.getDate() - 1 === day && d.date.getMonth() === month);
+			return days.find(
+				(d) =>
+					d.date && d.date.getDate() - 1 === day && d.date.getMonth() === month,
+			);
 		};
 
 		// recieves a Date and returns the a Day object on that Date with no events
@@ -126,7 +125,7 @@ const Calendar = (props: Props) => {
 		};
 
 		// returns a Day object with no Date and an empty events array
-		const genEmptyDayObj = () => {
+		const genEmptyDayObj: () => Day = () => {
 			const dayObj: { date?: Date; events: Array<string> } = {
 				events: [],
 			};
@@ -154,7 +153,7 @@ const Calendar = (props: Props) => {
 		for (let i: number = 0; i < MONTHSIZE[month]; i++) {
 			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
 			let dayObj: Day | undefined = checkDay(i);
-			console.log(dayObj)
+			console.log(dayObj);
 			// if no Day is found, set testDate to the Date associated with this value of 'i', and generate a Day object with no events using testDate
 			if (dayObj === undefined) {
 				testDate.setDate(i + 1);
