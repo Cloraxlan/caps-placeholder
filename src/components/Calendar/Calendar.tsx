@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-import { Day } from "../../Interfaces/Day";
+import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 import MonthsFilter from "./MonthsFilter/MonthsFilter";
 
 import "./Calendar.css";
+import Recipe from "../../Interfaces-Classes/Recipe";
+import {
+	addRecipeDate,
+	RecipeDate,
+	selectRecipeDates,
+} from "../../features/recipeSearch/calendarSlice";
+import { useAppSelector } from "../../app/hooks";
 
 interface Props {}
 
@@ -53,39 +60,7 @@ const MONTHSIZE = [
 
 let MONTH = new Date().getMonth();
 
-const daysPre: Day[] = [
-	{
-		date: new Date("January 01, 2021 00:00:00"),
-		events: ["Eat Food", "Eat More Food"],
-	},
-	{
-		date: new Date("January 02, 2021 00:00:00"),
-		events: ["Eat Too much food"],
-	},
-	{
-		date: new Date("January 03, 2021 00:00:00"),
-		events: ["EAT", "Become poor"],
-	},
-	{ date: new Date("January 04, 2021 00:00:00"), events: ["Poorer"] },
-	{
-		date: new Date("January 17, 2021 00:00:00"),
-		events: ["Help no more monies"],
-	},
-	{
-		date: new Date("January 06, 2021 00:00:00"),
-		events: ["Pantry empty", "Stomach growls"],
-	},
-	{ date: new Date("January 07, 2021 00:00:00"), events: ["Dont Eat"] },
-	{ date: new Date("January 08, 2021 00:00:00"), events: ["Suffer"] },
-	{ date: new Date("January 11, 2021 00:00:00"), events: ["Starve"] },
-	{ date: new Date("February 11, 2021 00:00:00"), events: ["Starve"] },
-	{ date: new Date("March 11, 2021 00:00:00"), events: ["Starve"] },
-	{
-		date: new Date("October 20, 2021 00:00:00"),
-		events: ["Bday events"],
-		holiday: "Birthday",
-	},
-];
+const daysPre: Day[] = [];
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
@@ -117,7 +92,10 @@ const Calendar = (props: Props) => {
 
 		// recieves a Date and returns the a Day object on that Date with no events
 		const genDayObj = (date: Date) => {
-			const dayObj: { date: Date; events: Array<string> } = {
+			const dayObj: {
+				date: Date;
+				events: Array<{ recipe: Recipe; note: string }>;
+			} = {
 				date: new Date(date),
 				events: [],
 			};
@@ -126,7 +104,10 @@ const Calendar = (props: Props) => {
 
 		// returns a Day object with no Date and an empty events array
 		const genEmptyDayObj: () => Day = () => {
-			const dayObj: { date?: Date; events: Array<string> } = {
+			const dayObj: {
+				date?: Date;
+				events: Array<{ recipe: Recipe; note: string }>;
+			} = {
 				events: [],
 			};
 			return dayObj;
@@ -175,7 +156,6 @@ const Calendar = (props: Props) => {
 
 		return weeks;
 	};
-
 	return (
 		<Card className="card">
 			<Card className="drop">
@@ -207,7 +187,7 @@ const Calendar = (props: Props) => {
 									return (
 										<CalendarDate
 											key={i.toString() + ":" + j.toString()}
-											day={day}
+											day={day as Day}
 										></CalendarDate>
 									);
 								})}

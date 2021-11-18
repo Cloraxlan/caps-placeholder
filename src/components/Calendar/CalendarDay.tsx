@@ -1,70 +1,85 @@
-import React from "react";
-import { Day } from "../../Interfaces/Day";
+import React, { useState } from "react";
+import { Day } from "../../Interfaces-Classes/Day";
 
 import "./Calendar.css";
 
 interface Props {
 	day: Day;
 }
-// const MONTHS = [
-// 	"January",
-// 	"February",
-// 	"March",
-// 	"April",
-// 	"May",
-// 	"June",
-// 	"July",
-// 	"August",
-// 	"September",
-// 	"October",
-// 	"November",
-// 	"December",
-// ];
-const CalendarDay = (props: Props) => {
-	// const monthNumToName: (num: number) => string = (num: number) => {
-	// 	return MONTHS[num - 1];
-	// };
+const MONTHS = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
+];
 
-	const checkHoliday = () => {
-		//if today is a holiday, highlight the calendar box and add the name of the holiday above the event list
-		if(props.day.holiday) {
-			return (
-				<div className="notes highlight">
-					<div>{props.day.holiday}</div>
-					{props.day.events.map((event) => {
-						return <div>{event}</div>;
-					})}
-				</div>
-			);
-		}
-		//if today is not a holiday, render the calendar box as normal
-		return (
-			<div className="notes">
-				{props.day.events.map((event) => {
-					return <div key={Math.random().toString()}>{event}</div>;
-				})}
-			</div>
-		);
-	}
-	if(props.day.date) {
-		return (
+const CalendarDay = (props: Props) => {
+	const monthNumToName: (num: number) => string = (num: number) => {
+		return MONTHS[num - 1];
+	};
+	//Value is the name, or eventually id for the event
+	const [overlayShown, setOverlayShown] = useState("");
+	return (
+		<React.Fragment>
 			<td>
 				<div className="day">
-					<div>{props.day.date.getDate()}</div>
-					{checkHoliday()}
+					{/* <li>{monthNumToName(props.day.month)}</li> */}
+					<div>{props.day.date?.getDate()}</div>
+					<div className="notes">
+						{props.day.events.map((event) => {
+							return (
+								<div
+									onClick={() => {
+										//Or whatever should be the id
+										setOverlayShown(event.recipe.name);
+									}}
+								>
+									{event.recipe.name}
+								</div>
+							);
+						})}
+					</div>
 				</div>
+				{overlayShown && (
+					<div className="calendarOverlay">
+						<button
+							className="close"
+							onClick={() => {
+								setOverlayShown("");
+							}}
+						>
+							X
+						</button>
+						{props.day.events.map((event) => {
+							//Again, check whatever identifies the overlay to show
+							if (event.recipe.name == overlayShown) {
+								return (
+									<div className="recipeOverlayText">
+										<h1>{event.recipe.name}</h1>
+										<p>Note: {event.note}</p>
+										<p>{event.recipe.description}</p>
+										<div className="ingrdientItem">
+											{event.recipe.ingredientList.map((ingredient) => {
+												return <li>{ingredient}</li>;
+											})}
+										</div>
+									</div>
+								);
+							}
+						})}
+					</div>
+				)}
 			</td>
-		);
-	} else {
-		return (
-			<td>
-				<div className="day">
-					<div> </div>
-				</div>
-			</td>
-		);
-	}
-	
+		</React.Fragment>
+	);
 };
 
 export default CalendarDay;

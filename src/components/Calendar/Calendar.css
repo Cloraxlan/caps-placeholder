@@ -1,48 +1,84 @@
+/*eggColor: "#faf3ddff",
+	brownGreenColor: "#c8d5b9ff",
+	dyingPlantGreenColor: "#8fc0a9ff",
+	blueGreenColor: "#68b0abff",
+	deepGreenColor: "#4a7c59ff",*/
+
 table {
-    margin: auto;
-    border: 1px solid #999;
-    border-collapse: collapse;
-    font-family: Georgia, Times, serif;
+	margin: auto;
+	border: 1px solid #999;
+	border-collapse: collapse;
+	font-family: Georgia, Times, serif;
 }
 th {
-    border: 1px solid #999;
-    font-size: 70%;
-    text-transform: uppercase;
+	border: 1px solid #999;
+	font-size: 70%;
+	text-transform: uppercase;
 }
 td {
-    border: 1px solid #999;
-    height: 5em;
-    width:5em;
-    padding: 5px;
-    vertical-align: top;
+	border: 1px solid #999;
+	height: 5em;
+	width: 5em;
+	padding: 5px;
+	vertical-align: top;
 }
 caption {
-    font-size: 300%;
-    font-style: italic;
+	font-size: 300%;
+	font-style: italic;
 }
 .card {
-    text-align: center;
-    padding: 0.25rem;
+	text-align: center;
+	padding: 0.25rem;
 }
 .day {
-    text-align: left;
+	text-align: left;
 }
 .notes {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 80%;
-    text-align: right;
-    padding-left: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 80%;
+	text-align: right;
+	padding-left: 20px;
 }
 .highlight {
-    background-color: #ECE;
+	background-color: #ece;
 }
 .weekend {
-    background-color: #F3F3F3;
+	background-color: #c8d5b9ff;
 }
-.drop {
-    padding: 0.25rem;
-    background-color: #c8d5b9ff;
-    margin: 2rem auto;
-    width: 50rem;
-    max-width: 95%;
+.weekday {
+	background-color: transparent;
 }
+.calendarOverlay {
+	z-index: 5;
+	background-color: #c8d5b9ff;
+	border-width: 5vh;
+	border: solid;
+	border-radius: 1vh;
+	border-color: rgb(98, 165, 134);
+	left: 20%;
+	top: 21.9%;
+	width: 60vw; /* Full width (cover the whole page) */
+	height: 60vh; /* Full height (cover the whole page) */
+	position: fixed;
+}
+.recipeOverlayText {
+	display: flex;
+	flex-direction: column;
+	font-family: "IBM Plex Serif", serif;
+}
+.close {
+	display: flex;
+	flex-direction: column;
+	font-family: "IBM Plex Serif", serif;
+	/* background-color: rgb(164, 182, 143); */
+	background-color: transparent;
+	border: none;
+	border-radius: 0.5vh;
+}
+
+.close:hover {
+	/* background-color: rgb(131, 145, 115); */
+	background-color: rgb(164, 182, 143);
+}
+/* .recipeOverlayText {
+} */

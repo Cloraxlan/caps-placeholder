@@ -1,0 +1,22 @@
+.Title {
+	font-family: "IBM Plex Serif", serif;
+	text-align: center;
+}
+
+.Flex {
+	flex-direction: row;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	gap: 0.5vw;
+}
+
+.Submit {
+	font-family: "IBM Plex Serif", serif;
+	box-sizing: content-box;
+	background-color: #8fc0a9ff;
+	border-width: 5vh;
+	border: solid;
+	border-radius: 1vh;
+	border-color: rgb(98, 165, 134);
+}

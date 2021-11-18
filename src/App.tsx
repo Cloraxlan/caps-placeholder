@@ -1,26 +1,26 @@
 //import React, { CSSProperties } from "react";
-// import Header from "./components/Header";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
 import Layout from "./components/Layout/Layout";
 import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import LoginPage from "./components/LoginPage/LoginPage";
+import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
-// const bodyStyling: CSSProperties = {
-// 	backgroundColor: "black",
-// };
+
 function App() {
 	return (
-		<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-			<Layout>
-				<Calendar />
-				<ul style={{listStyle: "none"}}>
-					<li><Login /></li>
-					<br />
-					<li><Logout/></li>
-				</ul>
-			</Layout>
-			{/* <Header />*/}
-		</div>
+		<body>
+			<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+				<Layout>
+					<Switch>
+						<Route path="/LoginPage" component={LoginPage} />
+						<Route path="/Search" component={Search} />
+						<Route path="/Calendar" component={Calendar} />
+
+						<ul style={{ listStyle: "none" }}></ul>
+					</Switch>
+				</Layout>
+			</div>
+		</body>
 	);
 }
 
