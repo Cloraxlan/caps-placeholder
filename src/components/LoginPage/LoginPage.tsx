@@ -39,7 +39,7 @@ function LoginPage(): ReactElement {
 		if (selector.profile != undefined) {
 			return "Welcome back " + getFirstName() + "!";
 		} else {
-			return "";
+			return "Please Sign in";
 		}
 	};
 	return (
