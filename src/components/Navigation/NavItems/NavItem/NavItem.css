@@ -9,7 +9,7 @@
 	box-sizing: border-box;
 	display: flex;
 	height: 100%;
-	align-items: center;
+	align-items: flex-end;
 	background-color: #8fc0a9ff;
 	/* border-bottom: 4px solid; */
 	color: #4a7c59ff;

@@ -73,7 +73,7 @@ const SearchBox = (props: Props) => {
 					}}
 				></input>
 				<button
-					className="Submit"
+					className="SearchButton"
 					onClick={() => {
 						search(true);
 					}}

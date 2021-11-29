@@ -1,27 +1,28 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { GoogleLoginResponse } from "react-google-login";
 import { RootState } from "../../app/store";
 export interface LoginState {
-	username: string;
-	password: string;
+	profile: GoogleLoginResponse | null;
 }
-const initialState: LoginState = {
-	username: "",
-	password: "",
-};
+const initialState: any = {};
 export const loginSlice: Slice = createSlice({
-	name: "counter",
+	name: "login",
 	initialState,
 	reducers: {
-		setPassword: (state: LoginState, action: PayloadAction<string>) => {
-			state.password = action.payload;
+		setProfile: (
+			state: LoginState,
+			action: PayloadAction<GoogleLoginResponse>,
+		) => {
+			state.profile = action.payload;
 		},
-		setUsername: (state: LoginState, action: PayloadAction<string>) => {
-			state.username = action.payload;
+		setLogout: (state: LoginState) => {
+			state.profile = null;
+			console.log(state.profile + "oi");
 		},
 	},
 });
 export const selectLogin = (state: RootState) => state.login;
 
-export const { setPassword, setUsername } = loginSlice.actions;
+export const { setProfile, setLogout } = loginSlice.actions;
 
 export default loginSlice.reducer;

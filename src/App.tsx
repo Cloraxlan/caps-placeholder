@@ -9,7 +9,7 @@ import Calendar from "./components/Calendar/Calendar";
 function App() {
 	return (
 		<body>
-			<div>
+			<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
 				<Layout>
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />
