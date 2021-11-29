@@ -1,13 +1,73 @@
 .Login {
-	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 15vh;
+	width: 20vw;
+	height: 5vh;
+	text-align: center;
+	padding-top: 2vh;
+	align-self: center;
+	/* line-height: 1.1em; */
+	/* font-size: 1.1em; */
 }
 
 .Logout {
+	width: 20vw;
+	height: 5vh;
+	text-align: center;
+	padding-top: 2vh;
+	align-self: center;
+	/* line-height: 1.1em; */
+	/* font-size: 1.1em; */
+}
+
+.LogoutMargin {
 	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 2vh;
+	margin-top: 5vh;
+	position: relative;
+	left: -1.5vw;
+}
+
+.LoginMargin {
+	display: flex;
+	margin-top: 15vh;
+	position: relative;
+	left: -1.5vw;
+}
+
+.StatusBox {
+	text-align: left;
+	position: relative;
+	left: 42.5vw;
+	background-color: #c8d5b9ff;
+	/* white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; */
+	/* word-wrap: break-word;
+	width: min-content;
+	max-width: 15vw;
+	width: fit-content; */
+	margin-top: -5vh;
+	padding-right: 1vw;
+	padding-bottom: 0.5vw;
+	padding-top: 0.5vw;
+	padding-left: 1vw;
+	/* border: solid;
+	border-color: red;
+	border-width: 0.2vw; */
+	border-radius: 0.5vw;
+	display: flex;
+	width: min-content;
+	max-width: 17.5vw;
+	flex-direction: column;
+	font-family: "IBM Plex Serif", serif;
+	font-size: 2.5vh;
+}
+
+.Text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.StatusMessage {
+	text-align: center;
+	font-family: "IBM Plex Serif", serif;
 }
