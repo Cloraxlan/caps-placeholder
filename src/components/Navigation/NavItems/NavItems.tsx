@@ -19,9 +19,6 @@ const NavItems = () => {
 			<NavItem link="/" active={document.location.pathname === "/"}>
 				Home
 			</NavItem>
-			<NavItem link="/" active={false}>
-				Feature
-			</NavItem>
 			<NavItem
 				link="/LoginPage"
 				active={document.location.pathname === "/LoginPage"}
