@@ -23,6 +23,12 @@ const recipes = [
 		"budder",
 		"souls of the dead",
 	]),
+	new Recipe("Cooking with Simon", "ok", ["Cooking", "With", "Simon"]),
+	new Recipe("CARS", "THE MASTERPIECE OF THE CENTURY", [
+		"Ka-Chow!",
+		"Focus. Speed. I am speed.",
+		"Tow Mater. Average intelligence.",
+	]),
 	new Recipe("CanDees Cade", "Run.", [
 		"Sugar",
 		"Anger",
