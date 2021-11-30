@@ -3,6 +3,7 @@ import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchBox from "./SearchBox";
 import ResultItem from "./ResultItem";
 import "./Search.css";
+//import selectRecipeDates from "./calendarSlice";
 interface Props {}
 //idrc enough to style this rn, its all gonna be remade anyway. enjoy funny flexbox
 const style: CSSProperties = {
@@ -11,7 +12,7 @@ const style: CSSProperties = {
 };
 const Search = (props: Props) => {
 	const [results, setResults] = useState<Recipe[]>([]);
-
+	const [searchOverlayShown, setSearchOverlayShown] = useState("");
 	return (
 		<div>
 			<SearchBox setResults={setResults}></SearchBox>
@@ -20,8 +21,17 @@ const Search = (props: Props) => {
 					{/* <div className="SideBox"></div> */}
 					{results.map((result) => {
 						return (
-							<div style={style}>
-								<ResultItem result={result}></ResultItem>
+							<div>
+								<div></div>
+								<div
+									style={style}
+									onClick={() => {
+										setSearchOverlayShown("True");
+										console.log("Hi");
+									}}
+								>
+									<ResultItem result={result}></ResultItem>
+								</div>
 							</div>
 						);
 					})}

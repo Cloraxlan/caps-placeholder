@@ -13,18 +13,16 @@
 	margin-bottom: 5vh;
 }
 .DropDownButton {
-	margin-left: 33vw;
 	font-size: 2vh;
 	margin-bottom: 5vh;
 }
 .DropDownText {
-	margin-left: 33vw;
 	font-size: 2vh;
 	margin-bottom: 5vh;
 }
-.Ingredient {
-	margin-left: 33vw;
-}
+/* .Ingredient {
+
+} */
 
 .SideBox {
 	background-color: #cfc;
