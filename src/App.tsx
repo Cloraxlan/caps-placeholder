@@ -5,17 +5,24 @@ import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
+import GroceryList from "./features/groceries/GroceryList";
 
 function App() {
 	return (
 		<body>
-			<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
 				<Layout>
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />
 						<Route path="/Search" component={Search} />
 						<Route path="/Calendar" component={Calendar} />
-
+						<Route path="/Grocery" component={GroceryList} />
 						<ul style={{ listStyle: "none" }}></ul>
 					</Switch>
 				</Layout>
