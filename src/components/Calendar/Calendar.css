@@ -59,6 +59,7 @@ caption {
 	width: 60vw; /* Full width (cover the whole page) */
 	height: 60vh; /* Full height (cover the whole page) */
 	position: fixed;
+	font-family: "IBM Plex Serif", serif;
 }
 .recipeOverlayText {
 	display: flex;

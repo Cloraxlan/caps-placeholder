@@ -12,7 +12,6 @@ const style: CSSProperties = {
 };
 const Search = (props: Props) => {
 	const [results, setResults] = useState<Recipe[]>([]);
-	const [searchOverlayShown, setSearchOverlayShown] = useState("");
 	return (
 		<div>
 			<SearchBox setResults={setResults}></SearchBox>
@@ -23,13 +22,7 @@ const Search = (props: Props) => {
 						return (
 							<div>
 								<div></div>
-								<div
-									style={style}
-									onClick={() => {
-										setSearchOverlayShown("True");
-										console.log("Hi");
-									}}
-								>
+								<div style={style}>
 									<ResultItem result={result}></ResultItem>
 								</div>
 							</div>
