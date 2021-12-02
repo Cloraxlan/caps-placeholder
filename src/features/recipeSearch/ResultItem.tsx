@@ -24,6 +24,7 @@ const ResultItem = (props: Props) => {
 	};
 	return (
 		<div>
+			{/*Overlay system*/}
 			{searchOverlayShown && (
 				<div className="calendarOverlay">
 					<button
@@ -42,8 +43,13 @@ const ResultItem = (props: Props) => {
 							return <li>{ingredient}</li>;
 						})}
 					</div>
-					<div> Instructions </div>
+					<div className="OverlayListTitle"> Instructions </div>
 					<div className="OverlayInstructions">{props.result.instuctions}</div>
+
+					<SaveRecipe
+						className2="OverlaySaveRecipe"
+						recipe={props.result}
+					></SaveRecipe>
 				</div>
 			)}
 			<div className="Font">
@@ -52,7 +58,6 @@ const ResultItem = (props: Props) => {
 						className="Name"
 						onClick={() => {
 							setSearchOverlayShown(true);
-							console.log("Hi");
 						}}
 					>
 						{props.result.name}

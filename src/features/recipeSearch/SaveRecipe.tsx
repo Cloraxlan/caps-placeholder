@@ -11,6 +11,7 @@ import calendarSlice, {
 
 interface Props {
 	recipe: Recipe;
+	className2?: string;
 }
 
 const SaveRecipe = (props: Props) => {
@@ -22,9 +23,17 @@ const SaveRecipe = (props: Props) => {
 		let date = new Date(month + " " + day + ", 2021");
 		dispatch(addRecipeDate({ date: date, recipe: props.recipe.serialize() }));
 	};
+	let setClassName: () => string = () => {
+		if (props.className2) {
+			return props.className2;
+		}
+		return "Save";
+	};
+	console.log(setClassName());
+
 	return (
 		<div>
-			<button onClick={save} className="Save">
+			<button onClick={save} className={setClassName()}>
 				Save Recipe
 			</button>
 		</div>

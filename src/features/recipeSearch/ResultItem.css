@@ -23,3 +23,16 @@
 	font-size: 2.5vh;
 	margin-left: 2vw;
 }
+
+.OverlayInstructions {
+	font-size: 2.5vh;
+	margin-left: 2vw;
+}
+
+.OverlaySaveRecipe {
+	font-family: "IBM Plex Serif", serif;
+	margin-left: 48.5vw;
+	margin-top: 18vh;
+	font-size: 3vh;
+	width: 10vw;
+}
