@@ -3,3 +3,29 @@
 	margin-top: 3vh;
 	margin-left: 15vw;
 }
+
+.SaveOverlay {
+	z-index: 7;
+	background-color: #c8d5b9ff;
+	border-width: 5vh;
+	border: solid;
+	border-radius: 1vh;
+	border-color: rgb(98, 165, 134);
+	left: 30%;
+	top: 22.9%;
+	width: 40vw; /* Full width (cover the whole page) */
+	height: 50vh; /* Full height (cover the whole page) */
+	position: fixed;
+	font-family: "IBM Plex Serif", serif;
+}
+
+.BlackBackground {
+	z-index: 6;
+	background-color: black;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	opacity: 0.6;
+}
