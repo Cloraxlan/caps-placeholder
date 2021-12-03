@@ -3,6 +3,7 @@ import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
 import MonthsFilter from "./MonthsFilter/MonthsFilter";
+import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
 import Recipe from "../../Interfaces-Classes/Recipe";
@@ -16,7 +17,6 @@ import { useAppSelector } from "../../app/hooks";
 interface Props {}
 
 const year = new Date().getFullYear();
-console.log(year);
 
 const testLeapYear = (year: number) => {
 	if (year % 4 === 0) {
@@ -67,10 +67,13 @@ const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
-	console.log(recipeDateList);
 	let days = convertToDays(recipeDateList);
 	// not sure how to use this hook as a fix to the rendering bug
-	useEffect(() => {});
+	useEffect(() => {
+		days = convertToDays(recipeDateList);
+		//console.log(generateRows(7));
+		return;
+	}, [recipeDateList]);
 
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
@@ -86,9 +89,12 @@ const Calendar = (props: Props) => {
 		const checkDay = (day: number) => {
 			// console.log(days)
 			// console.log(day+1 + ' ' + mth)
+
+			/**/
+
 			return days.find(
 				(d) =>
-					d.date && d.date.getDate() - 1 === day && d.date.getMonth() === month,
+					d.date && d.date.getDate() - 1 === day && d.date.getMonth() == month,
 			);
 		};
 
@@ -183,12 +189,15 @@ const Calendar = (props: Props) => {
 				</thead>
 				<tbody>
 					{generateRows(7).map((row, i) => {
+						//console.log(row);
 						return (
-							<tr key={Math.random().toString()}>
+							<tr key={uuidv4()}>
 								{row.map((day, j) => {
+									//console.log(day);
+
 									return (
 										<CalendarDate
-											key={i.toString() + ":" + j.toString()}
+											key={uuidv4()}
 											day={day as Day}
 										></CalendarDate>
 									);
