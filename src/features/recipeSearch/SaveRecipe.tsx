@@ -52,9 +52,33 @@ const SaveRecipe = (props: Props) => {
 						>
 							X
 						</button>
-						<input type="text"></input>
-						<input type="date"></input>
-						<button type="submit">Save</button>
+						<div>
+							{/* <input
+								contentEditable="true"
+								className="SaveRecipeNote"
+								placeholder="Add a note"
+								type="text"
+							></input> */}
+							<div className="NoteStyling">Note: </div>
+							<span
+								className="SaveRecipeNote"
+								role="textbox"
+								contentEditable="true"
+								placeholder="Add a note"
+							></span>
+						</div>
+						<div className="SaveRecipeDate">
+							<input type="date"></input>
+						</div>
+						<button
+							type="submit"
+							className="SaveButtonOverlay"
+							onClick={() => {
+								setShowRecipeSave(false);
+							}}
+						>
+							Save
+						</button>
 					</form>
 				</div>
 			)}

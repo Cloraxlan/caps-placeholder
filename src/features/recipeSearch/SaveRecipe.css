@@ -29,3 +29,29 @@
 	position: fixed;
 	opacity: 0.6;
 }
+
+.SaveRecipeNote {
+	width: 35vw;
+	margin-left: 0.5vw;
+	display: inline-block;
+	max-height: 33vh;
+	background-color: white;
+}
+
+.SaveRecipeDate {
+	margin-left: 0.5vw;
+	margin-top: 1vh;
+	font-family: "IBM Plex Serif", serif;
+}
+
+.SaveButtonOverlay {
+	font-family: "IBM Plex Serif", serif;
+	margin-left: 31.5vw;
+	width: 7.5vw;
+	top: 43vh;
+	position: absolute;
+}
+
+.NoteStyling {
+	margin-left: 0.5vw;
+}
