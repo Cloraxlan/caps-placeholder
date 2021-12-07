@@ -16,8 +16,19 @@ interface Props {
 
 const SaveRecipe = (props: Props) => {
 	const [showRecipeSave, setShowRecipeSave] = useState(false);
+	let [currentNote, setCurrentNote] = useState();
+	let [currentDate, setCurrentDate] = useState();
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
+
+	let changeNote = (event: any) => {
+		setCurrentNote(event.target.value);
+		console.log(event.target.value);
+	};
+	let changeDate = (event: any) => {
+		setCurrentDate = event.target.value;
+		console.log(event.target.value);
+	};
 	let save = () => {
 		setShowRecipeSave(true);
 		// let month = prompt("Month (as name)");
@@ -31,11 +42,13 @@ const SaveRecipe = (props: Props) => {
 		}
 		return "Save";
 	};
-	console.log(setClassName());
 
 	const submitSave = (event: any) => {
 		event.preventDefault();
-		console.log(event);
+		setShowRecipeSave(false);
+		console.log("HELLO");
+		let note = event.nativeEvent.submitter;
+		console.log(note);
 	};
 
 	return (
@@ -45,6 +58,7 @@ const SaveRecipe = (props: Props) => {
 					<div className="BlackBackground" />
 					<form onSubmit={submitSave} className="SaveOverlay">
 						<button
+							type="button"
 							className="close"
 							onClick={() => {
 								setShowRecipeSave(false);
@@ -60,23 +74,18 @@ const SaveRecipe = (props: Props) => {
 								type="text"
 							></input> */}
 							<div className="NoteStyling">Note: </div>
-							<span
+							<input
+								onChange={changeNote}
 								className="SaveRecipeNote"
 								role="textbox"
 								contentEditable="true"
 								placeholder="Add a note"
-							></span>
+							></input>
 						</div>
 						<div className="SaveRecipeDate">
-							<input type="date"></input>
+							<input onChange={changeDate} type="date"></input>
 						</div>
-						<button
-							type="submit"
-							className="SaveButtonOverlay"
-							onClick={() => {
-								setShowRecipeSave(false);
-							}}
-						>
+						<button type="submit" className="SaveButtonOverlay">
 							Save
 						</button>
 					</form>
