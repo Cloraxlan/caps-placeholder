@@ -7,6 +7,10 @@
 	font-size: 4.5vh;
 }
 
+.Name:hover {
+	background-color: rgb(218, 210, 185);
+}
+
 .Description {
 	margin-top: -3vh;
 	font-size: 2vh;
