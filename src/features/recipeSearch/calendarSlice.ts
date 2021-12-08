@@ -6,7 +6,7 @@ import Recipe from "../../Interfaces-Classes/Recipe";
 export interface RecipeDate {
 	recipe: Recipe;
 	date: Date;
-	note: String;
+	note?: String;
 }
 export interface CalendarState {
 	recipeDates: Array<RecipeDate>;

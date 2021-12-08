@@ -8,6 +8,7 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
+import { prototype } from "events";
 
 interface Props {
 	recipe: Recipe;
@@ -17,17 +18,20 @@ interface Props {
 const SaveRecipe = (props: Props) => {
 	const [showRecipeSave, setShowRecipeSave] = useState(false);
 	let [currentNote, setCurrentNote] = useState();
-	let [currentDate, setCurrentDate] = useState();
+	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
 
 	let changeNote = (event: any) => {
 		setCurrentNote(event.target.value);
-		console.log(event.target.value);
+		// console.log(event.target.value);
 	};
 	let changeDate = (event: any) => {
-		setCurrentDate = event.target.value;
-		console.log(event.target.value);
+		setCurrentDate(event.target.value);
+		let d = new Date(event.target.value);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+		// console.log(d);
 	};
 	let save = () => {
 		setShowRecipeSave(true);
@@ -46,9 +50,22 @@ const SaveRecipe = (props: Props) => {
 	const submitSave = (event: any) => {
 		event.preventDefault();
 		setShowRecipeSave(false);
-		console.log("HELLO");
-		let note = event.nativeEvent.submitter;
-		console.log(note);
+		let d = new Date(currentDate);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+		// console.log("Date");
+		// console.log(d);
+		// console.log("Recipe");
+		// console.log(props.recipe.serialize());
+		// console.log("Note");
+		// console.log(currentNote);
+		dispatch(
+			addRecipeDate({
+				date: d,
+				recipe: props.recipe.serialize(),
+				note: currentNote,
+			}),
+		);
 	};
 
 	return (
