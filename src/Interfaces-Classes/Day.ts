@@ -2,7 +2,7 @@ import { RecipeDate } from "../features/recipeSearch/calendarSlice";
 import Recipe from "./Recipe";
 
 export interface Day {
-	date: Date;
+	date?: Date;
 	//Eventually will be expanded into more complex data, for now strings work
 	events: Array<{ recipe: Recipe; note: string }>;
 	holiday?: string;
@@ -14,8 +14,7 @@ export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 		let date = recipeDate.date;
 		let found = false;
 		for (let i = 0; i < days.length; i++) {
-			
-			if (days[i].date.toDateString()  === date.toDateString() ) {
+			if (days[i].date?.toDateString() === date.toDateString()) {
 				found = true;
 				days[i].events.push({
 					recipe: recipeDate.recipe,
