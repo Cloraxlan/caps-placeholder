@@ -8,6 +8,7 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
+import { prototype } from "events";
 
 interface Props {
 	recipe: Recipe;
@@ -16,8 +17,22 @@ interface Props {
 
 const SaveRecipe = (props: Props) => {
 	const [showRecipeSave, setShowRecipeSave] = useState(false);
+	let [currentNote, setCurrentNote] = useState();
+	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
+
+	let changeNote = (event: any) => {
+		setCurrentNote(event.target.value);
+		// console.log(event.target.value);
+	};
+	let changeDate = (event: any) => {
+		setCurrentDate(event.target.value);
+		let d = new Date(event.target.value);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+		// console.log(d);
+	};
 	let save = () => {
 		setShowRecipeSave(true);
 		// let month = prompt("Month (as name)");
@@ -31,11 +46,26 @@ const SaveRecipe = (props: Props) => {
 		}
 		return "Save";
 	};
-	console.log(setClassName());
 
 	const submitSave = (event: any) => {
 		event.preventDefault();
-		console.log(event);
+		setShowRecipeSave(false);
+		let d = new Date(currentDate);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+		// console.log("Date");
+		// console.log(d);
+		// console.log("Recipe");
+		// console.log(props.recipe.serialize());
+		// console.log("Note");
+		// console.log(currentNote);
+		dispatch(
+			addRecipeDate({
+				date: d,
+				recipe: props.recipe.serialize(),
+				note: currentNote,
+			}),
+		);
 	};
 
 	return (
@@ -45,6 +75,7 @@ const SaveRecipe = (props: Props) => {
 					<div className="BlackBackground" />
 					<form onSubmit={submitSave} className="SaveOverlay">
 						<button
+							type="button"
 							className="close"
 							onClick={() => {
 								setShowRecipeSave(false);
@@ -52,9 +83,28 @@ const SaveRecipe = (props: Props) => {
 						>
 							X
 						</button>
-						<input type="text"></input>
-						<input type="date"></input>
-						<button type="submit">Save</button>
+						<div>
+							{/* <input
+								contentEditable="true"
+								className="SaveRecipeNote"
+								placeholder="Add a note"
+								type="text"
+							></input> */}
+							<div className="NoteStyling">Note: </div>
+							<input
+								onChange={changeNote}
+								className="SaveRecipeNote"
+								role="textbox"
+								contentEditable="true"
+								placeholder="Add a note"
+							></input>
+						</div>
+						<div className="SaveRecipeDate">
+							<input onChange={changeDate} type="date"></input>
+						</div>
+						<button type="submit" className="SaveButtonOverlay">
+							Save
+						</button>
 					</form>
 				</div>
 			)}

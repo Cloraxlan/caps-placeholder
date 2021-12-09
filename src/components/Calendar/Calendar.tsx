@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
+import MonthsFilter from "./MonthsFilter/MonthsFilter";
+import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
 import Recipe from "../../Interfaces-Classes/Recipe";
@@ -18,12 +21,27 @@ const year = new Date().getFullYear();
 const testLeapYear = (year: number) => {
 	if (year % 4 === 0) {
 		if (year % 100 === 0 && year % 400 !== 0) {
-			return 29;
+			return 28;
 		}
-		return 28;
+		return 29;
 	}
-	return 29;
+	return 28;
 };
+
+const MONTHS = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December",
+];
 
 const MONTHSIZE = [
 	31,
@@ -40,61 +58,119 @@ const MONTHSIZE = [
 	31,
 ];
 
-const MONTH = 0;
+let MONTH = new Date().getMonth();
+
+const daysPre: Day[] = [];
 
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
+	const [month, setMonth] = useState(MONTH);
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
-	console.log(recipeDateList);
 	let days = convertToDays(recipeDateList);
+	// not sure how to use this hook as a fix to the rendering bug
+	useEffect(() => {
+		days = convertToDays(recipeDateList);
+		//console.log(generateRows(7));
+		return;
+	}, [recipeDateList]);
 
-	//const [days, setDays] = useState(daysPre);
-	const generateRows = (weekLength: number = 7) => {
+	const filterMonthHandler = (selectedMonth: number) => {
+		setMonth(selectedMonth);
+	};
+
+	const generateRows: (weekLength: number) => Array<Array<Day>> = (
+		weekLength: number = 7,
+	) => {
+		// console.log(mth + ' ' + month)
+
+		// recieves a number representing the day of the month, and searches through the state
+		// for a day object on that day of MONTH. Returns the found day object
 		const checkDay = (day: number) => {
-			return days.find((d: Day) => d.date.getDate() - 1 === day);
+			// console.log(days)
+			// console.log(day+1 + ' ' + mth)
+
+			/**/
+
+			return days.find(
+				(d) =>
+					d.date && d.date.getDate() - 1 === day && d.date.getMonth() == month,
+			);
 		};
 
-		if (days) {
-			// let weeks = days.length / weekLength;
-			let weeks = MONTHSIZE[MONTH] / weekLength;
-			let day = 0;
-			let rows = [];
-			for (let i: number = 0; i < weeks; i++) {
-				let row = [];
-				for (let o: number = 0; o < weekLength; o++) {
-					// console.log(o + " " + i);
-					let foundDayObj = checkDay(day);
+		// recieves a Date and returns the a Day object on that Date with no events
+		const genDayObj = (date: Date) => {
+			const dayObj: {
+				date: Date;
+				events: Array<{ recipe: Recipe; note: string }>;
+			} = {
+				date: new Date(date),
+				events: [],
+			};
+			return dayObj;
+		};
 
-					if (foundDayObj !== undefined) {
-						row.push(foundDayObj);
-					} else {
-						const newDate = new Date();
-						let oldDate;
-						if (row.length !== 0) {
-							oldDate = new Date(row[row.length - 1].date);
-						} else {
-							oldDate = new Date(rows[rows.length - 1][weekLength - 1].date);
-						}
-						newDate.setDate(oldDate.getDate() + 1);
-						const dateObj: { date: Date; events: Array<string> } = {
-							date: newDate,
-							events: [],
-						};
-						row.push(dateObj);
-					}
-					day++;
-				}
-				rows.push(row);
-			}
-			return rows;
+		// returns a Day object with no Date and an empty events array
+		const genEmptyDayObj: () => Day = () => {
+			const dayObj: {
+				date?: Date;
+				events: Array<{ recipe: Recipe; note: string }>;
+			} = {
+				events: [],
+			};
+			return dayObj;
+		};
+
+		// Initialize an empty array of days to be populated with Day objects representing the days of MONTH
+		const dayObjArr: Array<Day> = [];
+
+		// Initialize a reference date set to the first day of the MONTH
+		const refDate: Date = new Date();
+		refDate.setMonth(month);
+		refDate.setDate(1);
+
+		// refDate.getDay() is the day of the week that the first day of the MONTH starts on.
+		// if the month starts on a day other than sunday, this loops through and fills up to that point with empty Day objects
+		for (let j: number = 0; j < refDate.getDay(); j++) {
+			const overflowDate = new Date();
+			overflowDate.setDate(refDate.getDate() - refDate.getDay());
+			dayObjArr.push(genEmptyDayObj());
 		}
-		return [];
+
+		// loops through every day of the month. testDate is initialized as a Date object on the same day as refDate (first of the MONTH)
+		const testDate: Date = new Date(refDate);
+		for (let i: number = 0; i < MONTHSIZE[month]; i++) {
+			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
+			let dayObj: Day | undefined = checkDay(i);
+			console.log(dayObj);
+			// if no Day is found, set testDate to the Date associated with this value of 'i', and generate a Day object with no events using testDate
+			if (dayObj === undefined) {
+				testDate.setDate(i + 1);
+				dayObj = genDayObj(testDate);
+			}
+			dayObjArr.push(dayObj);
+		}
+
+		// slice dayObjArr into 7 element long mini arrays and add to 2d array "weeks"
+		const weeks: Array<Array<Day>> = [];
+		for (let o: number = 0; o < dayObjArr.length / 7; o++) {
+			weeks.push(dayObjArr.slice(0 + 7 * o, 7 + 7 * o));
+		}
+		//fill final week with empty days
+		const finalWeek = weeks[weeks.length - 1];
+		const finalElement = finalWeek[finalWeek.length - 1];
+		finalWeek.length = 7;
+		finalWeek.fill(genEmptyDayObj(), finalWeek.indexOf(finalElement) + 1, 6);
+
+		return weeks;
 	};
 	return (
 		<Card className="card">
+			<Card className="drop">
+				<MonthsFilter onFilterMonth={filterMonthHandler} />
+			</Card>
 			<table>
-				<caption>January </caption>
+				<caption>{MONTHS[month]}</caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />
@@ -113,12 +189,15 @@ const Calendar = (props: Props) => {
 				</thead>
 				<tbody>
 					{generateRows(7).map((row, i) => {
+						//console.log(row);
 						return (
-							<tr>
+							<tr key={uuidv4()}>
 								{row.map((day, j) => {
+									//console.log(day);
+
 									return (
 										<CalendarDate
-											key={i.toString() + ":" + j.toString()}
+											key={uuidv4()}
 											day={day as Day}
 										></CalendarDate>
 									);
