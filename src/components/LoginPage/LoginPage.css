@@ -54,6 +54,7 @@
 	border-width: 0.2vw; */
 	border-radius: 0.5vw;
 	display: flex;
+	height: fit-content;
 	width: min-content;
 	max-width: 17.5vw;
 	flex-direction: column;
