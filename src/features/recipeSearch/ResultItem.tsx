@@ -85,11 +85,11 @@ const ResultItem = (props: Props) => {
 					{arrowDirection(showIngredients)}
 				</p>
 				{showIngredients && (
-					<ul>
+					<ol>
 						{props.result.ingredientList.map((ingredient) => {
-							return <li className="Ingredient">{ingredient}</li>;
+							return <li style={{textAlign: "left"}} className="Ingredient">{ingredient}</li>;
 						})}
-					</ul>
+					</ol>
 				)}
 				<p
 					className="DropDownButton "

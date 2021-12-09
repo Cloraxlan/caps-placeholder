@@ -3,6 +3,7 @@ import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchBox from "./SearchBox";
 import ResultItem from "./ResultItem";
 import "./Search.css";
+import Card from "../../components/UI/Card/Card";
 //import selectRecipeDates from "./calendarSlice";
 interface Props {}
 //idrc enough to style this rn, its all gonna be remade anyway. enjoy funny flexbox
@@ -13,9 +14,9 @@ const style: CSSProperties = {
 const Search = (props: Props) => {
 	const [results, setResults] = useState<Recipe[]>([]);
 	return (
-		<div>
+		<Card className="CardPad">
 			<SearchBox setResults={setResults}></SearchBox>
-			<ul>
+			<ul style={{padding: "1rem",margin: 0}}>
 				<React.Fragment>
 					{/* <div className="SideBox"></div> */}
 					{results.map((result) => {
@@ -30,7 +31,7 @@ const Search = (props: Props) => {
 					})}
 				</React.Fragment>
 			</ul>
-		</div>
+		</Card>
 	);
 };
 
