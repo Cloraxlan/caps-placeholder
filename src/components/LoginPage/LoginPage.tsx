@@ -44,11 +44,11 @@ function LoginPage(): ReactElement {
 	};
 	return (
 		<div>
-			<div className="StatusMessage">{statusMessage()}</div>
 			<div className="StatusBox">
 				<div className="Text">Status: {getStatus()}</div>
 				<div className="Text">{SignedInAs()}</div>
 			</div>
+			<div className="StatusMessage">{statusMessage()}</div>
 			<ul className="LoginMargin">
 				<Login />
 			</ul>
