@@ -1,10 +1,10 @@
 import { ReactElement, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import Login from "../../components/Login";
-import Logout from "../../components/Logout";
+import Login from "./Login";
+import Logout from "./Logout";
 import { selectLogin } from "../../features/login/loginSlice";
 import "../LoginPage/LoginPage.css";
-
+import Card from "../../components/UI/Card/Card";
 function LoginPage(): ReactElement {
 	const selector = useAppSelector(selectLogin);
 	const [status, setStatus] = useState(false);
@@ -48,7 +48,7 @@ function LoginPage(): ReactElement {
 				<div className="Text">Status: {getStatus()}</div>
 				<div className="Text">{SignedInAs()}</div>
 			</div>
-			<div className="StatusMessage">{statusMessage()}</div>
+			<Card className="StatusMessage">{statusMessage()}</Card>
 			<ul className="LoginMargin">
 				<Login />
 			</ul>
