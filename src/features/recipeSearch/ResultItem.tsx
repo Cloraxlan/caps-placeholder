@@ -24,7 +24,7 @@ const ResultItem = (props: Props) => {
 	};
 	return (
 		<div>
-			{/*Overlay system*/}
+			{/*Overlay system for recipe*/}
 			{searchOverlayShown && (
 				<div className="calendarOverlay">
 					<button
@@ -52,6 +52,7 @@ const ResultItem = (props: Props) => {
 					></SaveRecipe>
 				</div>
 			)}
+			{/*Displaying all the recipies when searches*/}
 			<div className="Font">
 				<div>
 					<p
@@ -87,7 +88,11 @@ const ResultItem = (props: Props) => {
 				{showIngredients && (
 					<ol>
 						{props.result.ingredientList.map((ingredient) => {
-							return <li style={{textAlign: "left"}} className="Ingredient">{ingredient}</li>;
+							return (
+								<li style={{ textAlign: "left" }} className="Ingredient">
+									{ingredient}
+								</li>
+							);
 						})}
 					</ol>
 				)}

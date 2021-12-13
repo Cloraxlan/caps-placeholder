@@ -70,6 +70,7 @@ const SaveRecipe = (props: Props) => {
 
 	return (
 		<div>
+			{/*Recipe save*/}
 			{showRecipeSave && (
 				<div>
 					<div className="BlackBackground" />
@@ -108,6 +109,7 @@ const SaveRecipe = (props: Props) => {
 					</form>
 				</div>
 			)}
+			{/*When "Save Recipe" in the recipe overlay is clicked, show the recipe save*/}
 			<button onClick={save} className={setClassName()}>
 				Save Recipe
 			</button>
