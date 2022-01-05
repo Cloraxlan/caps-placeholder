@@ -13,6 +13,7 @@ import {
 	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
+import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 
 interface Props {}
 
@@ -78,6 +79,10 @@ const Calendar = (props: Props) => {
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
 	};
+
+	const monthChangeHandler = (iterand: number) => {
+		
+	}
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
 		weekLength: number = 7,
@@ -168,6 +173,7 @@ const Calendar = (props: Props) => {
 		<Card className="card">
 			<Card className="drop">
 				<MonthsFilter onFilterMonth={filterMonthHandler} />
+				<MonthChangeButtons onMonthChange={monthChangeHandler} />
 			</Card>
 			<table>
 				<caption>{MONTHS[month]}</caption>
