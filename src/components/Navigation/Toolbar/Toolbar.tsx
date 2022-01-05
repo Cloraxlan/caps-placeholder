@@ -1,9 +1,9 @@
-import React from "react";
+import { Fragment } from "react";
 import NavItems from "../NavItems/NavItems";
 import "./Toolbar.css";
 
 const Toolbar = () => (
-	<React.Fragment>
+	<Fragment>
 		<style>
 			@import
 			url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap');
@@ -14,7 +14,7 @@ const Toolbar = () => (
 				<NavItems />
 			</nav>
 		</header>
-	</React.Fragment>
+	</Fragment>
 );
 
 export default Toolbar;
