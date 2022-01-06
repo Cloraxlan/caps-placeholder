@@ -58,9 +58,10 @@ const SearchBox = (props: Props) => {
 	};
 	return (
 		<div className="Title">
-			<h1>Search For Recipe</h1>
+			<h1 className="TitleSize">Search For Recipe</h1>
 			<div className="Flex">
 				<input
+					className="InputFont"
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							search(true);
