@@ -2,27 +2,20 @@ import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 
 export default class Ingredient {
-	private type: "UNIT" | "BULK";
-	private unit: string;
-	private system: "METRIC" | "CUSTOMARY";
-	private magnitude: number;
-	constructor(ingredientString: string) {
+	protected _magnitude: number;
+	//TODO make it identify the name
+	//private _ingredientName: string;
+	protected constructor(ingredientString: string) {
+		//initialize nlp(library natural language library that allows things such as numbers to be parsed)
 		const nlpI = nlp;
 		let plugin = nlpNumbers;
 		nlp.extend(plugin);
 
-		//for now just unit
-		this.type = "UNIT";
-		this.system = "METRIC";
-		this.unit = "UNIT";
-
-		let doc = nlpI(
-			"i have two questions for Homer - 'Why lie?' and 'Lies, why?'",
-		);
-		//get all numbers, in any form
-		let nums = doc.values();
-		console.log(nums.out("array"));
-
-		this.magnitude = 0;
+		let doc: any = nlpI(ingredientString);
+		//gets first number unit and sets that to be the amount of that ingredient
+		this._magnitude = doc.numbers().get()[0];
+	}
+	public get magnitude() {
+		return this._magnitude;
 	}
 }

@@ -5,11 +5,23 @@ import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
+import Ingredient from "./Interfaces-Classes/Ingredient";
 
 function App() {
+	["6 cups thinly sliced, peeled apples (6 medium)", "3/4 cup sugar"].map(
+		(x) => {
+			new Ingredient(x);
+		},
+	);
 	return (
 		<body>
-			<div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
 				<Layout>
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />

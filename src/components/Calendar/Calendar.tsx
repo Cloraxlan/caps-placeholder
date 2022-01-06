@@ -91,7 +91,6 @@ const Calendar = (props: Props) => {
 			// console.log(day+1 + ' ' + mth)
 
 			/**/
-
 			return days.find(
 				(d) =>
 					d.date && d.date.getDate() - 1 === day && d.date.getMonth() == month,
