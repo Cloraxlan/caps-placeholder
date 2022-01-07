@@ -3,6 +3,7 @@ import './MonthsFilter.css'
 const MonthsFilter = (props: { onFilterMonth: (arg0: any) => void; }) => {
 
     const filterChangeHandler = (event: { target: { value: any; }; }) => {
+        console.log(event.target)
         props.onFilterMonth(event.target.value);
     }
 

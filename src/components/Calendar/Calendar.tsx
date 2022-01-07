@@ -81,7 +81,13 @@ const Calendar = (props: Props) => {
 	};
 
 	const monthChangeHandler = (iterand: number) => {
-		
+		console.log("ran");
+		setMonth(prevMonth => {
+			let newMonth = prevMonth+iterand;
+			if (newMonth<0) newMonth = 11;
+			if (newMonth>11) newMonth = 0;
+			return newMonth;
+		});
 	}
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
@@ -147,7 +153,7 @@ const Calendar = (props: Props) => {
 		for (let i: number = 0; i < MONTHSIZE[month]; i++) {
 			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
 			let dayObj: Day | undefined = checkDay(i);
-			console.log(dayObj);
+			// console.log(dayObj);
 			// if no Day is found, set testDate to the Date associated with this value of 'i', and generate a Day object with no events using testDate
 			if (dayObj === undefined) {
 				testDate.setDate(i + 1);
