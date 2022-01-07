@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
@@ -82,13 +82,13 @@ const Calendar = (props: Props) => {
 
 	const monthChangeHandler = (iterand: number) => {
 		console.log("ran");
-		setMonth(prevMonth => {
-			let newMonth = prevMonth+iterand;
-			if (newMonth<0) newMonth = 11;
-			if (newMonth>11) newMonth = 0;
+		setMonth((prevMonth) => {
+			let newMonth = prevMonth + iterand;
+			if (newMonth < 0) newMonth = 11;
+			if (newMonth > 11) newMonth = 0;
 			return newMonth;
 		});
-	}
+	};
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
 		weekLength: number = 7,
@@ -179,8 +179,10 @@ const Calendar = (props: Props) => {
 		<Card className="card">
 			<Card className="drop">
 				<MonthsFilter onFilterMonth={filterMonthHandler} />
-				<MonthChangeButtons onMonthChange={monthChangeHandler} />
 			</Card>
+			<div className="monthChangeButtons">
+				<MonthChangeButtons onMonthChange={monthChangeHandler} />
+			</div>
 			<table>
 				<caption>{MONTHS[month]}</caption>
 				<colgroup>
