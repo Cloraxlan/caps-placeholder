@@ -1,4 +1,7 @@
 import Unit from "./Unit";
+import UnitSystem, {
+	KNOW_SYSTEM_MASTER_CONVERSION_FACTORS,
+} from "./UnitSystem";
 //!!!!
 //VOLUME MASTER CONVERTION FACTOR FOR CUSTOMARY IS THE GALLON
 //!!!!
@@ -97,20 +100,8 @@ const VOLUME_UNITS: Unit[] = [
 
 export const ALL_CUSTOMARY_VOLUME =
 	CUSTOMARY_VOLUME_ABR.concat(CUSTOMARY_VOLUME_ABR);
-
-export default class CustomarySystem {
-	private _unit: Unit;
+export default class CustomarySystem extends UnitSystem {
 	constructor(unit: Unit) {
-		this._unit = unit;
+		super(unit, "CUSTOMARY");
 	}
-	public convertCustomarytoCustomary(
-		currentUnit: Unit,
-		magnitude: number,
-	): number {
-		if(currentUnit.system !=)
-		return (
-			(currentUnit.convertionFactor * magnitude) / this._unit.convertionFactor
-		);
-	}
-	convertBetweenSystem
 }
