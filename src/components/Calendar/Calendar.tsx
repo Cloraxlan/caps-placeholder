@@ -180,9 +180,10 @@ const Calendar = (props: Props) => {
 			<Card className="drop">
 				<MonthsFilter onFilterMonth={filterMonthHandler} />
 			</Card>
-			<div className="monthChangeButtons">
+			<MonthChangeButtons onMonthChange={monthChangeHandler} />
+			{/* <div className="monthChangeButtons">
 				<MonthChangeButtons onMonthChange={monthChangeHandler} />
-			</div>
+			</div> */}
 			<table>
 				<caption>{MONTHS[month]}</caption>
 				<colgroup>

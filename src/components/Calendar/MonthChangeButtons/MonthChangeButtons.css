@@ -1,0 +1,11 @@
+.monthChangeButtons {
+	display: flex;
+	flex-direction: row;
+	gap: 526px;
+}
+
+.arrow {
+	background-color: transparent;
+	border-color: transparent;
+	font-size: 50px;
+}

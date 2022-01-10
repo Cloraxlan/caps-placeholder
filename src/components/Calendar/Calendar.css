@@ -84,5 +84,6 @@ caption {
 } */
 
 .monthChangeButtons {
-	padding-top: 250vh;
+	position: absolute;
+	top: 151px;
 }
