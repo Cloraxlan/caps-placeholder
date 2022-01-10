@@ -5,6 +5,13 @@ import UnitSystem, {
 //!!!!
 //VOLUME MASTER CONVERTION FACTOR FOR CUSTOMARY IS THE GALLON
 //!!!!
+export const MASTER_VOLUME_CUSTOMARY: Unit = {
+	fullName: "gallon",
+	abbreviations: ["gal.", "gal", "gl.", "gl"],
+	system: "CUSTOMARY",
+	measure: "VOLUME",
+	convertionFactor: 1,
+};
 export const CUSTOMARY_VOLUME_FULL = [
 	"drop",
 	"smidgen",
@@ -100,8 +107,13 @@ const VOLUME_UNITS: Unit[] = [
 
 export const ALL_CUSTOMARY_VOLUME =
 	CUSTOMARY_VOLUME_ABR.concat(CUSTOMARY_VOLUME_ABR);
-export default class CustomarySystem extends UnitSystem {
+/*export default class CustomarySystem extends UnitSystem {
 	constructor(unit: Unit) {
 		super(unit, "CUSTOMARY");
 	}
-}
+	public convert(magnitude: number, finalUnit: Unit) {
+		if (this._unit.system != finalUnit.system) {
+			this.convertSystems(finalUnit.system);
+		}
+	}
+}*/
