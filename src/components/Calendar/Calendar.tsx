@@ -175,6 +175,16 @@ const Calendar = (props: Props) => {
 
 		return weeks;
 	};
+
+	useEffect(() => {
+		window.addEventListener("keydown", (event: any) => {
+			if (event.key === "Enter") {
+				console.log("Enter key pressed");
+			}
+			console.log("Key Pressed");
+			console.log(window);
+		});
+	}, []);
 	return (
 		<Card className="card">
 			<Card className="drop">

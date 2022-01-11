@@ -3,7 +3,7 @@ import "./MonthChangeButtons.css";
 
 const MonthChangeButtons = (props: any) => {
 	const filterChangeHandler = (event: any) => {
-		const val = event.target.innerText === "Next" ? 1 : -1;
+		const val = event.target.innerText === "ᐅ" ? 1 : -1;
 		props.onMonthChange(val);
 	};
 
