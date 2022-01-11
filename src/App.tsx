@@ -6,13 +6,25 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
 import Ingredient from "./Interfaces-Classes/Ingredient";
+import UnitSystem from "./Interfaces-Classes/UnitSystem";
 
 function App() {
-	["6 cups thinly sliced, peeled apples (6 medium)", "3/4 cup sugar"].map(
-		(x) => {
-			new Ingredient(x);
-		},
+	console.log(
+		new UnitSystem({
+			fullName: "cup",
+			abbreviations: ["cp.", "cp"],
+			system: "CUSTOMARY",
+			measure: "VOLUME",
+			convertionFactor: 16,
+		}).convert(5, {
+			fullName: "mililiter",
+			abbreviations: ["ml", "ml."],
+			system: "METRIC",
+			measure: "VOLUME",
+			convertionFactor: 1000,
+		}),
 	);
+
 	return (
 		<body>
 			<div

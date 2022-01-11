@@ -6,7 +6,8 @@ export interface SystemConversion {
 	finalSystem: string;
 	measure: "VOLUME" | "WEIGHT";
 	convert: number;
-	master: Unit;
+	initMaster: Unit;
+	finalMaster: Unit;
 }
 //Converting between system declarations
 export type KNOWN_SYSTEMS = "METRIC" | "CUSTOMARY";
@@ -17,14 +18,16 @@ export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_VOLUME: SystemConversion[] =
 			finalSystem: "METRIC",
 			measure: "VOLUME",
 			convert: 3.785,
-			master: MASTER_VOLUME_CUSTOMARY,
+			initMaster: MASTER_VOLUME_CUSTOMARY,
+			finalMaster: MASTER_VOLUME_METRIC,
 		},
 		{
 			baseSystem: "METRIC",
 			finalSystem: "CUSTOMARY",
 			measure: "VOLUME",
 			convert: 0.264172,
-			master: MASTER_VOLUME_METRIC,
+			initMaster: MASTER_VOLUME_METRIC,
+			finalMaster: MASTER_VOLUME_CUSTOMARY,
 		},
 	];
 export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT: SystemConversion[] =
@@ -46,6 +49,8 @@ export default class UnitSystem {
 	): number {
 		//Check if same unit system is used
 		if (finalUnit.system != this._unit.system) {
+			//NOTE FOR TOMMOROW UNIT IS NOT BEING CONVERTED IN RIGHT ORDER!!!
+			console.log(finalUnit.system);
 			throw "Unit System Mismatch";
 		}
 		if (finalUnit.measure != this._unit.measure) {
@@ -61,13 +66,14 @@ export default class UnitSystem {
 		);
 	}
 	//convert between systems using the conversion if know
+	//Basic conversion with no logic used when everything is already know to work
 	private convertSystems(
 		conversion: SystemConversion,
 		magnitude: number,
 	): number {
 		return conversion.convert * magnitude;
 	}
-
+	//More logical version of conversion that finds what system to convert into
 	private convertIntoSystem(
 		systemToConvertInto: KNOWN_SYSTEMS,
 		magnitude: number,
@@ -98,7 +104,16 @@ export default class UnitSystem {
 		if (!conversion) {
 			throw "Cannot convert, system conversion unknown";
 		} else {
-			this._unit = (conversion as SystemConversion).master;
+			console.log(this._unit);
+
+			console.log(this._unit);
+			//Convert into the master so you can convert into the other systems master
+			magnitude = this.convertBetweenUnitInSameSystem(
+				(conversion as SystemConversion).initMaster,
+				magnitude,
+			);
+			this._unit = (conversion as SystemConversion).finalMaster;
+
 			return this.convertSystems(conversion, magnitude);
 		}
 	}
@@ -109,7 +124,8 @@ export default class UnitSystem {
 				finalUnit.system as KNOWN_SYSTEMS,
 				magnitude,
 			);
+			console.log("oii");
 		}
-		this.convertBetweenUnitInSameSystem(finalUnit, magnitude);
+		return this.convertBetweenUnitInSameSystem(finalUnit, magnitude);
 	}
 }
