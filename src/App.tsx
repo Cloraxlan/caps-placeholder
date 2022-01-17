@@ -7,6 +7,7 @@ import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
 import Ingredient from "./Interfaces-Classes/Ingredient";
 import UnitSystem from "./Interfaces-Classes/UnitSystem";
+import Debug from "./Debug";
 
 function App() {
 	console.log(
@@ -39,6 +40,7 @@ function App() {
 						<Route path="/LoginPage" component={LoginPage} />
 						<Route path="/Search" component={Search} />
 						<Route path="/Calendar" component={Calendar} />
+						<Route path="/Debug" component={Debug} />
 
 						<ul style={{ listStyle: "none" }}></ul>
 					</Switch>

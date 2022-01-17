@@ -1,3 +1,8 @@
+import BulkIngredient from "./BulkIngredient";
+import Ingredient, { allUnits } from "./Ingredient";
+import Unit, { identifyUnitsByString } from "./Unit";
+import UnitIngredient from "./UnitIngredient";
+
 export interface serialRecipe {
 	name: string;
 	description: string;
@@ -28,5 +33,16 @@ export default class Recipe {
 			description: this._description,
 			ingredientList: this._ingredientList,
 		};
+	}
+}
+//Uses a string to identify the Unit and what measure it uses, if none is found it is identified as a bulk unitless ingredient
+export const constructIngredientFromString: (ingredientString: string)=> Ingredient = (ingredientString: string)=>{
+	let result = 	identifyUnitsByString(ingredientString, allUnits);
+	switch (result) {
+		case undefined:
+			return new UnitIngredient(ingredientString);
+		default:
+			return new BulkIngredient((result as Unit), ingredientString);
+
 	}
 }

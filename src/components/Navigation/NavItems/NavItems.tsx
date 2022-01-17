@@ -34,6 +34,12 @@ const NavItems = () => {
 			>
 				Calendar
 			</NavItem>
+			<NavItem
+				link={{ pathname: "/Debug", state: { calendarState } }}
+				active={document.location.pathname === "/Debug"}
+			>
+				Debug
+			</NavItem>
 		</ul>
 	);
 };

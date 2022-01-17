@@ -104,6 +104,8 @@ const VOLUME_UNITS: Unit[] = [
 		convertionFactor: 768,
 	},
 ];
+const WEIGHT_UNITS: Unit[] = []
+export const ALL_CUSTOMARY_UNITS = VOLUME_UNITS.concat(WEIGHT_UNITS);
 
 export const ALL_CUSTOMARY_VOLUME =
 	CUSTOMARY_VOLUME_ABR.concat(CUSTOMARY_VOLUME_ABR);

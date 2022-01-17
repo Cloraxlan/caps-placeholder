@@ -12,4 +12,19 @@ export default interface Unit {
 export const identifyUnitsByString = (
 	query: string,
 	units: Unit[],
-): Unit | undefined => {};
+): Unit | undefined => {
+	//See if name is found
+	for(let i = 0; i < units.length; i++){
+		if(query.includes(units[i].fullName)){
+			return units[i]
+		}
+	}
+	//See if abreviations are found	
+	for(let i = 0; i < units.length; i++){
+		for(let j = 0; j < units[i].abbreviations.length; j++){
+			if(query.includes(units[i].abbreviations[j])){
+				return units[i];
+			}
+		}
+	}
+}; 
