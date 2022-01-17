@@ -1,10 +1,11 @@
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 import { ALL_CUSTOMARY_UNITS } from "./CustomarySystem";
+import { ALL_METRIC_UNITS } from "./MetricSystem";
 import { identifyUnitsByString } from "./Unit";
 
 //TODO ADD METRIC
-export const allUnits = ALL_CUSTOMARY_UNITS
+export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS)
 export default abstract class Ingredient {
 	protected _magnitude: number;
 	private _measure: "UNITLESS" | "WEIGHT" | "VOLUME" 

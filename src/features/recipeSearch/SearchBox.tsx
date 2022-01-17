@@ -12,7 +12,9 @@ const recipes = [
 		 constructIngredientFromString("5 cups of apples"),
 		 constructIngredientFromString("1 pie crust"),
 
-		 constructIngredientFromString("3 teaspoons of cinnamon")
+		 constructIngredientFromString("3 TEASPOON of cinnamon"),
+		constructIngredientFromString("eighty g. of sugar")
+
 	]),
 	
 ];

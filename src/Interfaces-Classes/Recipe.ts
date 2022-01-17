@@ -17,6 +17,7 @@ export default class Recipe {
 		this._name = name;
 		this._description = description;
 		this._ingredientList = ingredients;
+		
 	}
 	public get name() {
 		return this._name;
@@ -26,6 +27,22 @@ export default class Recipe {
 	}
 	public get ingredientList() {
 		return this._ingredientList;
+	}
+	//converts the Ingredients into a single set of preffered units
+	public convertIntoSingleUnit(volume: Unit, weight: Unit){
+		for(let i = 0; i < this.ingredientList.length; i++){
+			switch (this._ingredientList[i].measure) {
+				case "UNITLESS":
+					break;
+				case "VOLUME":
+					(this._ingredientList[i] as BulkIngredient).convertUnits(volume)
+					break;
+				case "WEIGHT":
+					(this._ingredientList[i] as BulkIngredient).convertUnits(weight)
+
+					break;
+			}
+		}
 	}
 	public serialize(): serialRecipe {
 		let serializedIngredients: string[] = [];

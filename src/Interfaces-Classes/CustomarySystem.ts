@@ -12,54 +12,13 @@ export const MASTER_VOLUME_CUSTOMARY: Unit = {
 	measure: "VOLUME",
 	convertionFactor: 1,
 };
-export const CUSTOMARY_VOLUME_FULL = [
-	"drop",
-	"smidgen",
-	"pinch",
-	"dash",
-	"saltspoon",
-	"scruple",
-	"coffeespoon",
-	"fluid dram",
-	"teaspoon",
-	"dessertspoon",
-	"tablespoon",
-	"wineglass",
-	"teacup",
-	"gill",
-	"cup",
-	"pint",
-	"quart",
-	"pottle",
-	"gallon",
-];
-export const CUSTOMARY_VOLUME_ABR = [
-	"dr.",
-	"gt.",
-	"gtt.",
-	"smdg.",
-	"smi.",
-	"pn.",
-	"ds.",
-	"ssp.",
-	"csp.",
-	"fl.dr.",
-	"tsp.",
-	"tsp",
-	"dsp.",
-	"dssp.",
-	"dstspn.",
-	"tbsp.",
-	"tbsp",
-	"fl.oz",
-	"fl.oz.",
-	"wgf.",
-	"tcf.",
-	"pt.",
-	"qt.",
-	"pot.",
-	"gal.",
-];
+export const MASTER_WEIGHT_CUSTOMARY: Unit = {
+		fullName: "pound",
+		abbreviations: ["lb", "lbs", "lb.", "lbs."],
+		system: "CUSTOMARY",
+		measure: "WEIGHT",
+		convertionFactor: 1,
+	}
 const VOLUME_UNITS: Unit[] = [
 	{
 		fullName: "cup",
@@ -103,12 +62,33 @@ const VOLUME_UNITS: Unit[] = [
 		measure: "VOLUME",
 		convertionFactor: 768,
 	},
+	{
+		fullName: "fluid ounce",
+		abbreviations: ["floz.", "fl oz.", "fl oz", "floz"],
+		system: "CUSTOMARY",
+		measure: "VOLUME",
+		convertionFactor: 128,
+	}
 ];
-const WEIGHT_UNITS: Unit[] = []
+const WEIGHT_UNITS: Unit[] = [
+	{
+		fullName: "pound",
+		abbreviations: ["lb", "lbs", "lb.", "lbs."],
+		system: "CUSTOMARY",
+		measure: "WEIGHT",
+		convertionFactor: 1,
+	},
+	{
+		fullName: "ounce",
+		abbreviations: ["oz", "oz."],
+		system: "CUSTOMARY",
+		measure: "WEIGHT",
+		convertionFactor: 16,
+	}
+]
 export const ALL_CUSTOMARY_UNITS = VOLUME_UNITS.concat(WEIGHT_UNITS);
 
-export const ALL_CUSTOMARY_VOLUME =
-	CUSTOMARY_VOLUME_ABR.concat(CUSTOMARY_VOLUME_ABR);
+
 /*export default class CustomarySystem extends UnitSystem {
 	constructor(unit: Unit) {
 		super(unit, "CUSTOMARY");

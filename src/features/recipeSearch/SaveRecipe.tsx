@@ -8,6 +8,8 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
+import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 
 interface Props {
 	recipe: Recipe;
@@ -20,6 +22,10 @@ const SaveRecipe = (props: Props) => {
 		let month = prompt("Month (as name)");
 		let day = prompt("Day(as number)");
 		let date = new Date(month + " " + day + ", 2021");
+		props.recipe.convertIntoSingleUnit(MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC);
+		//console.log((props.recipe.ingredientList[3] as BulkIngredient).unit)
+		console.log((props.recipe.ingredientList[3] ).measure)
+
 		dispatch(addRecipeDate({ date: date, recipe: props.recipe.serialize() }));
 	};
 	return (
