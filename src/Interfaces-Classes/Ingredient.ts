@@ -5,7 +5,7 @@ import { identifyUnitsByString } from "./Unit";
 
 //TODO ADD METRIC
 export const allUnits = ALL_CUSTOMARY_UNITS
-export default class Ingredient {
+export default abstract class Ingredient {
 	protected _magnitude: number;
 	private _measure: "UNITLESS" | "WEIGHT" | "VOLUME" 
 	//protected _name: string;
@@ -58,8 +58,20 @@ export default class Ingredient {
 	public get measure(){
 		return this._measure
 	}
-	public get name(){
+	public get ingredientName(){
 		return this._ingredientName;
+	}
+	//Adds an s if magnitude not equal to 1
+	public pluralizedName(){
+		if(this.magnitude != 1){
+			return this.ingredientName+"s";
+		}else{
+			return this.ingredientName;
+		}
+	}
+	//Name with magnitude and name
+	public fullName(): string{
+		return this._magnitude+ " "+ this.pluralizedName();
 	}
 	//sees if it is unitless or unitwith
 	public isBulk(){

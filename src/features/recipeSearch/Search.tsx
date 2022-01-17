@@ -38,7 +38,7 @@ const Search = (props: Props) => {
 
 									<ul>
 										{result.ingredientList.map((ingredient) => {
-											return <li className="Ingredient">{ingredient}</li>;
+											return <li className="Ingredient">{ingredient.fullName()}</li>;
 										})}
 									</ul>
 									<SaveRecipe recipe={result}></SaveRecipe>

@@ -24,9 +24,9 @@ const Debug = (props: Props) => {
         if(i.isBulk()){
             let  c : BulkIngredient = (i as BulkIngredient);
             c.convertUnits(LITER);
-            console.log(c.magnitude +" " + c.unit.fullName + " of "+ c.name)
+            console.log(c.magnitude +" " + c.unit.fullName + " of "+ c.ingredientName)
         }else{
-                        console.log(i.magnitude + " of "+ i.name)
+                        console.log(i.magnitude + " of "+ i.ingredientName)
 
         }
     })

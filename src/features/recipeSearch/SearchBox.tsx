@@ -1,40 +1,20 @@
 import React, { useRef } from "react";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { constructIngredientFromString } from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
+import Ingredient from "../../Interfaces-Classes/Ingredient";
 
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
 	new Recipe("Apple Pie", "It is very good takes like an hour to make", [
-		"apple",
-		"pie crust",
+		 constructIngredientFromString("5 cups of apples"),
+		 constructIngredientFromString("1 pie crust"),
+
+		 constructIngredientFromString("3 teaspoons of cinnamon")
 	]),
-	new Recipe("Jeramisu", "Yummy Jeremy mmmmmm yummy", ["Jeremy", "yum powder"]),
-	new Recipe("Pizzella", "yes", [
-		"poptarts mostly",
-		"Pizza",
-		"A kiss from Marcello",
-	]),
-	new Recipe("Popkornrad", "Pop pop!", [
-		"Konrad",
-		"oil",
-		"budder",
-		"souls of the dead",
-	]),
-	new Recipe("Cooking with Simon", "ok", ["Cooking", "With", "Simon"]),
-	new Recipe("CARS", "THE MASTERPIECE OF THE CENTURY", [
-		"Ka-Chow!",
-		"Focus. Speed. I am speed.",
-		"Tow Mater. Average intelligence.",
-	]),
-	new Recipe("CanDees Cade", "Run.", [
-		"Sugar",
-		"Anger",
-		"Red Food Coloring(blood)",
-		"Santa",
-	]),
+	
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
