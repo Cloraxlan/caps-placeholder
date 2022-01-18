@@ -28,6 +28,7 @@ function App() {
 
 	return (
 		<body>
+			{/* Centers content on each page */}
 			<div
 				style={{
 					display: "flex",
@@ -35,7 +36,9 @@ function App() {
 					justifyContent: "center",
 				}}
 			>
+				{/* Renders page content with a toolbar */}
 				<Layout>
+					{/* links toolbar nav items to pages */}
 					<Switch>
 						<Route path="/LoginPage" component={LoginPage} />
 						<Route path="/Search" component={Search} />

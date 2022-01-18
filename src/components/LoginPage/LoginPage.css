@@ -1,9 +1,11 @@
-.Login {
+.LogButton {
 	width: 20vw;
 	height: 5vh;
 	text-align: center;
 	padding-top: 2vh;
 	align-self: center;
+	font-size: 3vh;
+	min-width: 250px;
 	/* line-height: 1.1em; */
 	/* font-size: 1.1em; */
 }
@@ -14,6 +16,8 @@
 	text-align: center;
 	padding-top: 2vh;
 	align-self: center;
+	font-size: 3vh;
+
 	/* line-height: 1.1em; */
 	/* font-size: 1.1em; */
 }
@@ -34,6 +38,7 @@
 
 .StatusBox {
 	text-align: left;
+	vertical-align: top;
 	position: relative;
 	left: 42.5vw;
 	background-color: #c8d5b9ff;
@@ -44,7 +49,6 @@
 	width: min-content;
 	max-width: 15vw;
 	width: fit-content; */
-	margin-top: -5vh;
 	padding-right: 1vw;
 	padding-bottom: 0.5vw;
 	padding-top: 0.5vw;
@@ -54,11 +58,13 @@
 	border-width: 0.2vw; */
 	border-radius: 0.5vw;
 	display: flex;
+	height: fit-content;
 	width: min-content;
 	max-width: 17.5vw;
 	flex-direction: column;
 	font-family: "IBM Plex Serif", serif;
-	font-size: 2.5vh;
+	font-size: calc(4px + 1.8vh);
+	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
 }
 
 .Text {
@@ -68,6 +74,8 @@
 }
 
 .StatusMessage {
+	margin-top: -5vh;
 	text-align: center;
 	font-family: "IBM Plex Serif", serif;
+	font-size: calc(8px + 1vh);
 }

@@ -18,7 +18,7 @@ export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 				found = true;
 				days[i].events.push({
 					recipe: recipeDate.recipe,
-					note: "TODO REMEBER OKAY!!",
+					note: recipeDate.note as string,
 				});
 			}
 		}
@@ -26,7 +26,9 @@ export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 			//Add holiday stuff TODO
 			days.push({
 				date: recipeDate.date,
-				events: [{ recipe: recipeDate.recipe, note: "TODO REMEBER OKAY!!" }],
+				events: [
+					{ recipe: recipeDate.recipe, note: recipeDate.note as string },
+				],
 			});
 		}
 	});

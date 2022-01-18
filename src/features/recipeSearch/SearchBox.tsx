@@ -38,22 +38,25 @@ const SearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-
+		console.log(getSearchValue(false));
 		props.setResults(searchQ.basicSearch(recipes));
 	};
 	return (
 		<div className="Title">
-			<h1>Search For Recipe</h1>
+			<h1 className="TitleSize">Search For Recipe</h1>
 			<div className="Flex">
 				<input
+					className="InputFont"
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							search(true);
 						}
+					}}
+					ref={searchBox}
+					onChange={() => {
 						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
 						search(false);
 					}}
-					ref={searchBox}
 				></input>
 				<button
 					className="SearchButton"
