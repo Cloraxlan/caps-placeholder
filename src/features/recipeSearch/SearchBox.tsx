@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
-import Recipe, { constructIngredientFromString } from "../../Interfaces-Classes/Recipe";
+import Recipe, {
+	constructIngredientFromString,
+} from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
 import Ingredient from "../../Interfaces-Classes/Ingredient";
@@ -8,13 +10,18 @@ interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
-	new Recipe("Apple Pie", "It is very good takes like an hour to make", [
-		 constructIngredientFromString("5 cups of apples"),
-		 constructIngredientFromString("1 pie crust"),
+	new Recipe(
+		"Apple Pie",
+		"It is very good takes like an hour to make",
+		[
+			constructIngredientFromString("5 cups of apples"),
+			constructIngredientFromString("1 pie crust"),
 
-		 constructIngredientFromString("3 teaspoons of cinnamon")
-	]),
-	
+			constructIngredientFromString("3 teaspoons of cinnamon"),
+		],
+		[],
+		{},
+	),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
