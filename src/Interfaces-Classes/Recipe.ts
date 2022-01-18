@@ -13,11 +13,16 @@ export interface recipeTime {
 	hours: number;
 	minutes: number;
 }
+export interface nutritionData {
+	//Per serving
+	calories: number;
+}
 export interface recipeMetadata {
 	prepTime?: recipeTime;
 	totalTime?: number;
 	//Amount of servings in base recipe, if not specified default is 1
 	baseServings?: number;
+	nutritionPerServing?: nutritionData;
 }
 export default class Recipe {
 	private _name: string;
