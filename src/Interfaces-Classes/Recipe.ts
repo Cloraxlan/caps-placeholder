@@ -85,6 +85,13 @@ export default class Recipe {
 			this._ingredientList[i].resizeIngredient(resizeRation);
 		}
 	}
+	public listInstrutions(): string {
+		let instructions: string = "";
+		this._instructionSet.map((instruction, i) => {
+			instructions += i + ": " + instruction + "\n";
+		});
+		return instructions;
+	}
 }
 //Uses a string to identify the Unit and what measure it uses, if none is found it is identified as a bulk unitless ingredient
 export const constructIngredientFromString: (

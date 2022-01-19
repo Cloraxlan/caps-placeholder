@@ -34,11 +34,6 @@ const SaveRecipe = (props: Props) => {
 		// console.log(d);
 	};
 	let save = () => {
-		let month = prompt("Month (as name)");
-		let day = prompt("Day(as number)");
-		let date = new Date(month + " " + day + ", 2021");
-		props.recipe.resizePortions(2);
-		dispatch(addRecipeDate({ date: date, recipe: props.recipe.serialize() }));
 		setShowRecipeSave(true);
 		// let month = prompt("Month (as name)");
 		// let day = prompt("Day(as number)");

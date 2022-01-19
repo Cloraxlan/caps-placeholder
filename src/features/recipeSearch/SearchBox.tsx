@@ -19,7 +19,7 @@ const recipes = [
 
 			constructIngredientFromString("3 teaspoons of cinnamon"),
 		],
-		[],
+		["combine ingredients", "bake"],
 		{},
 	),
 ];
