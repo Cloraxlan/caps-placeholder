@@ -4,7 +4,7 @@
 
 .Name {
 	margin-top: 5vh;
-	font-size: 4.5vh;
+	font-size: calc(16px + 1.75vh);
 }
 
 .Name:hover {
@@ -13,25 +13,25 @@
 
 .Description {
 	margin-top: -3vh;
-	font-size: 2vh;
+	font-size: calc(8px + 1vh);
 	margin-bottom: 5vh;
 }
 .DropDownButton {
-	font-size: 2vh;
+	font-size: calc(8px + 1vh);
 	margin-bottom: 5vh;
 }
 .DropDownText {
-	font-size: 2vh;
+	font-size: calc(8px + 1vh);
 	margin-bottom: 5vh;
 }
 /* .Ingredient {
 
 } */
 
-.SideBox {
+/* .SideBox {
 	background-color: #cfc;
 	padding: 100px;
-}
+} */
 
 .CardPad {
 	padding: 0.5rem;

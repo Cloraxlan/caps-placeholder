@@ -3,12 +3,20 @@
 	text-align: center;
 }
 
+.TitleSize {
+	font-size: calc(18px + 2vh);
+}
+
 .Flex {
 	flex-direction: row;
 	display: flex;
 	justify-content: center;
 	text-align: center;
 	gap: 0.5vw;
+}
+
+.InputFont {
+	font-size: calc(12px + 0.5vh);
 }
 
 .SearchButton {
@@ -18,6 +26,8 @@
 	border: solid;
 	border-width: 0.25vh;
 	border-radius: 1vh;
+	height: calc(16px + 0.7vh);
+	font-size: calc(12px + 0.5vh);
 	/* border-color: rgb(98, 165, 134); */
 	border-color: rgb(134, 179, 158);
 }

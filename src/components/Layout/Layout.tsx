@@ -2,6 +2,7 @@ import React, { CSSProperties } from "react";
 import Toolbar from "../Navigation/Toolbar/Toolbar";
 
 const childrenStyle: CSSProperties = {
+	// marginTop: "10vh",
 	marginTop: "72px",
 };
 

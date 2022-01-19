@@ -16,7 +16,7 @@ const Search = (props: Props) => {
 	return (
 		<Card className="CardPad">
 			<SearchBox setResults={setResults}></SearchBox>
-			<ul style={{padding: "1rem",margin: 0}}>
+			<ul style={{ padding: "1rem", margin: 0 }}>
 				<React.Fragment>
 					{/* <div className="SideBox"></div> */}
 					{results.map((result) => {

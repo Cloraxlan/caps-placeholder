@@ -1,7 +1,10 @@
 import React, { useRef } from "react";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, {
+	constructIngredientFromString,
+} from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
+import Ingredient from "../../Interfaces-Classes/Ingredient";
 
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
@@ -10,32 +13,14 @@ const recipes = [
 	new Recipe(
 		"Apple Pie",
 		"It is very good takes like an hour to make",
-		["apple", "pie crust"],
-		"make it",
-	),
-	new Recipe(
-		"Jeramisu",
-		"Yummy Jeremy mmmmmm yummy",
-		["Jeremy", "yum powder"],
-		"make it",
-	),
-	new Recipe(
-		"Pizzella",
-		"yes",
-		["poptarts mostly", "Pizza", "A kiss from Marcello"],
-		"make it",
-	),
-	new Recipe(
-		"Popkornrad",
-		"Pop pop!",
-		["Konrad", "oil", "budder", "souls of the dead"],
-		"make it",
-	),
-	new Recipe(
-		"CanDees Cade",
-		"Run.",
-		["Sugar", "Anger", "Red Food Coloring(blood)", "Santa"],
-		"make it",
+		[
+			constructIngredientFromString("5 cups of apples"),
+			constructIngredientFromString("1 pie crust"),
+
+			constructIngredientFromString("3 teaspoons of cinnamon"),
+		],
+		["combine ingredients", "bake"],
+		{},
 	),
 ];
 const SearchBox = (props: Props) => {
@@ -58,9 +43,10 @@ const SearchBox = (props: Props) => {
 	};
 	return (
 		<div className="Title">
-			<h1>Search For Recipe</h1>
+			<h1 className="TitleSize">Search For Recipe</h1>
 			<div className="Flex">
 				<input
+					className="InputFont"
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							search(true);

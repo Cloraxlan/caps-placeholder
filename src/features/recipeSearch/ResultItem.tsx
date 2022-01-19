@@ -40,11 +40,13 @@ const ResultItem = (props: Props) => {
 					<div className="OverlayListTitle"> Ingredient List </div>
 					<div className="OverlayIngredientItem">
 						{props.result.ingredientList.map((ingredient) => {
-							return <li>{ingredient}</li>;
+							return <li>{ingredient.fullName()}</li>;
 						})}
 					</div>
 					<div className="OverlayListTitle"> Instructions </div>
-					<div className="OverlayInstructions">{props.result.instuctions}</div>
+					<div className="OverlayInstructions">
+						{props.result.listInstrutions()}
+					</div>
 
 					<SaveRecipe
 						className2="OverlaySaveRecipe"
@@ -90,7 +92,7 @@ const ResultItem = (props: Props) => {
 						{props.result.ingredientList.map((ingredient) => {
 							return (
 								<li style={{ textAlign: "left" }} className="Ingredient">
-									{ingredient}
+									{ingredient.fullName()}
 								</li>
 							);
 						})}
@@ -108,7 +110,7 @@ const ResultItem = (props: Props) => {
 					{arrowDirection(showInstructions)}
 				</p>
 				{showInstructions && (
-					<p className="DropDownText">{props.result.instuctions}</p>
+					<p className="DropDownText">{props.result.listInstrutions()}</p>
 				)}
 				<SaveRecipe recipe={props.result}></SaveRecipe>
 			</div>
