@@ -13,6 +13,9 @@ import {
 	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
+// import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
+import CalendarSearch from "./CalendarSearch/CalendarSearch";
+import React from "react";
 
 interface Props {}
 
@@ -65,6 +68,7 @@ const daysPre: Day[] = [];
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
+	const [results, setResults] = useState<Recipe[]>([]);
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
@@ -165,49 +169,56 @@ const Calendar = (props: Props) => {
 		return weeks;
 	};
 	return (
-		<Card className="card">
-			<Card className="drop">
-				<MonthsFilter onFilterMonth={filterMonthHandler} />
-			</Card>
-			<table>
-				<caption>{MONTHS[month]}</caption>
-				<colgroup>
-					<col className="weekend" />
-					<col className="weekday" span={5} />
-					<col className="weekend" />
-				</colgroup>
-				<thead>
-					<tr id="days">
-						<th>Sun</th>
-						<th>Mon</th>
-						<th>Tue</th>
-						<th>Wed</th>
-						<th>Thu</th>
-						<th>Fri</th>
-						<th>Sat</th>
-					</tr>
-				</thead>
-				<tbody>
-					{generateRows(7).map((row, i) => {
-						//console.log(row);
-						return (
-							<tr key={uuidv4()}>
-								{row.map((day, j) => {
-									//console.log(day);
+		<React.Fragment>
+			<CalendarSearch setResults={setResults} recipeList={recipeDateList}/>
+			<Card className="card">
+				<Card className="drop">
+					<MonthsFilter onFilterMonth={filterMonthHandler} />
+				</Card>
+				{/* <MonthChangeButtons onMonthChange={monthChangeHandler} /> */}
+				{/* <div className="monthChangeButtons">
+					<MonthChangeButtons onMonthChange={monthChangeHandler} />
+				</div> */}
+				<table>
+					<caption>{MONTHS[month]}</caption>
+					<colgroup>
+						<col className="weekend" />
+						<col className="weekday" span={5} />
+						<col className="weekend" />
+					</colgroup>
+					<thead>
+						<tr id="days">
+							<th>Sun</th>
+							<th>Mon</th>
+							<th>Tue</th>
+							<th>Wed</th>
+							<th>Thu</th>
+							<th>Fri</th>
+							<th>Sat</th>
+						</tr>
+					</thead>
+					<tbody>
+						{generateRows(7).map((row, i) => {
+							//console.log(row);
+							return (
+								<tr key={uuidv4()}>
+									{row.map((day, j) => {
+										//console.log(day);
 
-									return (
-										<CalendarDate
-											key={uuidv4()}
-											day={day as Day}
-										></CalendarDate>
-									);
-								})}
-							</tr>
-						);
-					})}
-				</tbody>
-			</table>
-		</Card>
+										return (
+											<CalendarDate
+												key={uuidv4()}
+												day={day as Day}
+											></CalendarDate>
+										);
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</Card>
+		</React.Fragment>
 	);
 };
 
