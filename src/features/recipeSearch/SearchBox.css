@@ -3,6 +3,10 @@
 	text-align: center;
 }
 
+.TitleSize {
+	font-size: calc(18px + 2vh);
+}
+
 .Flex {
 	flex-direction: row;
 	display: flex;
@@ -11,12 +15,19 @@
 	gap: 0.5vw;
 }
 
-.Submit {
+.InputFont {
+	font-size: calc(12px + 0.5vh);
+}
+
+.SearchButton {
 	font-family: "IBM Plex Serif", serif;
 	box-sizing: content-box;
 	background-color: #8fc0a9ff;
-	border-width: 5vh;
 	border: solid;
+	border-width: 0.25vh;
 	border-radius: 1vh;
-	border-color: rgb(98, 165, 134);
+	height: calc(16px + 0.7vh);
+	font-size: calc(12px + 0.5vh);
+	/* border-color: rgb(98, 165, 134); */
+	border-color: rgb(134, 179, 158);
 }

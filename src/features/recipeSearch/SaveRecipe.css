@@ -1,5 +1,57 @@
 .Save {
 	font-family: "IBM Plex Serif", serif;
 	margin-top: 3vh;
-	margin-left: 33vw;
+	margin-left: 15vw;
+}
+
+.SaveOverlay {
+	z-index: 7;
+	background-color: #c8d5b9ff;
+	border-width: 5vh;
+	border: solid;
+	border-radius: 1vh;
+	border-color: rgb(98, 165, 134);
+	left: 30%;
+	top: 22.9%;
+	width: 40vw; /* Full width (cover the whole page) */
+	height: 50vh; /* Full height (cover the whole page) */
+	position: fixed;
+	font-family: "IBM Plex Serif", serif;
+}
+
+.BlackBackground {
+	z-index: 6;
+	background-color: black;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	opacity: 0.6;
+}
+
+.SaveRecipeNote {
+	width: 35vw;
+	margin-left: 0.5vw;
+	display: inline-block;
+	max-height: 33vh;
+	background-color: white;
+}
+
+.SaveRecipeDate {
+	margin-left: 0.5vw;
+	margin-top: 1vh;
+	font-family: "IBM Plex Serif", serif;
+}
+
+.SaveButtonOverlay {
+	font-family: "IBM Plex Serif", serif;
+	margin-left: 11vw;
+	width: 7.5vw;
+	top: 43vh;
+	position: absolute;
+}
+
+.NoteStyling {
+	margin-left: 0.5vw;
 }

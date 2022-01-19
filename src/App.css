@@ -2,19 +2,6 @@ body {
 	background-color: #faf3ddff;
 	scrollbar-width: none;
 }
-.Login {
-	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 15vh;
-}
-
-.Logout {
-	display: flex;
-	flex-direction: row-reverse;
-	margin-left: 80vw;
-	margin-top: 2vh;
-}
 
 body::-webkit-scrollbar {
 	display: none;

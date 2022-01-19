@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../app/hooks";
 import { selectRecipeDates } from "../../../features/recipeSearch/calendarSlice";
 import NavItem from "./NavItem/NavItem";
 const navItemsStyling: CSSProperties = {
@@ -19,14 +19,11 @@ const NavItems = () => {
 			<NavItem link="/" active={document.location.pathname === "/"}>
 				Home
 			</NavItem>
-			<NavItem link="/" active={false}>
-				Feature
-			</NavItem>
 			<NavItem
 				link="/LoginPage"
 				active={document.location.pathname === "/LoginPage"}
 			>
-				Future Login Page
+				Login Page
 			</NavItem>
 			<NavItem link="/Search" active={document.location.pathname === "/Search"}>
 				Recipe Search
@@ -36,6 +33,12 @@ const NavItems = () => {
 				active={document.location.pathname === "/Calendar"}
 			>
 				Calendar
+			</NavItem>
+			<NavItem
+				link={{ pathname: "/Debug", state: { calendarState } }}
+				active={document.location.pathname === "/Debug"}
+			>
+				Debug
 			</NavItem>
 		</ul>
 	);

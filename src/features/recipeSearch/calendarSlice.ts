@@ -1,25 +1,18 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
 import Recipe from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
 	recipe: Recipe;
 	date: Date;
+	note?: String;
 }
 export interface CalendarState {
 	recipeDates: Array<RecipeDate>;
 }
 const initialState: CalendarState = {
-	recipeDates: [
-		{
-			date: new Date("January 01, 2021 00:00:00"),
-			recipe: new Recipe("yum", "pie", ["yes", "cades blood"]),
-		},
-		{
-			date: new Date("January 03, 2021 00:00:00"),
-			recipe: new Recipe("yum2", "pie", ["yes", "price discrimination"]),
-		},
-	],
+	recipeDates: [],
 };
 export const calendarSlice: Slice = createSlice({
 	name: "calendar",

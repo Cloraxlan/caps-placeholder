@@ -9,7 +9,8 @@
 	box-sizing: border-box;
 	display: flex;
 	height: 100%;
-	align-items: center;
+	min-height: 50px;
+	align-items: flex-end;
 	background-color: #8fc0a9ff;
 	/* border-bottom: 4px solid; */
 	color: #4a7c59ff;
@@ -20,8 +21,8 @@
 	text-decoration: none;
 	font-family: "IBM Plex Serif", serif;
 	height: 100%;
-	padding: 14px 40px;
-	border-bottom: 14px solid #c8d5b9ff;
+	padding: 2vh 3vw;
+	border-bottom: 2vh solid #c8d5b9ff;
 	/* border-bottom: 14px solid rgb(255, 255, 255); */
 	box-sizing: border-box;
 	display: block;
@@ -29,7 +30,7 @@
 }
 .NavItem a:hover {
 	/* border-bottom: 14px solid #faf3ddff; */
-	border-bottom: 14px solid #8fc0a9ff;
+	border-bottom: 2vh solid #8fc0a9ff;
 }
 .NavItem a:hover,
 .NavItem a:active,
