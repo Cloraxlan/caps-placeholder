@@ -38,7 +38,7 @@ const CalendarDay = (props: Props) => {
 						<p>{event.recipe.description}</p>
 						<div className="ingrdientItem">
 							{event.recipe.ingredientList.map((ingredient) => {
-								return <li>{ingredient}</li>;
+								return <li>{ingredient.fullName()}</li>;
 							})}
 						</div>
 					</div>

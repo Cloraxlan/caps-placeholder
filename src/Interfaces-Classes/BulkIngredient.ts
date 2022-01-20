@@ -20,12 +20,12 @@ export default class BulkIngredient extends Ingredient {
 		}
 	}
 	public fullName(): string {
-		return this._magnitude + " " + this.pluralizedName();
+		return this.magnitude + " " + this.pluralizedName();
 	}
 	//Converts into diffrent units and changes the unit of the class
 	public convertUnits(unitToConvertInto: Unit) {
 		let converter = new UnitSystem(this._unit);
 		this._unit = unitToConvertInto;
-		this._magnitude = converter.convert(this._magnitude, unitToConvertInto);
+		this.magnitude = converter.convert(this.magnitude, unitToConvertInto);
 	}
 }

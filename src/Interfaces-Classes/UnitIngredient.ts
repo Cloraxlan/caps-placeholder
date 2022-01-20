@@ -6,6 +6,6 @@ export default class UnitIngredient extends Ingredient {
 	}
 	//Changes amount of ingredient needed to get the right portion size
 	public resizePortion(proportion: number) {
-		this._magnitude = this._magnitude * proportion;
+		this.magnitude = this.magnitude * proportion;
 	}
 }
