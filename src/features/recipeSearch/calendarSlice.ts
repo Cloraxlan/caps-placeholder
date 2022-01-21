@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
-	recipe: Recipe;
+	recipe: serialRecipe;
 	date: Date;
 	note?: String;
 }

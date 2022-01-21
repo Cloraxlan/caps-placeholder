@@ -1,10 +1,10 @@
 import { RecipeDate } from "../features/recipeSearch/calendarSlice";
-import Recipe from "./Recipe";
+import Recipe, { serialRecipe } from "./Recipe";
 
 export interface Day {
 	date?: Date;
 	//Eventually will be expanded into more complex data, for now strings work
-	events: Array<{ recipe: Recipe; note: string }>;
+	events: Array<{ recipe: serialRecipe; note: string }>;
 	holiday?: string;
 }
 //Converts a list of recipeDates into Days

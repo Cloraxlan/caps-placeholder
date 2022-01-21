@@ -6,7 +6,7 @@ import { identifyUnitsByString } from "./Unit";
 export interface serializedIngredient {
 	magnitude: number;
 	measure: "UNITLESS" | "WEIGHT" | "VOLUME";
-
+	fullName: string;
 	ingredientName: string;
 }
 
@@ -20,6 +20,7 @@ export default abstract class Ingredient {
 	) {
 		this._ingredient = {
 			ingredientName: "",
+			fullName: "",
 			measure: "UNITLESS",
 			magnitude: 0,
 		};
@@ -109,6 +110,7 @@ export default abstract class Ingredient {
 		this.magnitude = this.magnitude * proportion;
 	}
 	public serialize() {
+		this._ingredient.fullName = this.fullName();
 		return this._ingredient;
 	}
 }

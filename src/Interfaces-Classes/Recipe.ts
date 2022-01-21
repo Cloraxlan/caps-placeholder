@@ -1,5 +1,5 @@
 import BulkIngredient from "./BulkIngredient";
-import Ingredient, { allUnits } from "./Ingredient";
+import Ingredient, { allUnits, serializedIngredient } from "./Ingredient";
 import Unit, { identifyUnitsByString } from "./Unit";
 import UnitIngredient from "./UnitIngredient";
 
@@ -7,7 +7,7 @@ export interface serialRecipe {
 	name: string;
 	description: string;
 	instructionSet: Array<string>;
-	ingredientList: Array<Ingredient>;
+	ingredients: Array<serializedIngredient>;
 	servings: number;
 	metadata: recipeMetadata;
 }
@@ -28,6 +28,8 @@ export interface recipeMetadata {
 }
 export default class Recipe {
 	private _recipe: serialRecipe;
+	private _servings: number;
+	private _ingredients: Ingredient[];
 	constructor(
 		name: string,
 		description: string,
@@ -41,19 +43,21 @@ export default class Recipe {
 			metadata: {},
 			instructionSet: [],
 			name: "",
-			ingredientList: [],
+			ingredients: [],
 		};
 		this.name = name;
 		this.description = description;
-		this.ingredientList = ingredients;
+		this._ingredients = ingredients;
 		this.instructions = instructions;
 		this.metadata = metadata;
-		if (this.metadata.baseServings) {
-			this.servings = this.metadata.baseServings;
+		if (this._recipe.servings) {
+			this._servings = this._recipe.metadata.baseServings as number;
 		} else {
 			//If not specified defaults to one
-			this.servings = 1;
+			this._servings = 1;
 		}
+		//Updates the interface
+		this.ingredients = ingredients;
 	}
 	public get name() {
 		return this._recipe.name;
@@ -61,14 +65,14 @@ export default class Recipe {
 	public get description() {
 		return this._recipe.description;
 	}
-	public get ingredientList() {
-		return this._recipe.ingredientList;
+	public get ingredients() {
+		return this._ingredients;
 	}
 	public get instructions() {
 		return this._recipe.instructionSet;
 	}
 	public get servings() {
-		return this._recipe.servings;
+		return this._servings;
 	}
 	public set name(name: string) {
 		this._recipe.name = name;
@@ -76,14 +80,19 @@ export default class Recipe {
 	public set description(description: string) {
 		this._recipe.description = description;
 	}
-	public set ingredientList(ingredients: Ingredient[]) {
-		this._recipe.ingredientList = ingredients;
+	public set ingredients(ingredients: Ingredient[]) {
+		this._ingredients = ingredients;
+		let serializedIngredients: serializedIngredient[] = [];
+		ingredients.map((ingredient) => {
+			serializedIngredients.push(ingredient.serialize());
+		});
+		this._recipe.ingredients = serializedIngredients;
 	}
 	public set instructions(instructions: string[]) {
 		this._recipe.instructionSet = instructions;
 	}
 	public set servings(servings: number) {
-		this._recipe.servings = servings;
+		this._servings = servings;
 	}
 	public set metadata(metadata: recipeMetadata) {
 		this._recipe.metadata = metadata;
@@ -98,8 +107,8 @@ export default class Recipe {
 	//changes the amount of servings and the required ingredient proportions accordingly
 	public resizePortions(newServings: number) {
 		let resizeRation: number = newServings / this.servings;
-		for (let i = 0; i < this.ingredientList.length; i++) {
-			this.ingredientList[i].resizeIngredient(resizeRation);
+		for (let i = 0; i < this.ingredients.length; i++) {
+			this.ingredients[i].resizeIngredient(resizeRation);
 		}
 	}
 	public listInstrutions(): string {
