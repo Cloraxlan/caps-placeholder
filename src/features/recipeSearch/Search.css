@@ -4,19 +4,35 @@
 
 .Name {
 	margin-top: 5vh;
-	font-size: 4.5vh;
+	font-size: calc(16px + 1.75vh);
+}
+
+.Name:hover {
+	background-color: rgb(218, 210, 185);
 }
 
 .Description {
 	margin-top: -3vh;
-	font-size: 2vh;
+	font-size: calc(8px + 1vh);
 	margin-bottom: 5vh;
 }
-
+.DropDownButton {
+	font-size: calc(8px + 1vh);
+	margin-bottom: 5vh;
+}
+.DropDownText {
+	font-size: calc(8px + 1vh);
+	margin-bottom: 5vh;
+}
 /* .Ingredient {
+
 } */
 
-.SideBox {
+/* .SideBox {
 	background-color: #cfc;
 	padding: 100px;
+} */
+
+.CardPad {
+	padding: 0.5rem;
 }

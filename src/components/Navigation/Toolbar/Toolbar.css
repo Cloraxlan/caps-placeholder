@@ -1,6 +1,7 @@
 .Toolbar {
 	/* height: 56px; */
-	height: 66px;
+	height: 8vh;
+	min-height: 50px;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -14,8 +15,9 @@
 	box-sizing: border-box;
 	z-index: 90;
 	font-family: "IBM Plex Serif", serif;
+	font-size: calc(12px + 0.5vh);
 }
 
 .Toolbar nav {
-	height: 100%;
+	height: 8vh;
 }

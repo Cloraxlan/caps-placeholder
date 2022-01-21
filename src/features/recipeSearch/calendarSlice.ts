@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
+import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
 import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
-	recipe: Recipe;
-	date: Date;
+	recipe: serialRecipe;
+	date: string;
+	note?: String;
 }
 export interface CalendarState {
 	recipeDates: Array<RecipeDate>;
 }
 const initialState: CalendarState = {
-	recipeDates: [
-		
-	],
+	recipeDates: [],
 };
 export const calendarSlice: Slice = createSlice({
 	name: "calendar",

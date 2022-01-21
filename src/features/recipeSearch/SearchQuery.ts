@@ -15,8 +15,10 @@ export default class SearchQuery {
 		recipes.map((recipe) => {
 			console.log(this._searchString);
 			let ingredientIncludes = false;
-			recipe.ingredientList.map((ingredient) => {
-				if (ingredient.ingredientName.toLowerCase().includes(this._searchString)) {
+			recipe.ingredients.map((ingredient) => {
+				if (
+					ingredient.ingredientName.toLowerCase().includes(this._searchString)
+				) {
 					ingredientIncludes = true;
 				}
 			});

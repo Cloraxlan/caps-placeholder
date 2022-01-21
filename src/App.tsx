@@ -8,6 +8,7 @@ import Calendar from "./components/Calendar/Calendar";
 import Ingredient from "./Interfaces-Classes/Ingredient";
 import UnitSystem from "./Interfaces-Classes/UnitSystem";
 import Debug from "./Debug";
+import Landing from "./Landing/Landing";
 
 function App() {
 	console.log(
@@ -28,6 +29,7 @@ function App() {
 
 	return (
 		<body>
+			{/* Centers content on each page */}
 			<div
 				style={{
 					display: "flex",
@@ -35,8 +37,11 @@ function App() {
 					justifyContent: "center",
 				}}
 			>
+				{/* Renders page content with a toolbar */}
 				<Layout>
+					{/* links toolbar nav items to pages */}
 					<Switch>
+						<Route exact={true} path="/" component={Landing} />
 						<Route path="/LoginPage" component={LoginPage} />
 						<Route path="/Search" component={Search} />
 						<Route path="/Calendar" component={Calendar} />

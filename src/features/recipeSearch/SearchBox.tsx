@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
-import Recipe, { constructIngredientFromString } from "../../Interfaces-Classes/Recipe";
+import Recipe, {
+	constructIngredientFromString,
+} from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
 import Ingredient from "../../Interfaces-Classes/Ingredient";
@@ -8,15 +10,18 @@ interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes = [
-	new Recipe("Apple Pie", "It is very good takes like an hour to make", [
-		 constructIngredientFromString("5 cups of apples"),
-		 constructIngredientFromString("1 pie crust"),
+	new Recipe(
+		"Apple Pie",
+		"It is very good takes like an hour to make",
+		[
+			constructIngredientFromString("5 cups of apples"),
+			constructIngredientFromString("1 pie crust"),
 
-		 constructIngredientFromString("3 TEASPOON of cinnamon"),
-		constructIngredientFromString("eighty g. of sugar")
-
-	]),
-	
+			constructIngredientFromString("3 teaspoons of cinnamon"),
+		],
+		["combine ingredients", "bake"],
+		{},
+	),
 ];
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
@@ -33,22 +38,25 @@ const SearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-
+		console.log(getSearchValue(false));
 		props.setResults(searchQ.basicSearch(recipes));
 	};
 	return (
 		<div className="Title">
-			<h1>Search For Recipe</h1>
+			<h1 className="TitleSize">Search For Recipe</h1>
 			<div className="Flex">
 				<input
+					className="InputFont"
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							search(true);
 						}
+					}}
+					ref={searchBox}
+					onChange={() => {
 						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
 						search(false);
 					}}
-					ref={searchBox}
 				></input>
 				<button
 					className="SearchButton"
