@@ -84,7 +84,8 @@ const Calendar = (props: Props) => {
 	const monthChangeHandler = (iterand: number) => {
 		console.log("ran");
 		setMonth((prevMonth) => {
-			let newMonth = prevMonth + iterand;
+			let newMonth: number = Number(prevMonth) + iterand;
+			console.log(newMonth);
 			if (newMonth < 0) newMonth = 11;
 			if (newMonth > 11) newMonth = 0;
 			return newMonth;
@@ -177,13 +178,21 @@ const Calendar = (props: Props) => {
 	};
 
 	useEffect(() => {
-		window.addEventListener("keydown", (event: any) => {
-			if (event.key === "Enter") {
-				console.log("Enter key pressed");
-			}
-			console.log("Key Pressed");
-			console.log(window);
-		});
+		let keyPressEvent: any = window.addEventListener(
+			"keydown",
+			(event: any) => {
+				let monthChanger: number = 0;
+				if (event.key === "ArrowLeft") {
+					monthChanger = -1;
+				} else if (event.key === "ArrowRight") {
+					monthChanger = 1;
+				}
+				monthChangeHandler(monthChanger);
+			},
+		);
+		return () => {
+			window.removeEventListener("keydown", keyPressEvent);
+		};
 	}, []);
 	return (
 		<React.Fragment>
@@ -192,7 +201,7 @@ const Calendar = (props: Props) => {
 				<Card className="drop">
 					<MonthsFilter onFilterMonth={filterMonthHandler} />
 				</Card>
-				{/* <MonthChangeButtons onMonthChange={monthChangeHandler} /> */}
+				<MonthChangeButtons onMonthChange={monthChangeHandler} />
 				{/* <div className="monthChangeButtons">
 					<MonthChangeButtons onMonthChange={monthChangeHandler} />
 				</div> */}
