@@ -13,6 +13,8 @@ import {
 	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
+
+import CalendarSearchBox from "./CalendarSearch/CalendarSearchBox";
 import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 
 interface Props {}
@@ -66,7 +68,7 @@ const daysPre: Day[] = [];
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
-	const [results, setResults] = useState<Recipe[]>([]);
+	const [results, setResults] = useState<Day[]>([]);
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
@@ -187,15 +189,12 @@ const Calendar = (props: Props) => {
 	}, []);
 	return (
 		<React.Fragment>
-			{/* <CalendarSearch setResults={setResults} recipeList={recipeDateList}/> */}
+			<CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/>
 			<Card className="card">
 				<Card className="drop">
 					<MonthsFilter onFilterMonth={filterMonthHandler} />
 				</Card>
-				{/* <MonthChangeButtons onMonthChange={monthChangeHandler} /> */}
-				{/* <div className="monthChangeButtons">
-					<MonthChangeButtons onMonthChange={monthChangeHandler} />
-				</div> */}
+				<MonthChangeButtons onMonthChange={monthChangeHandler} />
 				<table>
 					<caption>{MONTHS[month]}</caption>
 					<colgroup>

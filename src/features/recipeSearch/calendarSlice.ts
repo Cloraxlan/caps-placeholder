@@ -3,6 +3,8 @@ import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
 import Recipe from "../../Interfaces-Classes/Recipe";
 
+import Ingredient from "../../Interfaces-Classes/Ingredient";
+
 export interface RecipeDate {
 	recipe: Recipe;
 	date: Date;
@@ -12,7 +14,18 @@ export interface CalendarState {
 	recipeDates: Array<RecipeDate>;
 }
 const initialState: CalendarState = {
-	recipeDates: [],
+	recipeDates: [
+		// { 
+		// 	recipe: 
+		// 	{
+		// 		name: "Bread",
+		// 		description: "dough of flour",
+		// 		ingredients: [ new Ingredient("1 cup warm water", "VOLUME") ],
+		// 		instructions: [],
+		// 	}, 
+		// 	date: new Date("January 3rd 2022")
+		// }
+	],
 };
 export const calendarSlice: Slice = createSlice({
 	name: "calendar",
