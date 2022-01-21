@@ -1,13 +1,15 @@
 import BulkIngredient from "./BulkIngredient";
-import Ingredient, { allUnits } from "./Ingredient";
+import Ingredient, { allUnits, serializedIngredient } from "./Ingredient";
 import Unit, { identifyUnitsByString } from "./Unit";
 import UnitIngredient from "./UnitIngredient";
 
 export interface serialRecipe {
 	name: string;
 	description: string;
-	ingredientList: Array<string>;
 	instructionSet: Array<string>;
+	ingredients: Array<serializedIngredient>;
+	servings: number;
+	metadata: recipeMetadata;
 }
 export interface recipeTime {
 	hours: number;
@@ -25,13 +27,9 @@ export interface recipeMetadata {
 	nutritionPerServing?: nutritionData;
 }
 export default class Recipe {
-	private _name: string;
-	private _description: string;
-	private _instructionSet: Array<string>;
-	//Only a string for now to be kept simple, will later be expanded into new class
-	private _ingredientList: Array<Ingredient>;
+	private _recipe: serialRecipe;
 	private _servings: number;
-	private _metadata: recipeMetadata;
+	private _ingredients: Ingredient[];
 	constructor(
 		name: string,
 		description: string,
@@ -39,55 +37,83 @@ export default class Recipe {
 		instructions: Array<string>,
 		metadata: recipeMetadata,
 	) {
-		this._name = name;
-		this._description = description;
-		this._ingredientList = ingredients;
-		this._instructionSet = instructions;
-		this._metadata = metadata;
-		if (this._metadata.baseServings) {
-			this._servings = this._metadata.baseServings;
+		this._recipe = {
+			description: "",
+			servings: 1,
+			metadata: {},
+			instructionSet: [],
+			name: "",
+			ingredients: [],
+		};
+		this.name = name;
+		this.description = description;
+		this._ingredients = ingredients;
+		this.instructions = instructions;
+		this.metadata = metadata;
+		if (this._recipe.servings) {
+			this._servings = this._recipe.metadata.baseServings as number;
 		} else {
 			//If not specified defaults to one
 			this._servings = 1;
 		}
+		//Updates the interface
+		this.ingredients = ingredients;
 	}
 	public get name() {
-		return this._name;
+		return this._recipe.name;
 	}
 	public get description() {
-		return this._description;
+		return this._recipe.description;
 	}
-	public get ingredientList() {
-		return this._ingredientList;
+	public get ingredients() {
+		return this._ingredients;
 	}
 	public get instructions() {
-		return this._instructionSet;
+		return this._recipe.instructionSet;
 	}
 	public get servings() {
 		return this._servings;
 	}
+	public set name(name: string) {
+		this._recipe.name = name;
+	}
+	public set description(description: string) {
+		this._recipe.description = description;
+	}
+	public set ingredients(ingredients: Ingredient[]) {
+		this._ingredients = ingredients;
+		let serializedIngredients: serializedIngredient[] = [];
+		ingredients.map((ingredient) => {
+			serializedIngredients.push(ingredient.serialize());
+		});
+		this._recipe.ingredients = serializedIngredients;
+	}
+	public set instructions(instructions: string[]) {
+		this._recipe.instructionSet = instructions;
+	}
+	public set servings(servings: number) {
+		this._servings = servings;
+	}
+	public set metadata(metadata: recipeMetadata) {
+		this._recipe.metadata = metadata;
+	}
 	public serialize(): serialRecipe {
-		let serializedIngredients: string[] = [];
+		/*let serializedIngredients: string[] = [];
 		this.ingredientList.map((ingredient) => {
 			serializedIngredients.push(ingredient.fullName());
-		});
-		return {
-			name: this._name,
-			description: this._description,
-			ingredientList: serializedIngredients,
-			instructionSet: this._instructionSet,
-		};
+		});*/
+		return this._recipe;
 	}
 	//changes the amount of servings and the required ingredient proportions accordingly
 	public resizePortions(newServings: number) {
-		let resizeRation: number = newServings / this._servings;
-		for (let i = 0; i < this._ingredientList.length; i++) {
-			this._ingredientList[i].resizeIngredient(resizeRation);
+		let resizeRation: number = newServings / this.servings;
+		for (let i = 0; i < this.ingredients.length; i++) {
+			this.ingredients[i].resizeIngredient(resizeRation);
 		}
 	}
 	public listInstrutions(): string {
 		let instructions: string = "";
-		this._instructionSet.map((instruction, i) => {
+		this.instructions.map((instruction, i) => {
 			instructions += i + ": " + instruction + "\n";
 		});
 		return instructions;

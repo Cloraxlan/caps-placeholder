@@ -6,7 +6,7 @@ import MonthsFilter from "./MonthsFilter/MonthsFilter";
 import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import {
 	addRecipeDate,
 	RecipeDate,
@@ -105,7 +105,7 @@ const Calendar = (props: Props) => {
 		const genDayObj = (date: Date) => {
 			const dayObj: {
 				date: Date;
-				events: Array<{ recipe: Recipe; note: string }>;
+				events: Array<{ recipe: serialRecipe; note: string }>;
 			} = {
 				date: new Date(date),
 				events: [],
@@ -117,7 +117,7 @@ const Calendar = (props: Props) => {
 		const genEmptyDayObj: () => Day = () => {
 			const dayObj: {
 				date?: Date;
-				events: Array<{ recipe: Recipe; note: string }>;
+				events: Array<{ recipe: serialRecipe; note: string }>;
 			} = {
 				events: [],
 			};
