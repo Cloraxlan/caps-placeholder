@@ -1,8 +1,11 @@
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
+import BulkIngredient from "./BulkIngredient";
 import { ALL_CUSTOMARY_UNITS } from "./CustomarySystem";
 import { ALL_METRIC_UNITS } from "./MetricSystem";
+import { constructIngredientFromString } from "./Recipe";
 import { identifyUnitsByString } from "./Unit";
+import UnitIngredient from "./UnitIngredient";
 
 export interface serializedIngredient {
 	magnitude: number;
@@ -113,5 +116,8 @@ export default abstract class Ingredient {
 	public serialize() {
 		this._ingredient.fullName = this.fullName();
 		return this._ingredient;
+	}
+	public static constructFromInterface(ingredient: serializedIngredient): Ingredient{
+		return constructIngredientFromString(ingredient.fullName)
 	}
 }

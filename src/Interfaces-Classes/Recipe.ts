@@ -6,7 +6,7 @@ import UnitIngredient from "./UnitIngredient";
 export interface serialRecipe {
 	name: string;
 	description: string;
-	instructionSet: Array<string>;
+	instructions: Array<string>;
 	ingredients: Array<serializedIngredient>;
 	servings: number;
 	metadata: recipeMetadata;
@@ -41,7 +41,7 @@ export default class Recipe {
 			description: "",
 			servings: 1,
 			metadata: {},
-			instructionSet: [],
+			instructions: [],
 			name: "",
 			ingredients: [],
 		};
@@ -69,7 +69,7 @@ export default class Recipe {
 		return this._ingredients;
 	}
 	public get instructions() {
-		return this._recipe.instructionSet;
+		return this._recipe.instructions;
 	}
 	public get servings() {
 		return this._servings;
@@ -89,7 +89,7 @@ export default class Recipe {
 		this._recipe.ingredients = serializedIngredients;
 	}
 	public set instructions(instructions: string[]) {
-		this._recipe.instructionSet = instructions;
+		this._recipe.instructions = instructions;
 	}
 	public set servings(servings: number) {
 		this._servings = servings;
@@ -133,6 +133,15 @@ export default class Recipe {
 			instructions += i + ": " + instruction + "\n";
 		});
 		return instructions;
+	}
+	//Creates a recipe from a serialized recipe
+	public static constructFromInterface(recipe : serialRecipe): Recipe{
+		//Creates ingredients from serialized ingredients
+		let ingredients : Ingredient[] = [];
+		recipe.ingredients.map((ingredient)=>{
+			ingredients.push(Ingredient.constructFromInterface(ingredient))
+		})
+		return new Recipe(recipe.name, recipe.description, ingredients, recipe.instructions, recipe.metadata)
 	}
 }
 //Uses a string to identify the Unit and what measure it uses, if none is found it is identified as a bulk unitless ingredient
