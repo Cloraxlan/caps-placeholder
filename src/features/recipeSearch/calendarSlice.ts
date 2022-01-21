@@ -5,7 +5,7 @@ import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
 	recipe: serialRecipe;
-	date: Date;
+	date: string;
 	note?: String;
 }
 export interface CalendarState {

@@ -61,7 +61,7 @@ const SaveRecipe = (props: Props) => {
 		// console.log(currentNote);
 		dispatch(
 			addRecipeDate({
-				date: d,
+				date: d.toDateString(),
 				recipe: props.recipe.serialize(),
 				note: currentNote,
 			}),
