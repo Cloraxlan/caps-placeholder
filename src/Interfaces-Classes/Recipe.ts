@@ -97,6 +97,22 @@ export default class Recipe {
 	public set metadata(metadata: recipeMetadata) {
 		this._recipe.metadata = metadata;
 	}
+	//converts the Ingredients into a single set of preffered units
+	public convertIntoSingleUnit(volume: Unit, weight: Unit){
+		for(let i = 0; i < this.ingredients.length; i++){
+			switch (this.ingredients[i].measure) {
+				case "UNITLESS":
+					break;
+				case "VOLUME":
+					(this.ingredients[i] as BulkIngredient).convertUnits(volume)
+					break;
+				case "WEIGHT":
+					(this.ingredients[i] as BulkIngredient).convertUnits(weight)
+
+					break;
+			}
+		}
+	}
 	public serialize(): serialRecipe {
 		/*let serializedIngredients: string[] = [];
 		this.ingredientList.map((ingredient) => {

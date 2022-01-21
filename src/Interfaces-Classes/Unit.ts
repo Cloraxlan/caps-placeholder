@@ -13,11 +13,14 @@ export const identifyUnitsByString = (
 	query: string,
 	units: Unit[],
 ): Unit | undefined => {
+	query = query.toLowerCase()
 	//See if name is found
 	for(let i = 0; i < units.length; i++){
 		if(query.includes(units[i].fullName)){
 			return units[i]
 		}
+		
+		
 	}
 	//See if abreviations are found	
 	for(let i = 0; i < units.length; i++){

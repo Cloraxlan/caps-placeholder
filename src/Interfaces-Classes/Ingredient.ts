@@ -1,6 +1,7 @@
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 import { ALL_CUSTOMARY_UNITS } from "./CustomarySystem";
+import { ALL_METRIC_UNITS } from "./MetricSystem";
 import { identifyUnitsByString } from "./Unit";
 
 export interface serializedIngredient {
@@ -11,7 +12,7 @@ export interface serializedIngredient {
 }
 
 //TODO ADD METRIC
-export const allUnits = ALL_CUSTOMARY_UNITS;
+export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS)
 export default abstract class Ingredient {
 	private _ingredient: serializedIngredient;
 	protected constructor(
