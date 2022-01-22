@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
 	result: Recipe;
@@ -91,7 +92,7 @@ const ResultItem = (props: Props) => {
 					<ol>
 						{props.result.ingredients.map((ingredient) => {
 							return (
-								<li style={{ textAlign: "left" }} className="Ingredient">
+								<li  key={uuidv4()} style={{ textAlign: "left" }} className="Ingredient">
 									{ingredient.fullName()}
 								</li>
 							);
