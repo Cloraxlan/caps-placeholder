@@ -9,20 +9,15 @@ import Ingredient from "../../Interfaces-Classes/Ingredient";
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
-const recipes = [
-	new Recipe(
-		"Apple Pie",
-		"It is very good takes like an hour to make",
-		[
-			constructIngredientFromString("5 cups of apples"),
-			constructIngredientFromString("1 pie crust"),
-
-			constructIngredientFromString("3 teaspoons of cinnamon"),
-		],
-		["combine ingredients", "bake"],
-		{},
-	),
+const recipes : Recipe[] = [
+	
 ];
+let x = fetch("http://localhost:6777/")
+x.then((res)=>{
+	res.json().then((json)=>{
+		recipes.push(Recipe.constructFromInterface(json))
+	})
+})
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
 	//Gets value in input and clears it
