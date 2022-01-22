@@ -14,7 +14,6 @@ import {
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
 // import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
-import CalendarSearch from "./CalendarSearch/CalendarSearch";
 import React from "react";
 
 interface Props {}
@@ -169,7 +168,6 @@ const Calendar = (props: Props) => {
 	};
 	return (
 		<React.Fragment>
-			<CalendarSearch setResults={setResults} recipeList={recipeDateList}/>
 			<Card className="card">
 				<Card className="drop">
 					<MonthsFilter onFilterMonth={filterMonthHandler} />
