@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import "./SaveRecipe.css";
-import calendarSlice, {
+import {
 	addRecipeDate,
-	CalendarState,
+	// CalendarState,
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
-import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
-import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
-import { prototype } from "events";
+// import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+// import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
+// import { prototype } from "events";
 
 interface Props {
 	recipe: Recipe;
@@ -22,7 +22,7 @@ const SaveRecipe = (props: Props) => {
 	let [currentNote, setCurrentNote] = useState();
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
-	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
+	// const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
 
 	let changeNote = (event: any) => {
 		setCurrentNote(event.target.value);
@@ -97,7 +97,7 @@ const SaveRecipe = (props: Props) => {
 							<input
 								onChange={changeNote}
 								className="SaveRecipeNote"
-								role="textbox"
+								// role="textbox"
 								contentEditable="true"
 								placeholder="Add a note"
 							></input>

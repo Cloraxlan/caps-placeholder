@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
-import { NotEmittedStatement } from "typescript";
+// import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
-import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
-import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
-
-import Ingredient from "../../Interfaces-Classes/Ingredient";
+import {
+	MASTER_VOLUME_METRIC,
+	MASTER_WEIGHT_METRIC,
+} from "../../Interfaces-Classes/MetricSystem";
+import {
+	serialRecipe,
+	constructIngredientFromString,
+} from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
 	recipe: serialRecipe;
@@ -16,16 +20,19 @@ export interface CalendarState {
 }
 const initialState: CalendarState = {
 	recipeDates: [
-		// { 
-		// 	recipe: 
-		// 	{
-		// 		name: "Bread",
-		// 		description: "dough of flour",
-		// 		ingredients: [ new Ingredient("1 cup warm water", "VOLUME") ],
-		// 		instructions: [],
-		// 	}, 
-		// 	date: new Date("January 3rd 2022")
-		// }
+		{
+			recipe: {
+				name: "Bread",
+				description: "dough of flour",
+				ingredients: [
+					constructIngredientFromString("1 cup of water").serialize(),
+				],
+				instructions: [],
+				metadata: {},
+				servings: 1
+			},
+			date: new Date("January 3rd 2022").toDateString(),
+		},
 	],
 };
 export const calendarSlice: Slice = createSlice({

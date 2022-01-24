@@ -4,7 +4,7 @@ import Recipe, {
 } from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
-import Ingredient from "../../Interfaces-Classes/Ingredient";
+// import Ingredient from "../../Interfaces-Classes/Ingredient";
 
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
