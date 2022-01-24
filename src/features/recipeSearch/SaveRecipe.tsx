@@ -8,6 +8,8 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
+import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 import { prototype } from "events";
 
 interface Props {
@@ -61,7 +63,7 @@ const SaveRecipe = (props: Props) => {
 		// console.log(currentNote);
 		dispatch(
 			addRecipeDate({
-				date: d,
+				date: d.toDateString(),
 				recipe: props.recipe.serialize(),
 				note: currentNote,
 			}),

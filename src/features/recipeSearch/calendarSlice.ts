@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 
 import Ingredient from "../../Interfaces-Classes/Ingredient";
 
 export interface RecipeDate {
-	recipe: Recipe;
-	date: Date;
+	recipe: serialRecipe;
+	date: string;
 	note?: String;
 }
 export interface CalendarState {

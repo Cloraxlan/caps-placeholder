@@ -1,5 +1,5 @@
-import { MASTER_VOLUME_CUSTOMARY } from "./CustomarySystem";
-import { MASTER_VOLUME_METRIC } from "./MetricSystem";
+import { MASTER_VOLUME_CUSTOMARY, MASTER_WEIGHT_CUSTOMARY } from "./CustomarySystem";
+import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "./MetricSystem";
 import Unit from "./Unit";
 export interface SystemConversion {
 	baseSystem: string;
@@ -31,7 +31,26 @@ export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_VOLUME: SystemConversion[] =
 		},
 	];
 export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT: SystemConversion[] =
-	[];
+	[
+		
+		{
+			baseSystem: "CUSTOMARY",
+			finalSystem: "METRIC",
+			measure: "WEIGHT",
+			convert: 0.453592,
+			initMaster: MASTER_WEIGHT_CUSTOMARY,
+			finalMaster: MASTER_WEIGHT_METRIC,
+		},
+		{
+			baseSystem: "METRIC",
+			finalSystem: "CUSTOMARY",
+			measure: "WEIGHT",
+			convert: 2.20462,
+			initMaster: MASTER_WEIGHT_METRIC,
+			finalMaster: MASTER_WEIGHT_CUSTOMARY,
+		},
+	];
+	
 export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS = {
 	VOLUME: KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_VOLUME,
 	WEIGHT: KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT,
