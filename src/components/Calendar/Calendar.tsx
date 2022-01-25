@@ -31,35 +31,9 @@ const testLeapYear = (year: number) => {
 	return 28;
 };
 
-const MONTHS = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December",
-];
+const MONTHS = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
 
-const MONTHSIZE = [
-	31,
-	testLeapYear(year),
-	31,
-	30,
-	31,
-	30,
-	31,
-	31,
-	30,
-	31,
-	30,
-	31,
-];
+const MONTHSIZE = [ 31, testLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, ];
 
 let MONTH = new Date().getMonth();
 
