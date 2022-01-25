@@ -26,12 +26,28 @@ const initialState: CalendarState = {
 				description: "dough of flour",
 				ingredients: [
 					constructIngredientFromString("1 cup of water").serialize(),
+					constructIngredientFromString("500g of flour").serialize(),
 				],
-				instructions: [],
+				instructions: [ "Stir water", "add flour" ],
 				metadata: {},
 				servings: 1
 			},
 			date: new Date("January 3rd 2022").toDateString(),
+		},
+		{
+			recipe: {
+				name: "Cake",
+				description: "sugar dough of flour",
+				ingredients: [
+					constructIngredientFromString("1 cup of water").serialize(),
+					constructIngredientFromString("500g of flour").serialize(),
+					constructIngredientFromString("3 tablespoons of sugar").serialize(),
+				],
+				instructions: [ "Stir water", "add flour with sugar" ],
+				metadata: {},
+				servings: 4
+			},
+			date: new Date("February 7th 2022").toDateString(),
 		},
 	],
 };
@@ -40,6 +56,7 @@ export const calendarSlice: Slice = createSlice({
 	initialState,
 	reducers: {
 		addRecipeDate: (state: any, action: PayloadAction<RecipeDate>) => {
+			console.log(state);
 			console.log(action.payload);
 			state.recipeDates.push(action.payload);
 		},

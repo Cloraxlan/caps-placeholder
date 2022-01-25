@@ -79,6 +79,24 @@ const Calendar = (props: Props) => {
 		return;
 	}, [recipeDateList]);
 
+	useEffect(() => {
+		let keyPressEvent: any = window.addEventListener(
+			"keydown",
+			(event: any) => {
+				let monthChanger: number = 0;
+				if (event.key === "ArrowLeft") {
+					monthChanger = -1;
+				} else if (event.key === "ArrowRight") {
+					monthChanger = 1;
+				}
+				monthChangeHandler(monthChanger);
+			},
+		);
+		return () => {
+			window.removeEventListener("keydown", keyPressEvent);
+		};
+	}, []);
+
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
 	};
@@ -178,27 +196,9 @@ const Calendar = (props: Props) => {
 
 		return weeks;
 	};
-
-	useEffect(() => {
-		let keyPressEvent: any = window.addEventListener(
-			"keydown",
-			(event: any) => {
-				let monthChanger: number = 0;
-				if (event.key === "ArrowLeft") {
-					monthChanger = -1;
-				} else if (event.key === "ArrowRight") {
-					monthChanger = 1;
-				}
-				monthChangeHandler(monthChanger);
-			},
-		);
-		return () => {
-			window.removeEventListener("keydown", keyPressEvent);
-		};
-	}, []);
 	return (
 		<React.Fragment>
-			<CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/>
+			{/* <CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/> */}
 			<Card className="card">
 				<Card className="drop">
 					<MonthsFilter onFilterMonth={filterMonthHandler} />
