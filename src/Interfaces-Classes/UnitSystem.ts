@@ -123,9 +123,9 @@ export default class UnitSystem {
 		if (!conversion) {
 			throw "Cannot convert, system conversion unknown";
 		} else {
-			console.log(this._unit);
+			// console.log(this._unit);
 
-			console.log(this._unit);
+			// console.log(this._unit);
 			//Convert into the master so you can convert into the other systems master
 			magnitude = this.convertBetweenUnitInSameSystem(
 				(conversion as SystemConversion).initMaster,
@@ -143,7 +143,7 @@ export default class UnitSystem {
 				finalUnit.system as KNOWN_SYSTEMS,
 				magnitude,
 			);
-			console.log("oii");
+			// console.log("oii");
 		}
 		return this.convertBetweenUnitInSameSystem(finalUnit, magnitude);
 	}

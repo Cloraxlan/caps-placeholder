@@ -11,21 +11,21 @@ import Debug from "./Debug";
 import Landing from "./Landing/Landing";
 
 function App() {
-	console.log(
-		new UnitSystem({
-			fullName: "cup",
-			abbreviations: ["cp.", "cp"],
-			system: "CUSTOMARY",
-			measure: "VOLUME",
-			convertionFactor: 16,
-		}).convert(5, {
-			fullName: "mililiter",
-			abbreviations: ["ml", "ml."],
-			system: "METRIC",
-			measure: "VOLUME",
-			convertionFactor: 1000,
-		}),
-	);
+	// console.log(
+	// 	new UnitSystem({
+	// 		fullName: "cup",
+	// 		abbreviations: ["cp.", "cp"],
+	// 		system: "CUSTOMARY",
+	// 		measure: "VOLUME",
+	// 		convertionFactor: 16,
+	// 	}).convert(5, {
+	// 		fullName: "mililiter",
+	// 		abbreviations: ["ml", "ml."],
+	// 		system: "METRIC",
+	// 		measure: "VOLUME",
+	// 		convertionFactor: 1000,
+	// 	}),
+	// );
 
 	return (
 		<body>

@@ -13,8 +13,6 @@ const NavItem = (props: {
 		| undefined;
 }) => (
 	<li className="NavItem">
-		{console.log(props.active)}
-
 		<div className={props.active ? "active" : undefined}>
 			<Link to={props.link}>{props.children}</Link>
 		</div>
