@@ -32,7 +32,7 @@ const initialState: CalendarState = {
 				metadata: {},
 				servings: 1
 			},
-			date: new Date("January 3rd 2022").toDateString(),
+			date: new Date("January 3 2022").toDateString(),
 		},
 		{
 			recipe: {
@@ -47,7 +47,7 @@ const initialState: CalendarState = {
 				metadata: {},
 				servings: 4
 			},
-			date: new Date("February 7th 2022").toDateString(),
+			date: new Date("February 7 2022").toDateString(),
 		},
 	],
 };

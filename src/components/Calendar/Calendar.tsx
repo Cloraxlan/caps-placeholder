@@ -76,10 +76,8 @@ const Calendar = (props: Props) => {
 	};
 
 	const monthChangeHandler = (iterand: number) => {
-		console.log("ran");
 		setMonth((prevMonth) => {
 			let newMonth: number = Number(prevMonth) + iterand;
-			console.log(newMonth);
 			if (newMonth < 0) newMonth = 11;
 			if (newMonth > 11) newMonth = 0;
 			return newMonth;
