@@ -15,7 +15,7 @@ export interface serializedIngredient {
 }
 
 //TODO ADD METRIC
-export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS)
+export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS);
 export default abstract class Ingredient {
 	private _ingredient: serializedIngredient;
 	protected constructor(
@@ -41,9 +41,14 @@ export default abstract class Ingredient {
 		//gets first number unit and sets that to be the amount of that ingredient
 		this._ingredient.magnitude = doc.numbers().get()[0];
 		//Gets the name of the ingredient
-		this._ingredient.ingredientName = this.cleanName(
-			nlp(ingredientString).nouns().out("array")[0],
-		);
+		let allNouns = "";
+		nlp(ingredientString)
+			.nouns()
+			.out("array")
+			.map((noun) => {
+				allNouns += noun + " ";
+			});
+		this._ingredient.ingredientName = this.cleanName(allNouns);
 	}
 	//Removes of and the units if found
 	private cleanName(cleanString: string): string {
@@ -117,7 +122,9 @@ export default abstract class Ingredient {
 		this._ingredient.fullName = this.fullName();
 		return this._ingredient;
 	}
-	public static constructFromInterface(ingredient: serializedIngredient): Ingredient{
-		return constructIngredientFromString(ingredient.fullName)
+	public static constructFromInterface(
+		ingredient: serializedIngredient,
+	): Ingredient {
+		return constructIngredientFromString(ingredient.fullName);
 	}
 }
