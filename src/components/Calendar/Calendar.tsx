@@ -42,7 +42,7 @@ const daysPre: Day[] = [];
 const Calendar = (props: Props) => {
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
-	const [results, setResults] = useState<Day[]>([]);
+	const [results, setResults] = useState<RecipeDate[]>([]);
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
@@ -170,7 +170,7 @@ const Calendar = (props: Props) => {
 	};
 	return (
 		<React.Fragment>
-			{/* <CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/> */}
+			<CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/>
 			<Card className="card">
 				<Card className="drop">
 					<MonthsFilter onFilterMonth={filterMonthHandler} />

@@ -5,11 +5,12 @@ import Recipe, {
 import SearchQuery, { Query } from "./CalendarQuery";
 // import "./SearchBox.css";
 import Ingredient from "../../../Interfaces-Classes/Ingredient";
-import { Day } from "../../../Interfaces-Classes/Day";
+// import { Day } from "../../../Interfaces-Classes/Day";
+import { RecipeDate } from "../../../features/recipeSearch/calendarSlice";
 
 interface Props {
-	setResults: React.Dispatch<React.SetStateAction<Day[]>>,
-	recipeList: Array<Day>;
+	setResults: React.Dispatch<React.SetStateAction<RecipeDate[]>>,
+	recipeList: Array<RecipeDate>;
 }
 const recipes = [
 	new Recipe(
