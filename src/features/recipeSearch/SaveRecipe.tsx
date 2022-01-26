@@ -8,7 +8,10 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
-import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import {
+	MASTER_VOLUME_METRIC,
+	MASTER_WEIGHT_METRIC,
+} from "../../Interfaces-Classes/MetricSystem";
 import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 import { prototype } from "events";
 
@@ -75,7 +78,12 @@ const SaveRecipe = (props: Props) => {
 			{/*Recipe save*/}
 			{showRecipeSave && (
 				<div>
-					<div className="BlackBackground" />
+					<div
+						className="BlackBackground"
+						onClick={() => {
+							setShowRecipeSave(false);
+						}}
+					/>
 					<form onSubmit={submitSave} className="SaveOverlay">
 						<button
 							type="button"
