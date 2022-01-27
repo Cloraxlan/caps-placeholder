@@ -30,6 +30,18 @@ caption {
 	text-align: center;
 	padding: 0.25rem;
 }
+
+.calendarWrapper {
+	float: right;
+}
+
+.searchBox {
+	float: left;
+	/* padding: 2rem; */
+	padding-left: 1rem;
+	padding-right: 5rem;
+}
+
 .day {
 	text-align: left;
 }

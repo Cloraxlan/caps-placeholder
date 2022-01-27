@@ -168,53 +168,65 @@ const Calendar = (props: Props) => {
 
 		return weeks;
 	};
+
 	return (
 		<React.Fragment>
-			<CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/>
-			<Card className="card">
-				<Card className="drop">
-					<MonthsFilter onFilterMonth={filterMonthHandler} />
-				</Card>
-				<MonthChangeButtons onMonthChange={monthChangeHandler} />
-				<table>
-					<caption>{MONTHS[month]}</caption>
-					<colgroup>
-						<col className="weekend" />
-						<col className="weekday" span={5} />
-						<col className="weekend" />
-					</colgroup>
-					<thead>
-						<tr id="days">
-							<th>Sun</th>
-							<th>Mon</th>
-							<th>Tue</th>
-							<th>Wed</th>
-							<th>Thu</th>
-							<th>Fri</th>
-							<th>Sat</th>
-						</tr>
-					</thead>
-					<tbody>
-						{generateRows(7).map((row, i) => {
-							//console.log(row);
-							return (
-								<tr key={uuidv4()}>
-									{row.map((day, j) => {
-										//console.log(day);
+			<div className="searchBox">
+				<div style={{ 
+					borderRadius: "1vw", 
+					boxShadow: "0 0.1vw 0.5vw rgba(0, 0, 0, 0.25)", 
+					padding: "0.5rem", 
+					paddingBottom: "3rem" 
+					}}>
+					<CalendarSearchBox setResults={setResults} recipeList={recipeDateList}/>
+				</div>
+			</div>
+			<div className="calendarWrapper">
+				<Card className="card">
+					<Card className="drop">
+						<MonthsFilter onFilterMonth={filterMonthHandler} />
+					</Card>
+					<MonthChangeButtons onMonthChange={monthChangeHandler} />
+					<table>
+						<caption>{MONTHS[month]}</caption>
+						<colgroup>
+							<col className="weekend" />
+							<col className="weekday" span={5} />
+							<col className="weekend" />
+						</colgroup>
+						<thead>
+							<tr id="days">
+								<th>Sun</th>
+								<th>Mon</th>
+								<th>Tue</th>
+								<th>Wed</th>
+								<th>Thu</th>
+								<th>Fri</th>
+								<th>Sat</th>
+							</tr>
+						</thead>
+						<tbody>
+							{generateRows(7).map((row, i) => {
+								//console.log(row);
+								return (
+									<tr key={uuidv4()}>
+										{row.map((day, j) => {
+											//console.log(day);
 
-										return (
-											<CalendarDate
-												key={uuidv4()}
-												day={day as Day}
-											></CalendarDate>
-										);
-									})}
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
-			</Card>
+											return (
+												<CalendarDate
+													key={uuidv4()}
+													day={day as Day}
+												></CalendarDate>
+											);
+										})}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</Card>
+			</div>
 		</React.Fragment>
 	);
 };
