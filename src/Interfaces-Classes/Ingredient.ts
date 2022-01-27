@@ -7,9 +7,11 @@ import { constructIngredientFromString } from "./Recipe";
 import { identifyUnitsByString } from "./Unit";
 import UnitIngredient from "./UnitIngredient";
 
+export type measure = "UNITLESS" | "WEIGHT" | "VOLUME";
+
 export interface serializedIngredient {
 	magnitude: number;
-	measure: "UNITLESS" | "WEIGHT" | "VOLUME";
+	measure: measure;
 	fullName: string;
 	ingredientName: string;
 }
@@ -18,10 +20,7 @@ export interface serializedIngredient {
 export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS);
 export default abstract class Ingredient {
 	private _ingredient: serializedIngredient;
-	protected constructor(
-		ingredientString: string,
-		measure: "UNITLESS" | "WEIGHT" | "VOLUME",
-	) {
+	protected constructor(ingredientString: string, measure: measure) {
 		this._ingredient = {
 			ingredientName: "",
 			fullName: "",
@@ -86,7 +85,7 @@ export default abstract class Ingredient {
 	public set magnitude(magnitude: number) {
 		this._ingredient.magnitude = magnitude;
 	}
-	public set measure(measure: "UNITLESS" | "WEIGHT" | "VOLUME") {
+	public set measure(measure: measure) {
 		this._ingredient.measure = measure;
 	}
 	public set ingredientName(ingredientName: string) {
