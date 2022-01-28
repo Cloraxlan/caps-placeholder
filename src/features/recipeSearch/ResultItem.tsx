@@ -3,6 +3,13 @@ import React, { useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
+import {
+	measureSetting,
+	selectDefaultVolume,
+	selectDefaultWeight,
+} from "../../prefrencesSlice";
+import { useAppSelector } from "../../app/hooks";
+import Unit from "../../Interfaces-Classes/Unit";
 
 interface Props {
 	result: Recipe;
@@ -12,6 +19,21 @@ const ResultItem = (props: Props) => {
 	const [showIngredients, setShowIngredients] = useState(false);
 	const [showInstructions, setshowInstructions] = useState(false);
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
+	let defaultWeight: measureSetting = useAppSelector(selectDefaultWeight);
+	let defaultVolume: measureSetting = useAppSelector(selectDefaultVolume);
+	/*props.result.convertIntoSingleUnit(
+		defaultVolume as Unit,
+		defaultWeight as Unit,
+	);*/
+
+	/*if(defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV"){
+
+	}else if(defaultWeight != "DEFAULTW" && defaultVolume == "DEFAULTV"){
+		defaultVolume = props.result.
+	}else if(defaultWeight != "DEFAULTW" && defaultVolume != "DEFAULTV"){
+		props.result.convertIntoSingleUnit(defaultVolume as Unit, defaultWeight as Unit);
+
+	}*/
 
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
