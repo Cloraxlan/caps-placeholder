@@ -1,3 +1,5 @@
+import Recipe from "./Recipe";
+module.exports = Recipe;
 export * from "./BulkIngredient";
 export * from "./CustomarySystem";
 export * from "./Day";
