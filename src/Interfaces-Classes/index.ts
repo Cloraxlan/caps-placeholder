@@ -1,5 +1,13 @@
+import Ingredient from "./Ingredient";
 import Recipe from "./Recipe";
-module.exports = Recipe;
+import BulkIngredient from "./BulkIngredient";
+
+let cpd = {
+	Recipe,
+	Ingredient,
+	BulkIngredient,
+};
+export default cpd;
 export * from "./BulkIngredient";
 export * from "./CustomarySystem";
 export * from "./Day";
