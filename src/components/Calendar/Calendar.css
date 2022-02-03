@@ -31,16 +31,15 @@ caption {
 	padding: 0.25rem;
 }
 
-.calendarWrapper {
+/* .calendarWrapper {
 	float: right;
-}
+} */
 
-.searchBox {
+/* .searchBox {
 	float: left;
-	/* padding: 2rem; */
 	padding-left: 1rem;
 	padding-right: 5rem;
-}
+} */
 
 .day {
 	text-align: left;
@@ -98,7 +97,7 @@ caption {
 
 .monthChangeButtons {
 	position: absolute;
-	top: 260px;
+	top: 200px;
 }
 
 /* #wrapper {

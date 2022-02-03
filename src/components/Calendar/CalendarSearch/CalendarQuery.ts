@@ -15,10 +15,7 @@ export default class SearchQuery {
 	//Sees if recipe name ingidients or description contains the search term
 	public basicSearch(days: Array<RecipeDate>): Array<RecipeDate> {
 		let results: Array<RecipeDate> = [];
-        console.log(days);
-        console.log("Days");
         days.map((day: RecipeDate) => {
-            console.log(this._searchString);
             let ingredientIncludes = false;
             day.recipe.ingredients.map((ingredient) => {
                 if (ingredient.ingredientName.toLowerCase().includes(this._searchString)) {
@@ -33,7 +30,6 @@ export default class SearchQuery {
                 results.push(day);
             }
 		});
-        console.log(results);
 		return results;
 	}
 }

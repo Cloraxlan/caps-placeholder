@@ -1,18 +1,25 @@
 import { stat } from "fs";
 import React, { useState } from "react";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
 import { v4 as uuidv4 } from "uuid";
 
 interface Props {
-	result: Recipe;
+	result: Recipe | serialRecipe;
 }
+
 
 const ResultItem = (props: Props) => {
 	const [showIngredients, setShowIngredients] = useState(false);
 	const [showInstructions, setshowInstructions] = useState(false);
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
+	
+	let rec: Recipe | serialRecipe = props.result;
+	
+	if(!(rec instanceof Recipe)) {
+		rec = Recipe.constructFromInterface(rec);
+	}
 
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
@@ -36,22 +43,22 @@ const ResultItem = (props: Props) => {
 					>
 						X
 					</button>
-					<div className="OverlayName">{props.result.name}</div>
-					<div className="OverlayDescription">{props.result.description}</div>
+					<div className="OverlayName">{rec.name}</div>
+					<div className="OverlayDescription">{rec.description}</div>
 					<div className="OverlayListTitle"> Ingredient List </div>
 					<div className="OverlayIngredientItem">
-						{props.result.ingredients.map((ingredient) => {
-							return <li>{ingredient.fullName()}</li>;
+						{rec.ingredients.map((ingredient) => {
+							return <li key={uuidv4()}>{ingredient.fullName()}</li>;
 						})}
 					</div>
 					<div className="OverlayListTitle"> Instructions </div>
 					<div className="OverlayInstructions">
-						{props.result.listInstrutions()}
+						{rec.listInstrutions()}
 					</div>
 
 					<SaveRecipe
 						className2="OverlaySaveRecipe"
-						recipe={props.result}
+						recipe={rec}
 					></SaveRecipe>
 				</div>
 			)}
@@ -64,7 +71,7 @@ const ResultItem = (props: Props) => {
 							setSearchOverlayShown(true);
 						}}
 					>
-						{props.result.name}
+						{rec.name}
 					</p>
 				</div>
 				{/* <ul>
@@ -76,7 +83,7 @@ const ResultItem = (props: Props) => {
 										})}
 									</ul>
 								</ul> */}
-				<div className="Description">{props.result.description}</div>
+				<div className="Description">{rec.description}</div>
 				<p
 					className="DropDownButton "
 					onClick={() => {
@@ -90,7 +97,7 @@ const ResultItem = (props: Props) => {
 				</p>
 				{showIngredients && (
 					<ol>
-						{props.result.ingredients.map((ingredient) => {
+						{rec.ingredients.map((ingredient) => {
 							return (
 								<li  key={uuidv4()} style={{ textAlign: "left" }} className="Ingredient">
 									{ingredient.fullName()}
@@ -111,9 +118,9 @@ const ResultItem = (props: Props) => {
 					{arrowDirection(showInstructions)}
 				</p>
 				{showInstructions && (
-					<p className="DropDownText">{props.result.listInstrutions()}</p>
+					<p className="DropDownText">{rec.listInstrutions()}</p>
 				)}
-				<SaveRecipe recipe={props.result}></SaveRecipe>
+				<SaveRecipe recipe={rec as Recipe}></SaveRecipe>
 			</div>
 		</div>
 	);

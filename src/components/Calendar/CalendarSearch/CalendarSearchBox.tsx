@@ -41,7 +41,6 @@ const CalendarSearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-		console.log(getSearchValue(false));
 		props.setResults(searchQ.basicSearch(props.recipeList));
 	};
 	return (
@@ -56,10 +55,10 @@ const CalendarSearchBox = (props: Props) => {
 						}
 					}}
 					ref={searchBox}
-					onChange={() => {
-						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
-						search(false);
-					}}
+					// onChange={() => {
+					// 	//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
+					// 	search(false);
+					// }}
 				></input>
 				<button
 					className="SearchButton"

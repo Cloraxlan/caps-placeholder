@@ -56,8 +56,6 @@ export const calendarSlice: Slice = createSlice({
 	initialState,
 	reducers: {
 		addRecipeDate: (state: any, action: PayloadAction<RecipeDate>) => {
-			console.log(state);
-			console.log(action.payload);
 			state.recipeDates.push(action.payload);
 		},
 	},

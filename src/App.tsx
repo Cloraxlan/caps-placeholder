@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Search from "./features/recipeSearch/Search";
 import Calendar from "./components/Calendar/Calendar";
+import CalendarPage from "./components/Layout/CalendarPage";
 import Ingredient from "./Interfaces-Classes/Ingredient";
 import UnitSystem from "./Interfaces-Classes/UnitSystem";
 import Debug from "./Debug";
@@ -44,7 +45,7 @@ function App() {
 						<Route exact={true} path="/" component={Landing} />
 						<Route path="/LoginPage" component={LoginPage} />
 						<Route path="/Search" component={Search} />
-						<Route path="/Calendar" component={Calendar} />
+						<Route path="/Calendar" component={CalendarPage} />
 						<Route path="/Debug" component={Debug} />
 
 						<ul style={{ listStyle: "none" }}></ul>

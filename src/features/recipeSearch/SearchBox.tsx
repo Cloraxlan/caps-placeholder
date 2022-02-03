@@ -38,7 +38,7 @@ const SearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-		console.log(getSearchValue(false));
+		// console.log(getSearchValue(false));
 		props.setResults(searchQ.basicSearch(recipes));
 	};
 	return (
