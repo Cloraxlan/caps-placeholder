@@ -18,7 +18,10 @@ const Search = (props: Props) => {
 	const [results, setResults] = useState<Recipe[]>([]);
 	return (
 		<React.Fragment>
-			<AddCustomRecipe />
+			<AddCustomRecipe
+			// ingredients={currentIngredients}
+			// setIngredients={setCurrentIngredients}
+			/>
 			<Card className="CardPad">
 				<SearchBox setResults={setResults}></SearchBox>
 				<ul style={{ padding: "1rem", margin: 0 }}>
