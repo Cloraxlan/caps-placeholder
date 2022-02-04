@@ -21,10 +21,14 @@ const ResultItem = (props: Props) => {
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
 	let defaultWeight: measureSetting = useAppSelector(selectDefaultWeight);
 	let defaultVolume: measureSetting = useAppSelector(selectDefaultVolume);
-	/*props.result.convertIntoSingleUnit(
-		defaultVolume as Unit,
-		defaultWeight as Unit,
-	);*/
+	try {
+		props.result.convertIntoSingleUnit(
+			defaultVolume as Unit,
+			defaultWeight as Unit,
+		);
+	} catch (error) {
+		console.log(error);
+	}
 
 	/*if(defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV"){
 
