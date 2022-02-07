@@ -21,23 +21,17 @@ const ResultItem = (props: Props) => {
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
 	let defaultWeight: measureSetting = useAppSelector(selectDefaultWeight);
 	let defaultVolume: measureSetting = useAppSelector(selectDefaultVolume);
-	try {
+
+	if (defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV") {
+		props.result.convertIntoSingleUnit(defaultVolume as Unit, null);
+	} else if (defaultWeight != "DEFAULTW" && defaultVolume == "DEFAULTV") {
+		props.result.convertIntoSingleUnit(null, defaultWeight as Unit);
+	} else if (defaultWeight != "DEFAULTW" && defaultVolume != "DEFAULTV") {
 		props.result.convertIntoSingleUnit(
 			defaultVolume as Unit,
 			defaultWeight as Unit,
 		);
-	} catch (error) {
-		console.log(error);
 	}
-
-	/*if(defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV"){
-
-	}else if(defaultWeight != "DEFAULTW" && defaultVolume == "DEFAULTV"){
-		defaultVolume = props.result.
-	}else if(defaultWeight != "DEFAULTW" && defaultVolume != "DEFAULTV"){
-		props.result.convertIntoSingleUnit(defaultVolume as Unit, defaultWeight as Unit);
-
-	}*/
 
 	const arrowDirection = (state: boolean) => {
 		switch (state) {

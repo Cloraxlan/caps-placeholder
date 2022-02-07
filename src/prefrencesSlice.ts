@@ -12,7 +12,7 @@ export interface PreferenceState {
 }
 
 const initialState: PreferenceState = {
-	prefferedVolume: MASTER_VOLUME_CUSTOMARY,
+	prefferedVolume: "DEFAULTV",
 	prefferedWeight: MASTER_WEIGHT_METRIC,
 };
 
