@@ -7,6 +7,9 @@ import Recipe, {
 	recipeMetadata,
 } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
+import nlp from "compromise";
+import nlpNumbers from "compromise-numbers";
+import UnitIngredient from "../../Interfaces-Classes/UnitIngredient";
 // interface Props {
 // 	ingredients: String[];
 // 	setIngredients: React.Dispatch<React.SetStateAction<String[]>>;
@@ -15,15 +18,22 @@ import SaveRecipe from "./SaveRecipe";
 const AddCustomRecipe = () => {
 	const [addRecipeOverlayShown, setAddRecipeOverlayShown] = useState(false);
 	const [saveRecipeOverlayShown, setSaveRecipeOverlayShown] = useState(false);
-	let [currentName, setCurrentName] = useState<string>();
-	let [currentDescription, setCurrentDescription] = useState<string>();
+	let [currentName, setCurrentName] = useState<string>("");
+	let [currentDescription, setCurrentDescription] = useState<string>("");
 	let [currentSingleIngredient, setCurrentSingleIngredient] =
 		useState<string>();
-	let [currentIngredients, setCurrentIngredients] = useState<string[]>([]);
-	let [currentInstructions, setCurrentInstructions] = useState<string>();
+	let [currentIngredients, setCurrentIngredients] = useState<string[]>(
+		[] as string[],
+	);
+	let [currentInstructions, setCurrentInstructions] = useState<string>("");
+	let [tempRecipeState, setTempRecipeState] = useState<Recipe>(
+		new Recipe("", "", [], [], [] as recipeMetadata),
+	);
+
+	let tempRecipe: Recipe = new Recipe("", "", [], [], [] as recipeMetadata);
+
 	/*let tempCurrentIngredients: String[] = [];
 	tempCurrentIngredients = [...props.ingredients];*/
-	let tempRecipe: Recipe = new Recipe("", "", [], [], [] as recipeMetadata);
 	const changeName = (event: any) => {
 		setCurrentName(event.target.value);
 	};
@@ -68,6 +78,15 @@ const AddCustomRecipe = () => {
 		console.log(event);
 		//Add a new recipe with the stuff
 		let ingredientsWithTyping = currentIngredients.map((ingredient) => {
+			const nlpI = nlp;
+			let plugin = nlpNumbers;
+			nlp.extend(plugin);
+			let doc: any = nlpI(ingredient);
+			if (doc.numbers().get().length < 1) {
+				ingredient = "1 " + ingredient;
+			}
+			console.log(ingredient);
+			new UnitIngredient(ingredient);
 			return constructIngredientFromString(ingredient);
 		});
 		tempRecipe = new Recipe(
@@ -77,12 +96,20 @@ const AddCustomRecipe = () => {
 			[currentInstructions] as string[],
 			[] as recipeMetadata,
 		);
+		setTempRecipeState(tempRecipe);
 		console.log(tempRecipe);
 		setCurrentName("");
 		setCurrentDescription("");
 		setCurrentIngredients([]);
 		setCurrentInstructions("");
 		setCurrentSingleIngredient("");
+		console.log(
+			currentName,
+			currentDescription,
+			currentIngredients,
+			currentInstructions,
+			currentSingleIngredient,
+		);
 		if (event.nativeEvent.submitter.innerText == "Save and Add Recipe") {
 			setSaveRecipeOverlayShown(true);
 			//Save a new recipe onto calendar with the stuff
@@ -97,7 +124,9 @@ const AddCustomRecipe = () => {
 	// 	});}
 	return (
 		<div>
-			{saveRecipeOverlayShown && <SaveRecipe recipe={tempRecipe}></SaveRecipe>}
+			{saveRecipeOverlayShown && (
+				<SaveRecipe recipe={tempRecipeState}></SaveRecipe>
+			)}
 			{addRecipeOverlayShown && (
 				<div className="calendarOverlay">
 					<button
