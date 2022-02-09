@@ -4,9 +4,12 @@ import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
 import { v4 as uuidv4 } from "uuid";
+import FindRecipe from "../../components/Calendar/CalendarSearch/FindRecipe";
+import { RecipeDate } from "./calendarSlice";
 
 interface Props {
 	result: Recipe | serialRecipe;
+	onSwitchMonth?: (date: RecipeDate | undefined) => void;
 }
 
 
@@ -16,11 +19,11 @@ const ResultItem = (props: Props) => {
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
 	
 	let rec: Recipe | serialRecipe = props.result;
-	
+	let showSave = true;
 	if(!(rec instanceof Recipe)) {
+		showSave = false;
 		rec = Recipe.constructFromInterface(rec);
 	}
-
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
 			case true:
@@ -30,6 +33,13 @@ const ResultItem = (props: Props) => {
 				return "▼";
 		}
 	};
+
+	const foundDateHandler = (date: RecipeDate | undefined) => {
+		console.log("Ran foundDateHandler in ResultItem")
+		// if(props.onSwitchMonth)
+		// 	props.onSwitchMonth(date);
+	}
+
 	return (
 		<div>
 			{/*Overlay system for recipe*/}
@@ -55,11 +65,11 @@ const ResultItem = (props: Props) => {
 					<div className="OverlayInstructions">
 						{rec.listInstrutions()}
 					</div>
-
-					<SaveRecipe
-						className2="OverlaySaveRecipe"
-						recipe={rec}
-					></SaveRecipe>
+					{showSave ? 
+						<SaveRecipe className2="OverlaySaveRecipe" recipe={rec} ></SaveRecipe>
+					: 
+						<FindRecipe recipe={rec} onDateFound={foundDateHandler}/> 
+					}
 				</div>
 			)}
 			{/*Displaying all the recipies when searches*/}
@@ -120,7 +130,11 @@ const ResultItem = (props: Props) => {
 				{showInstructions && (
 					<p className="DropDownText">{rec.listInstrutions()}</p>
 				)}
-				<SaveRecipe recipe={rec as Recipe}></SaveRecipe>
+				{showSave ? 
+					<SaveRecipe className2="OverlaySaveRecipe" recipe={rec as Recipe} ></SaveRecipe>
+				: 
+					<FindRecipe recipe={rec} onDateFound={foundDateHandler}/> 
+				}
 			</div>
 		</div>
 	);
