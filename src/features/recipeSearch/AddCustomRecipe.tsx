@@ -1,6 +1,7 @@
 import { current } from "@reduxjs/toolkit";
 import React from "react";
 import { useState, useEffect } from "react";
+
 import { isIdentifier } from "typescript";
 import Recipe, {
 	constructIngredientFromString,
@@ -21,7 +22,7 @@ const AddCustomRecipe = () => {
 	let [currentName, setCurrentName] = useState<string>("");
 	let [currentDescription, setCurrentDescription] = useState<string>("");
 	let [currentSingleIngredient, setCurrentSingleIngredient] =
-		useState<string>();
+		useState<string>("");
 	let [currentIngredients, setCurrentIngredients] = useState<string[]>(
 		[] as string[],
 	);
@@ -75,6 +76,7 @@ const AddCustomRecipe = () => {
 
 	const submitRecipe = (event: any) => {
 		event.preventDefault();
+		console.log("submitran");
 		console.log(event);
 		//Add a new recipe with the stuff
 		let ingredientsWithTyping = currentIngredients.map((ingredient) => {
@@ -110,23 +112,10 @@ const AddCustomRecipe = () => {
 			currentInstructions,
 			currentSingleIngredient,
 		);
-		if (event.nativeEvent.submitter.innerText == "Save and Add Recipe") {
-			setSaveRecipeOverlayShown(true);
-			//Save a new recipe onto calendar with the stuff
-		}
 	};
 
-	// if(document.getElementById('name') != null){
-	// 	document.getElementById('name').addEventListener('keypress', function(event) {
-	// 		if (event.keyCode == 13) {
-	// 			event.preventDefault();
-	// 		}
-	// 	});}
 	return (
 		<div>
-			{saveRecipeOverlayShown && (
-				<SaveRecipe recipe={tempRecipeState}></SaveRecipe>
-			)}
 			{addRecipeOverlayShown && (
 				<div className="calendarOverlay">
 					<button
@@ -138,37 +127,41 @@ const AddCustomRecipe = () => {
 					>
 						X
 					</button>
-					<form onSubmit={submitRecipe} id="submitRecipeForm">
-						<div>Add a Recipe </div>
-						<input
-							placeholder="Name"
-							id="name"
-							form="notSubmitRecipeForm"
-							onChange={changeName}
-							value={currentName}
-						></input>
-						<input
-							placeholder="Description"
-							onChange={changeDescription}
-							form="notSubmitRecipeForm"
-							value={currentDescription}
-						></input>
-						<input
-							placeholder="Ingredient"
-							onChange={changeSingleIngredient}
-							onKeyPress={isEnter}
-							form="notSubmitRecipeForm"
-							value={currentSingleIngredient}
-						></input>
-						<input
-							placeholder="Instructions"
-							onChange={changeInstructions}
-							form="notSubmitRecipeForm"
-							value={currentInstructions}
-						></input>
-						<button type="submit"> Add Recipe </button>
-						<button type="submit"> Save and Add Recipe</button>
-					</form>
+					{/* <form onSubmit={submitRecipe} id="submitRecipeForm"> */}
+					<div>Add a Recipe </div>
+					<input
+						placeholder="Name"
+						id="name"
+						form="notSubmitRecipeForm"
+						onChange={changeName}
+						value={currentName}
+					></input>
+					<input
+						placeholder="Description"
+						onChange={changeDescription}
+						form="notSubmitRecipeForm"
+						value={currentDescription}
+					></input>
+					<input
+						placeholder="Ingredient"
+						onChange={changeSingleIngredient}
+						onKeyPress={isEnter}
+						form="notSubmitRecipeForm"
+						value={currentSingleIngredient}
+					></input>
+					<input
+						placeholder="Instructions"
+						onChange={changeInstructions}
+						form="notSubmitRecipeForm"
+						value={currentInstructions}
+					></input>
+					<button onClick={submitRecipe}> Add Recipe </button>
+					<SaveRecipe
+						buttonTyping="submit"
+						recipe={tempRecipeState}
+						parentFunction={submitRecipe}
+					></SaveRecipe>
+					{/* </form> */}
 					<ul>
 						{currentIngredients.map((currentIngredient) => {
 							return <li key={String(Math.random())}>{currentIngredient}</li>;

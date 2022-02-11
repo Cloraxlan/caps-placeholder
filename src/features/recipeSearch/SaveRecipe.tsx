@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useImperativeHandle, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import "./SaveRecipe.css";
@@ -14,18 +14,23 @@ import {
 } from "../../Interfaces-Classes/MetricSystem";
 import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 import { prototype } from "events";
+import { forwardRef } from "react";
 
 interface Props {
 	recipe: Recipe;
 	className2?: string;
+	buttonTyping?: string;
+	parentFunction?: any;
 }
 
-const SaveRecipe = (props: Props) => {
+const SaveRecipe = (props: Props, ref: any) => {
 	const [showRecipeSave, setShowRecipeSave] = useState(false);
 	let [currentNote, setCurrentNote] = useState();
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
+	console.log(props.recipe);
+	console.log(props.buttonTyping);
 
 	let changeNote = (event: any) => {
 		setCurrentNote(event.target.value);
@@ -38,8 +43,9 @@ const SaveRecipe = (props: Props) => {
 		d.setHours(0, 0, 0, 0);
 		// console.log(d);
 	};
-	let save = () => {
+	let save = (event: any) => {
 		setShowRecipeSave(true);
+		console.log(event);
 		// let month = prompt("Month (as name)");
 		// let day = prompt("Day(as number)");
 		// let date = new Date(month + " " + day + ", 2021");
@@ -53,6 +59,10 @@ const SaveRecipe = (props: Props) => {
 	};
 
 	const submitSave = (event: any) => {
+		console.log("submitSave");
+		if (props.parentFunction) {
+			props.parentFunction();
+		}
 		event.preventDefault();
 		setShowRecipeSave(false);
 		let d = new Date(currentDate);
@@ -64,6 +74,7 @@ const SaveRecipe = (props: Props) => {
 		// console.log(props.recipe.serialize());
 		// console.log("Note");
 		// console.log(currentNote);
+
 		dispatch(
 			addRecipeDate({
 				date: d.toDateString(),
@@ -84,7 +95,11 @@ const SaveRecipe = (props: Props) => {
 							setShowRecipeSave(false);
 						}}
 					/>
-					<form onSubmit={submitSave} className="SaveOverlay">
+					<form
+						id="saveRecipeForm"
+						onSubmit={submitSave}
+						className="SaveOverlay"
+					>
 						<button
 							type="button"
 							className="close"
@@ -113,16 +128,34 @@ const SaveRecipe = (props: Props) => {
 						<div className="SaveRecipeDate">
 							<input onChange={changeDate} type="date"></input>
 						</div>
-						<button type="submit" className="SaveButtonOverlay">
+						<button
+							form="saveRecipeForm"
+							type="submit"
+							className="SaveButtonOverlay"
+						>
 							Save
 						</button>
 					</form>
 				</div>
 			)}
 			{/*When "Save Recipe" in the recipe overlay is clicked, show the recipe save*/}
-			<button onClick={save} className={setClassName()}>
-				Save Recipe
-			</button>
+			{props.buttonTyping &&
+			(props.buttonTyping == "button" ||
+				props.buttonTyping == "submit" ||
+				props.buttonTyping == "reset" ||
+				props.buttonTyping == undefined) ? (
+				<button
+					type={props.buttonTyping}
+					onClick={save}
+					className={setClassName()}
+				>
+					Save Recipe
+				</button>
+			) : (
+				<button onClick={save} className={setClassName()}>
+					Save Recipe
+				</button>
+			)}
 		</div>
 	);
 };
