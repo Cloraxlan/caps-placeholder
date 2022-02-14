@@ -76,6 +76,7 @@ const AddCustomRecipe = () => {
 
 	const submitRecipe = (event: any) => {
 		event.preventDefault();
+		//it reloads after the prevent default
 		console.log("submitran");
 		console.log(event);
 		//Add a new recipe with the stuff
@@ -132,32 +133,32 @@ const AddCustomRecipe = () => {
 					<input
 						placeholder="Name"
 						id="name"
-						form="notSubmitRecipeForm"
+						// form="notSubmitRecipeForm"
 						onChange={changeName}
 						value={currentName}
 					></input>
 					<input
 						placeholder="Description"
 						onChange={changeDescription}
-						form="notSubmitRecipeForm"
+						// form="notSubmitRecipeForm"
 						value={currentDescription}
 					></input>
 					<input
 						placeholder="Ingredient"
 						onChange={changeSingleIngredient}
 						onKeyPress={isEnter}
-						form="notSubmitRecipeForm"
+						// form="notSubmitRecipeForm"
 						value={currentSingleIngredient}
 					></input>
 					<input
 						placeholder="Instructions"
 						onChange={changeInstructions}
-						form="notSubmitRecipeForm"
+						// form="notSubmitRecipeForm"
 						value={currentInstructions}
 					></input>
 					<button onClick={submitRecipe}> Add Recipe </button>
 					<SaveRecipe
-						buttonTyping="submit"
+						buttonTyping="button"
 						recipe={tempRecipeState}
 						parentFunction={submitRecipe}
 					></SaveRecipe>
