@@ -83,7 +83,14 @@ export default abstract class Ingredient {
 		return this._ingredient.ingredientName;
 	}
 	public set magnitude(magnitude: number) {
-		this._ingredient.magnitude = magnitude;
+		console.log(this._ingredient);
+		console.log(magnitude);
+		try {
+			this._ingredient.magnitude = magnitude;
+			console.log("worked");
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	public set measure(measure: measure) {
 		this._ingredient.measure = measure;
