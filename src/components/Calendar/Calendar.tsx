@@ -172,12 +172,9 @@ const Calendar = () => {
 
 	return (
 		<Card className="card">
-			<Card className="drop">
-				<MonthsFilter onFilterMonth={filterMonthHandler} />
-			</Card>
 			<MonthChangeButtons onMonthChange={monthChangeHandler} />
 			<table>
-				<caption>{MONTHS[month]}</caption>
+				<caption>{<MonthsFilter onFilterMonth={filterMonthHandler} month={month}/>}</caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />

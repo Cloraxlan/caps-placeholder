@@ -23,7 +23,8 @@ td {
 	vertical-align: top;
 }
 caption {
-	font-size: 300%;
+	padding-left: 8rem;
+	font-size: 250%;
 	font-style: italic;
 }
 .card {
@@ -97,7 +98,7 @@ caption {
 
 .monthChangeButtons {
 	position: absolute;
-	top: 200px;
+	top: 145px;
 }
 
 /* #wrapper {

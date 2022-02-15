@@ -1,17 +1,28 @@
+import { useEffect } from "react";
 import "./MonthsFilter.css";
 
-const MonthsFilter = (props: { onFilterMonth: (arg0: any) => void }) => {
+const MonthsFilter = (props: {
+	onFilterMonth: (arg0: any) => void;
+	month: string | number | readonly string[] | undefined;
+}) => {
 	const filterChangeHandler = (event: { target: { value: any } }) => {
 		props.onFilterMonth(event.target.value);
 	};
 
+	const dropClickHandler = () => {
+		// (document.firstElementChild as HTMLElement)?.focus();
+	}
+
 	return (
 		<div className="months-filter">
-			<div className="months-filter__control">
-				<label>Filter by month</label>
+			<div id="drop" className="months-filter__control">
+				{/* <label>Filter by month</label> */}
 				<select
 					onChange={filterChangeHandler}
+					onClick={dropClickHandler}
 					defaultValue={new Date().getMonth().toString()}
+					value={props.month}
+					id="drop2"
 				>
 					<option value="0">January</option>
 					<option value="1">February</option>

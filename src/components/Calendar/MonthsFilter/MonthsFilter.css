@@ -1,6 +1,6 @@
 .months-filter {
     color: black;
-    padding: 0 1rem;
+    padding: 0 3.2rem;
 }
   
 .months-filter__control {
@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: space-between;
     margin: 1rem 0;
+    z-index: 3;
+    position: sticky;
 }
 
 .months-filter label {
@@ -17,8 +19,9 @@
 }
 
 .months-filter select {
+    text-align: center;
     font: inherit;
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 1rem;
     font-weight: bold;
     border-radius: 6px;
     background-color: #8fc0a9ff;
