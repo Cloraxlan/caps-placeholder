@@ -15,6 +15,7 @@ import {
 import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 import { prototype } from "events";
 import { forwardRef } from "react";
+import "./AddCustomRecipe.tsx";
 
 interface Props {
 	recipe: Recipe;
@@ -29,8 +30,8 @@ const SaveRecipe = (props: Props, ref: any) => {
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
-	console.log(props.recipe);
-	console.log(props.buttonTyping);
+	// console.log(props.recipe);
+	// console.log(props.buttonTyping);
 
 	let changeNote = (event: any) => {
 		setCurrentNote(event.target.value);
@@ -74,7 +75,8 @@ const SaveRecipe = (props: Props, ref: any) => {
 		// console.log(props.recipe.serialize());
 		// console.log("Note");
 		// console.log(currentNote);
-
+		console.log("below is recipe in saverecipe");
+		console.log(props.recipe);
 		dispatch(
 			addRecipeDate({
 				date: d.toDateString(),
