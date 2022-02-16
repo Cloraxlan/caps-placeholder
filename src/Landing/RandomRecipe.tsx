@@ -11,7 +11,7 @@ const RandomRecipe = (props: Props) => {
 
 	useEffect(() => {
 		let r: Recipe[] = [];
-		let x = fetch("http://localhost:6777/");
+		let x = fetch("http://rozpadek.me/search/findAll/");
 		x.then((res) => {
 			res.json().then((json) => {
 				json.map((recipe: serialRecipe) => {

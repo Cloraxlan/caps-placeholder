@@ -11,7 +11,7 @@ interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
 const recipes: Recipe[] = [];
-let x = fetch("http://rozpadek.me/");
+let x = fetch("http://rozpadek.me/search/findAll/");
 x.then((res) => {
 	res.json().then((json) => {
 		json.map((recipe: serialRecipe) => {
