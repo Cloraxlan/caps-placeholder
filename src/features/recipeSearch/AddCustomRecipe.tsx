@@ -182,51 +182,51 @@ const AddCustomRecipe = () => {
 							X
 						</button>
 						<div className="AddARecipe">Add a Recipe </div>
-						<input
-							placeholder="Name"
-							id="name"
-							// form="notSubmitRecipeForm"
-							onChange={changeName}
-							value={currentName}
-						></input>
-						<input
-							placeholder="Description"
-							onChange={changeDescription}
-							// form="notSubmitRecipeForm"
-							value={currentDescription}
-						></input>
-						<input
-							placeholder="Ingredient"
-							onChange={changeSingleIngredient}
-							onKeyPress={isEnter}
-							// form="notSubmitRecipeForm"
-							value={currentSingleIngredient}
-						></input>
-						<input
-							placeholder="Instructions"
-							onChange={changeInstructions}
-							// form="notSubmitRecipeForm"
-							value={currentInstructions}
-						></input>
-						<button onClick={submitRecipe}> Add Recipe </button>
-						<button onClick={submitRecipe}> Save and Add Recipe</button>
-						<input onChange={changeDate} type="date"></input>
-						<input
-							onChange={changeNote}
-							role="textbox"
-							contentEditable="true"
-							placeholder="Add a note"
-						></input>
-						{/* <SaveRecipe
-						buttonTyping="button"
-						recipe={tempRecipeState}
-						parentFunction={submitRecipe}
-					></SaveRecipe> */}
+						<div className="FlexHolderSave">
+							<input
+								onChange={changeNote}
+								role="textbox"
+								contentEditable="true"
+								placeholder="Add a note"
+							></input>
+							<input onChange={changeDate} type="date"></input>
+						</div>
+						<div className="FlexHolderAdd">
+							<input
+								placeholder="Name"
+								id="name"
+								// form="notSubmitRecipeForm"
+								onChange={changeName}
+								value={currentName}
+							></input>
+							<input
+								placeholder="Description"
+								onChange={changeDescription}
+								// form="notSubmitRecipeForm"
+								value={currentDescription}
+							></input>
+							<input
+								placeholder="Ingredient"
+								onChange={changeSingleIngredient}
+								onKeyPress={isEnter}
+								// form="notSubmitRecipeForm"
+								value={currentSingleIngredient}
+							></input>
+							<input
+								placeholder="Instructions"
+								onChange={changeInstructions}
+								// form="notSubmitRecipeForm"
+								value={currentInstructions}
+							></input>
+						</div>
 						<ul>
 							{currentIngredients.map((currentIngredient) => {
 								return <li key={String(Math.random())}>{currentIngredient}</li>;
 							})}
 						</ul>
+						<button onClick={submitRecipe}> Add Recipe </button>
+
+						<button onClick={submitRecipe}> Save and Add Recipe</button>
 					</div>
 				</div>
 			)}

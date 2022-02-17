@@ -3,3 +3,22 @@
 	font-family: "IBM Plex Serif", serif;
 	text-align: center;
 }
+
+.FlexHolderAdd {
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	gap: 1vh;
+	width: 25vw;
+	margin-top: -7vw;
+}
+
+.FlexHolderSave {
+	display: flex;
+	flex-direction: column;
+	padding: 1vh;
+	gap: 1vh;
+	width: 25vw;
+	margin-left: 30vw;
+	font-family: "IBM Plex Serif", serif;
+}
