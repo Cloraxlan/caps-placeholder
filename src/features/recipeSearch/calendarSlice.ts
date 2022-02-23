@@ -1,7 +1,10 @@
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";
-import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import {
+	MASTER_VOLUME_METRIC,
+	MASTER_WEIGHT_METRIC,
+} from "../../Interfaces-Classes/MetricSystem";
 import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 
 export interface RecipeDate {
@@ -21,6 +24,13 @@ export const calendarSlice: Slice = createSlice({
 	reducers: {
 		addRecipeDate: (state: any, action: PayloadAction<RecipeDate>) => {
 			console.log(action.payload);
+			fetch("http://rozpadek.me/search/add", {
+				method: "POST",
+
+				body: new URLSearchParams({
+					recipe: JSON.stringify((state.recipeDates as RecipeDate).recipe),
+				}),
+			});
 			state.recipeDates.push(action.payload);
 		},
 	},
