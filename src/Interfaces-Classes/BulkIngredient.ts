@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Ingredient from "./Ingredient";
 import Unit from "./Unit";
 import UnitSystem from "./UnitSystem";

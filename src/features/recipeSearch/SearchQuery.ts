@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Recipe from "../../Interfaces-Classes/Recipe";
 
 export interface Query {

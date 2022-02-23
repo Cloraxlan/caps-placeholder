@@ -1,3 +1,4 @@
+/* eslint-disable */
 //import React, { CSSProperties } from "react";
 import Layout from "./components/Layout/Layout";
 import "./App.css";

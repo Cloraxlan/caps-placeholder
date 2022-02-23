@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default interface Unit {
 	fullName: string;
 	abbreviations: string[];

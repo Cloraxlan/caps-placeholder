@@ -1,3 +1,4 @@
+/* eslint-disable */
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 import BulkIngredient from "./BulkIngredient";

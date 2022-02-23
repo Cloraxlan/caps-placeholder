@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import BulkIngredient from "./Interfaces-Classes/BulkIngredient";
 import Ingredient from "./Interfaces-Classes/Ingredient";

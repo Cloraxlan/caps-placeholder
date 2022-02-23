@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Ingredient from "./Ingredient";
 //An ingredient that is its own unit/unitless
 export default class UnitIngredient extends Ingredient {

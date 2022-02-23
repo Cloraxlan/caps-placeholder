@@ -1,3 +1,4 @@
+/* eslint-disable */
 import BulkIngredient from "./BulkIngredient";
 import Ingredient, { allUnits, serializedIngredient } from "./Ingredient";
 import Unit, { identifyUnitsByString } from "./Unit";

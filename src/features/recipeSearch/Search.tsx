@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { CSSProperties, useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import SearchBox from "./SearchBox";

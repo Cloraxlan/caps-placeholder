@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ReactElement, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Login from "./Login";

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Unit from "./Unit";
 import UnitSystem, {
 	KNOW_SYSTEM_MASTER_CONVERSION_FACTORS,

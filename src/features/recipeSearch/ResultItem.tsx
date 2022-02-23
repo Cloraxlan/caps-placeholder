@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { stat } from "fs";
 import React, { useState } from "react";
 import Recipe from "../../Interfaces-Classes/Recipe";
