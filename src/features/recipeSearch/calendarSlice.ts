@@ -24,14 +24,16 @@ export const calendarSlice: Slice = createSlice({
 	reducers: {
 		addRecipeDate: (state: any, action: PayloadAction<RecipeDate>) => {
 			console.log(action.payload);
+
+			state.recipeDates.push(action.payload);
 			fetch("http://rozpadek.me/search/add", {
 				method: "POST",
 
 				body: new URLSearchParams({
-					recipe: JSON.stringify((state.recipeDates as RecipeDate).recipe),
+					recipe: JSON.stringify(action.payload.recipe),
 				}),
 			});
-			state.recipeDates.push(action.payload);
+			console.log(JSON.stringify(action.payload.recipe));
 		},
 	},
 });
