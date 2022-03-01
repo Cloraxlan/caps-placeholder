@@ -182,46 +182,52 @@ const AddCustomRecipe = () => {
 							X
 						</button>
 						<div className="AddARecipe">Add a Recipe </div>
-						<input
-							placeholder="Name"
-							id="name"
-							// form="notSubmitRecipeForm"
-							onChange={changeName}
-							value={currentName}
-						></input>
-						<input
-							placeholder="Description"
-							onChange={changeDescription}
-							// form="notSubmitRecipeForm"
-							value={currentDescription}
-						></input>
-						<input
-							placeholder="Ingredient"
-							onChange={changeSingleIngredient}
-							onKeyPress={isEnter}
-							// form="notSubmitRecipeForm"
-							value={currentSingleIngredient}
-						></input>
-						<input
-							placeholder="Instructions"
-							onChange={changeInstructions}
-							// form="notSubmitRecipeForm"
-							value={currentInstructions}
-						></input>
-						<button onClick={submitRecipe}> Add Recipe </button>
-						<button onClick={submitRecipe}> Save and Add Recipe</button>
-						<input onChange={changeDate} type="date"></input>
-						<input
-							onChange={changeNote}
-							role="textbox"
-							contentEditable="true"
-							placeholder="Add a note"
-						></input>
-						{/* <SaveRecipe
-						buttonTyping="button"
-						recipe={tempRecipeState}
-						parentFunction={submitRecipe}
-					></SaveRecipe> */}
+						<div className="Flex">
+							<div className="FlexHolderAdd">
+								<input
+									className="RemoveMargin"
+									placeholder="Name"
+									id="name"
+									// form="notSubmitRecipeForm"
+									onChange={changeName}
+									value={currentName}
+								></input>
+								<input
+									className="RemoveMargin"
+									placeholder="Description"
+									onChange={changeDescription}
+									// form="notSubmitRecipeForm"
+									value={currentDescription}
+								></input>
+								<input
+									className="RemoveMargin"
+									placeholder="Ingredient (With units)"
+									onChange={changeSingleIngredient}
+									onKeyPress={isEnter}
+									// form="notSubmitRecipeForm"
+									value={currentSingleIngredient}
+								></input>
+								<input
+									className="RemoveMargin"
+									placeholder="Instructions"
+									onChange={changeInstructions}
+									// form="notSubmitRecipeForm"
+									value={currentInstructions}
+								></input>
+								<button onClick={submitRecipe}> Add Recipe </button>
+							</div>
+							<div className="FlexHolderSave">
+								<input
+									className="RemoveMargin"
+									onChange={changeNote}
+									role="textbox"
+									contentEditable="true"
+									placeholder="Add a note"
+								></input>
+								<input onChange={changeDate} type="date"></input>
+								<button onClick={submitRecipe}> Save and Add Recipe</button>
+							</div>
+						</div>
 						<ul>
 							{currentIngredients.map((currentIngredient) => {
 								return <li key={String(Math.random())}>{currentIngredient}</li>;
