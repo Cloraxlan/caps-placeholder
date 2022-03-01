@@ -10,7 +10,6 @@
 	padding: 1vh;
 	gap: 1vh;
 	width: 25vw;
-	margin-top: -7vw;
 }
 
 .FlexHolderSave {
@@ -19,6 +18,14 @@
 	padding: 1vh;
 	gap: 1vh;
 	width: 25vw;
-	margin-left: 30vw;
 	font-family: "IBM Plex Serif", serif;
+	/* position: relative; */
+	left: 30vw;
+	/* bottom: 16.8vh; */
+	margin-bottom: 10vh;
+}
+
+.RemoveMargin {
+	width: 100%;
+	box-sizing: border-box;
 }
