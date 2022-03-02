@@ -69,6 +69,7 @@ const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	const [results, setResults] = useState<Recipe[]>([]);
 	let recipeDateList = useAppSelector(selectRecipeDates);
+	console.log(JSON.stringify(recipeDateList));
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
 	// not sure how to use this hook as a fix to the rendering bug
