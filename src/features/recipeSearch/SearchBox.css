@@ -30,4 +30,5 @@
 	font-size: calc(12px + 0.5vh);
 	/* border-color: rgb(98, 165, 134); */
 	border-color: rgb(134, 179, 158);
+	font-weight: 500;
 }

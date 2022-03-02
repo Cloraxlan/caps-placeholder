@@ -29,3 +29,27 @@
 	width: 100%;
 	box-sizing: border-box;
 }
+
+.AddRecipeButton {
+	font-family: "IBM Plex Serif", serif;
+	box-sizing: content-box;
+	background-color: #8fc0a9ff;
+	border: solid;
+	border-width: 0.4vh;
+	border-radius: 1vh;
+	height: calc(23px + 1vh);
+	font-size: calc(17px + 0.7vh);
+	/* border-color: rgb(98, 165, 134); */
+	border-color: rgb(134, 179, 158);
+	font-weight: 500;
+	position: relative;
+	left: 49vw;
+	top: -5vh;
+}
+
+.AddRecipeReccomendation {
+	font-family: "IBM Plex Serif", serif;
+	font-size: calc(17px + 0.7vh);
+	position: relative;
+	left: 20vw;
+}
