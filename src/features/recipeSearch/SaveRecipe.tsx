@@ -8,9 +8,13 @@ import calendarSlice, {
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
-import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "../../Interfaces-Classes/MetricSystem";
+import {
+	MASTER_VOLUME_METRIC,
+	MASTER_WEIGHT_METRIC,
+} from "../../Interfaces-Classes/MetricSystem";
 import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
 import { prototype } from "events";
+import { selectToken } from "../../sessionSlice";
 
 interface Props {
 	recipe: Recipe;
@@ -23,7 +27,7 @@ const SaveRecipe = (props: Props) => {
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
-
+	const token: string = useAppSelector(selectToken);
 	let changeNote = (event: any) => {
 		setCurrentNote(event.target.value);
 		// console.log(event.target.value);
@@ -61,13 +65,25 @@ const SaveRecipe = (props: Props) => {
 		// console.log(props.recipe.serialize());
 		// console.log("Note");
 		// console.log(currentNote);
+		let recipe = props.recipe.serialize();
 		dispatch(
 			addRecipeDate({
 				date: d.toDateString(),
-				recipe: props.recipe.serialize(),
+				recipe: recipe,
 				note: currentNote,
 			}),
 		);
+		fetch("http://rozpadek.me/account/saveRecipe", {
+			method: "POST",
+
+			body: new URLSearchParams({
+				recipe: JSON.stringify({
+					date: d.toDateString(),
+					recipe: recipe,
+				}),
+				token: token,
+			}),
+		});
 	};
 
 	return (
