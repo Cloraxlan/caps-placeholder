@@ -12,9 +12,10 @@ import {
 	RecipeDate,
 	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 // import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 import React from "react";
+import { selectToken } from "../../sessionSlice";
 
 interface Props {}
 
@@ -65,10 +66,13 @@ let MONTH = new Date().getMonth();
 const daysPre: Day[] = [];
 
 const Calendar = (props: Props) => {
+	const dispatch = useAppDispatch();
+
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
 	const [results, setResults] = useState<Recipe[]>([]);
-	let recipeDateList = useAppSelector(selectRecipeDates);
+	let recipeDateList: RecipeDate[] = useAppSelector(selectRecipeDates);
+	const token: string = useAppSelector(selectToken);
 	console.log(JSON.stringify(recipeDateList));
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
@@ -78,6 +82,49 @@ const Calendar = (props: Props) => {
 		//console.log(generateRows(7));
 		return;
 	}, [recipeDateList]);
+	//Fetches from database saved recipes
+	useEffect(() => {
+		fetch("http://rozpadek.me/account/getSavedRecipes", {
+			method: "POST",
+
+			body: new URLSearchParams({
+				token: token,
+			}),
+		}).then((res) => {
+			res.json().then((json) => {
+				let recipeDateStrings: string[] = json.responce;
+				let recipeDates: RecipeDate[] = [];
+				recipeDateStrings.map((s) => {
+					let dupe = false;
+					let newRDate: RecipeDate = JSON.parse(s);
+					recipeDateList.map((recipeDate) => {
+						if (
+							recipeDate.date == newRDate.date &&
+							recipeDate.recipe == newRDate.recipe
+						) {
+							dupe = true;
+						}
+					});
+					if (!dupe) {
+						recipeDates.push(newRDate);
+					}
+				});
+				//Combines and removes duplicates
+				recipeDates.map((recipeDate) => {
+					dispatch(
+						addRecipeDate({
+							date: recipeDate.date,
+							recipe: recipeDate.recipe,
+							note: recipeDate.note,
+						}),
+					);
+					console.log("added");
+					console.log(recipeDate);
+				});
+			});
+		});
+		return;
+	}, []);
 
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
