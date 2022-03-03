@@ -41,7 +41,7 @@ const ResultItem = (props: Props) => {
 					<div className="OverlayListTitle"> Ingredient List </div>
 					<div className="OverlayIngredientItem">
 						{props.result.ingredients.map((ingredient) => {
-							return <li>{ingredient.fullName()}</li>;
+							return <ul>{"• " + ingredient.fullName()}</ul>;
 						})}
 					</div>
 					<div className="OverlayListTitle"> Instructions </div>
@@ -92,7 +92,11 @@ const ResultItem = (props: Props) => {
 					<ol>
 						{props.result.ingredients.map((ingredient) => {
 							return (
-								<li  key={uuidv4()} style={{ textAlign: "left" }} className="Ingredient">
+								<li
+									key={uuidv4()}
+									style={{ textAlign: "left" }}
+									className="Ingredient"
+								>
 									{ingredient.fullName()}
 								</li>
 							);
