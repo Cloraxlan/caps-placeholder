@@ -10,6 +10,7 @@ import {
 } from "../../prefrencesSlice";
 import { useAppSelector } from "../../app/hooks";
 import Unit from "../../Interfaces-Classes/Unit";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
 	result: Recipe;
@@ -111,7 +112,11 @@ const ResultItem = (props: Props) => {
 					<ol>
 						{props.result.ingredients.map((ingredient) => {
 							return (
-								<li style={{ textAlign: "left" }} className="Ingredient">
+								<li
+									key={uuidv4()}
+									style={{ textAlign: "left" }}
+									className="Ingredient"
+								>
 									{ingredient.fullName()}
 								</li>
 							);

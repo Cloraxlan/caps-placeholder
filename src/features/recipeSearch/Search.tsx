@@ -4,6 +4,8 @@ import SearchBox from "./SearchBox";
 import ResultItem from "./ResultItem";
 import "./Search.css";
 import Card from "../../components/UI/Card/Card";
+import { v4 as uuidv4 } from "uuid";
+
 //import selectRecipeDates from "./calendarSlice";
 interface Props {}
 //idrc enough to style this rn, its all gonna be remade anyway. enjoy funny flexbox
@@ -21,7 +23,7 @@ const Search = (props: Props) => {
 					{/* <div className="SideBox"></div> */}
 					{results.map((result) => {
 						return (
-							<div>
+							<div key={uuidv4()}>
 								<div></div>
 								<div style={style}>
 									<ResultItem result={result}></ResultItem>

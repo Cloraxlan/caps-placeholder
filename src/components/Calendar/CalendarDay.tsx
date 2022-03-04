@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Day } from "../../Interfaces-Classes/Day";
+import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
 
@@ -38,7 +39,7 @@ const CalendarDay = (props: Props) => {
 						<p>{event.recipe.description}</p>
 						<div className="ingrdientItem">
 							{event.recipe.ingredients.map((ingredient) => {
-								return <li>{ingredient.fullName}</li>;
+								return <li key={uuidv4()}>{ingredient.fullName}</li>;
 							})}
 						</div>
 					</div>
@@ -55,7 +56,7 @@ const CalendarDay = (props: Props) => {
 					<div className="notes">
 						{props.day.events.map((event) => {
 							return (
-								<div
+								<div key={uuidv4()}
 									onClick={() => {
 										//Or whatever should be the id
 										setOverlayShown(event.recipe.name);
