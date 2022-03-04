@@ -98,16 +98,16 @@ export default class Recipe {
 		this._recipe.metadata = metadata;
 	}
 	//converts the Ingredients into a single set of preffered units
-	public convertIntoSingleUnit(volume: Unit, weight: Unit){
-		for(let i = 0; i < this.ingredients.length; i++){
+	public convertIntoSingleUnit(volume: Unit, weight: Unit) {
+		for (let i = 0; i < this.ingredients.length; i++) {
 			switch (this.ingredients[i].measure) {
 				case "UNITLESS":
 					break;
 				case "VOLUME":
-					(this.ingredients[i] as BulkIngredient).convertUnits(volume)
+					(this.ingredients[i] as BulkIngredient).convertUnits(volume);
 					break;
 				case "WEIGHT":
-					(this.ingredients[i] as BulkIngredient).convertUnits(weight)
+					(this.ingredients[i] as BulkIngredient).convertUnits(weight);
 
 					break;
 			}
@@ -135,13 +135,19 @@ export default class Recipe {
 		return instructions;
 	}
 	//Creates a recipe from a serialized recipe
-	public static constructFromInterface(recipe : serialRecipe): Recipe{
+	public static constructFromInterface(recipe: serialRecipe): Recipe {
 		//Creates ingredients from serialized ingredients
-		let ingredients : Ingredient[] = [];
-		recipe.ingredients.map((ingredient)=>{
-			ingredients.push(Ingredient.constructFromInterface(ingredient))
-		})
-		return new Recipe(recipe.name, recipe.description, ingredients, recipe.instructions, recipe.metadata)
+		let ingredients: Ingredient[] = [];
+		recipe.ingredients.map((ingredient) => {
+			ingredients.push(Ingredient.constructFromInterface(ingredient));
+		});
+		return new Recipe(
+			recipe.name,
+			recipe.description,
+			ingredients,
+			recipe.instructions,
+			recipe.metadata,
+		);
 	}
 }
 //Uses a string to identify the Unit and what measure it uses, if none is found it is identified as a bulk unitless ingredient
