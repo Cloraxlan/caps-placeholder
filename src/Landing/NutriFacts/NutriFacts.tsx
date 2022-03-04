@@ -1,47 +1,61 @@
-// import got from 'got';
-import axios from 'axios';
+import React, { useState } from 'react'
+import OpenAIAPI from 'react-openai-api';
+import {
+    CompletionResponse,
+} from "react-openai-api/lib/esm/types";
 import dotenv from 'dotenv';
-import React from 'react';
 dotenv.config();
 
-const prompt = "5 Interesting Nutrition Facts:\n\n";
-let output: string;
+const promptTextDefault = `
+Interesting Nutrition Facts: 
 
+- Asparagus is a good source of vitamins A, C and E, B-complex vitamins, potassium and zinc.
 
-export default class NutriFacts extends React.Component {
-    state = {
-        facts: ""
+- An avocado has more than twice as much potassium as a banana.
+
+- Broccoli contains twice the vitamin C of an orange and almost as much calcium as whole milk, and the calcium is better absorbed!
+
+- Celery is the best vegetable source of naturally occurring sodium.
+
+- Kale contains lutein and zeaxanthin, which protect the eyes from macular degeneration.
+
+- To increase the protein in peanut butter, Brewer’s yeast can be mixed in - a useful tip for vegetarians.
+
+- Pumpkin seeds are high in zinc, which is good for the prostate and building the immune system.
+
+- Lemons are considered one of the world's healthiest foods - one lemon contains your daily dose of vitamin C, it cleanses the liver, boosts your immunity and aids in weight loss. Try adding it to a mug of warm water to kick start your day!
+
+- Eggs contain the highest quality food protein known. All parts of an egg are edible, including the shell which has a high calcium content.
+
+- The mushroom is the only non-animal natural source of vitamin D.
+`;
+
+const NutriFacts = () => {
+    const [promptText, setPromptText] = useState<string>("Loading ...");
+    
+    
+    const responseHandler = (openAIResponse: CompletionResponse) => {
+        console.log("NEW RESPONSE")
+        setPromptText(`Interesting Nutrition Facts: ${openAIResponse.choices[0].text}`)
     }
 
-    componentDidMount() {
-        (() => {
-            const url = 'https://api.openai.com/v1/engines/davinci/completions';
-            const params = {
-                "prompt": prompt,
-                "max_tokens": 160,
-                "temperature": 0.7,
-                "frequency_penalty": 0.5
-            };
-            const headers = {
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-            };
-            
-            try {
-                axios.post(url, { json: params, headers: headers }).then(res => {
-                    output = `${prompt}${(res as any).choices[0].text}`;
-                })
-                console.log(output);
-                this.setState(output);
-            } catch (err) {
-                console.log(err);
-            }
-        })();
-    }
-
-    render() {
-        return (
-            <p>{this.state.facts}</p>
-        );
-    }
-
+    return (
+        <React.Fragment>
+            <p style={{ whiteSpace: "pre-line" }}>{promptText}</p>
+            <OpenAIAPI
+                apiKey={process.env.REACT_APP_OPENAI_API_KEY as string}
+                payload={
+                    {
+                        prompt: promptTextDefault,
+                        maxTokens: 1000,
+                        temperature: 0.7,
+                        frequencyPenalty: 0.8,
+                    }
+                }
+                responseHandler={responseHandler}
+            />
+        </React.Fragment>
+    )
 }
+
+export default NutriFacts
