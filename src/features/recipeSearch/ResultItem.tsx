@@ -4,7 +4,8 @@ import Recipe from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
 import { v4 as uuidv4 } from "uuid";
-
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addRecipeDate } from "./calendarSlice";
 interface Props {
 	result: Recipe;
 }
@@ -13,6 +14,9 @@ const ResultItem = (props: Props) => {
 	const [showIngredients, setShowIngredients] = useState(false);
 	const [showInstructions, setshowInstructions] = useState(false);
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
+	let [currentNote, setCurrentNote] = useState();
+	let [currentDate, setCurrentDate] = useState("");
+	const dispatch = useAppDispatch();
 
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
@@ -23,6 +27,31 @@ const ResultItem = (props: Props) => {
 				return "▼";
 		}
 	};
+
+	let changeNote = (event: any) => {
+		setCurrentNote(event.target.value);
+	};
+	let changeDate = (event: any) => {
+		setCurrentDate(event.target.value);
+		let d = new Date(event.target.value);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+	};
+	const submitSave = (event: any) => {
+		event.preventDefault();
+		let d = new Date(currentDate);
+		d.setDate(d.getDate() + 1);
+		d.setHours(0, 0, 0, 0);
+		setSearchOverlayShown(false);
+		dispatch(
+			addRecipeDate({
+				date: d.toDateString(),
+				recipe: props.result.serialize(),
+				note: currentNote,
+			}),
+		);
+	};
+
 	return (
 		<div>
 			{/*Overlay system for recipe*/}
@@ -48,11 +77,35 @@ const ResultItem = (props: Props) => {
 					<div className="OverlayInstructions">
 						{props.result.listInstrutions()}
 					</div>
-
-					<SaveRecipe
+					<form
+						id="saveRecipeForm"
+						onSubmit={submitSave}
+						className="SaveOverlayResult"
+					>
+						<div>
+							<div className="NoteStylingResult">Note: </div>
+							<input
+								onChange={changeNote}
+								className="SaveRecipeNoteResult"
+								role="textbox"
+								placeholder="Add a note"
+							></input>
+						</div>
+						<div className="SaveRecipeDateResult">
+							<input onChange={changeDate} type="date"></input>
+						</div>
+						<button
+							form="saveRecipeForm"
+							type="submit"
+							className="SaveButtonOverlayResult"
+						>
+							Save
+						</button>
+					</form>
+					{/* <SaveRecipe
 						className2="OverlaySaveRecipe"
 						recipe={props.result}
-					></SaveRecipe>
+					></SaveRecipe> */}
 				</div>
 			)}
 			{/*Displaying all the recipies when searches*/}
@@ -92,7 +145,11 @@ const ResultItem = (props: Props) => {
 					<ol>
 						{props.result.ingredients.map((ingredient) => {
 							return (
-								<li  key={uuidv4()} style={{ textAlign: "left" }} className="Ingredient">
+								<li
+									key={uuidv4()}
+									style={{ textAlign: "left" }}
+									className="Ingredient"
+								>
 									{ingredient.fullName()}
 								</li>
 							);

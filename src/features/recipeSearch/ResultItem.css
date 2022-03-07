@@ -36,3 +36,27 @@
 	font-size: 3vh;
 	width: 10vw;
 }
+
+.SaveRecipeNoteResult {
+	width: 35vw;
+	margin-left: 0.5vw;
+	display: inline-block;
+	max-height: 33vh;
+	background-color: white;
+}
+
+.NoteStylingResult {
+	margin-top: 2vh;
+}
+
+.SaveRecipeNoteResult {
+	margin-top: 1vh;
+}
+
+.SaveRecipeDateResult {
+	margin-top: 1vh;
+}
+
+.SaveButtonOverlayResult {
+	width: 5vw;
+}
