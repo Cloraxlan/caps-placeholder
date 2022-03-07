@@ -30,18 +30,37 @@ Interesting Nutrition Facts:
 - The mushroom is the only non-animal natural source of vitamin D.
 `;
 
+const loadMessage: string = "Loading ..."
+
 const NutriFacts = () => {
-    const [promptText, setPromptText] = useState<string>("Loading ...");
+    const [promptText, setPromptText] = useState<string>(loadMessage);
     
     
     const responseHandler = (openAIResponse: CompletionResponse) => {
         console.log("NEW RESPONSE")
-        setPromptText(`Interesting Nutrition Facts: ${openAIResponse.choices[0].text}`)
+        setPromptText(openAIResponse.choices[0].text)
+    }
+
+    const textToList = (text: string) => {
+        if (text===loadMessage)
+            return <h2>{text}</h2>
+        else
+            return (
+                <React.Fragment>
+                    <h2>Interesting Nutrition Facts:</h2>
+                    <ul>
+                        {text.split('\n\n').map((fact: string)=> {
+                            return <li>{fact}</li>
+                        })}
+                    </ul>
+                </React.Fragment>
+            )
     }
 
     return (
         <React.Fragment>
-            <p style={{ whiteSpace: "pre-line" }}>{promptText}</p>
+            {/* <p style={{ whiteSpace: "pre-line" }}>{promptText}</p> */}
+            {textToList(promptText)}
             <OpenAIAPI
                 apiKey={process.env.REACT_APP_OPENAI_API_KEY as string}
                 payload={
