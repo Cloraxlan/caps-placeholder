@@ -29,8 +29,9 @@ Lemons are considered one of the world's healthiest foods - one lemon contains y
 
 Eggs contain the highest quality food protein known. All parts of an egg are edible, including the shell which has a high calcium content. | Certainty: 100%
 
-The mushroom is the only non-animal natural source of vitamin D. | Certainty: 100%
-`;
+The mushroom is the only non-animal natural source of vitamin D. | Certainty: 100%`;
+
+// Grapes are a vegetable. | Certainty 0%
 
 const loadMessage: string = "Loading ..."
 
@@ -52,8 +53,12 @@ const NutriFacts = () => {
                     <h2>Interesting Nutrition Facts:</h2>
                     <ul className="facts-list">
                         {text.split('\n\n').map((fact: string)=> {
-                            let certVal = fact.slice(fact.indexOf("|"))
-                            return <FactItem fact={fact} certainty={100} />
+                            console.log(fact)
+                            let factParts: Array<string> = fact.split(" | Certainty: ");
+                            if(factParts[1] === '') return null;
+                            if(factParts[0] === '') return null;
+                            console.log(factParts)
+                            return <FactItem fact={factParts[0]} certainty={factParts[1]} />
                         })}
                     </ul>
                 </React.Fragment>

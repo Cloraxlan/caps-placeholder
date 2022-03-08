@@ -1,0 +1,14 @@
+.content {
+  padding: 1rem;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+}
+
+.facts {
+  padding: 1rem;
+  background-color: rgb(200, 213, 185);
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+}
