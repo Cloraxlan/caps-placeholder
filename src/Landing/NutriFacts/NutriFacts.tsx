@@ -21,7 +21,7 @@ Celery is the best vegetable source of naturally occurring sodium. | Certainty: 
 
 Kale contains lutein and zeaxanthin, which protect the eyes from macular degeneration. | Certainty: 100%
 
-To increase the protein in peanut butter, Brewer’s yeast can be mixed in - a useful tip for vegetarians. | Certainty: 100%
+To increase the protein in peanut butter, Brewer's yeast can be mixed in - a useful tip for vegetarians. | Certainty: 100%
 
 Pumpkin seeds are high in zinc, which is good for the prostate and building the immune system. | Certainty: 100%
 
@@ -30,8 +30,6 @@ Lemons are considered one of the world's healthiest foods - one lemon contains y
 Eggs contain the highest quality food protein known. All parts of an egg are edible, including the shell which has a high calcium content. | Certainty: 100%
 
 The mushroom is the only non-animal natural source of vitamin D. | Certainty: 100%`;
-
-// Grapes are a vegetable. | Certainty 0%
 
 const loadMessage: string = "Loading ..."
 
