@@ -63,23 +63,27 @@ const NutriFacts = () => {
             )
     }
 
-    return (
-        <React.Fragment>
-            {textToList(promptText)}
-            <OpenAIAPI
-                apiKey={process.env.REACT_APP_OPENAI_API_KEY as string}
-                payload={
-                    {
-                        prompt: promptTextDefault,
-                        maxTokens: 1000,
-                        temperature: 0.7,
-                        frequencyPenalty: 0.8,
+    if (process.env.REACT_APP_OPENAI_API_KEY != undefined) {
+        return (
+            <React.Fragment>
+                {textToList(promptText)}
+                <OpenAIAPI
+                    apiKey={process.env.REACT_APP_OPENAI_API_KEY as string}
+                    payload={
+                        {
+                            prompt: promptTextDefault,
+                            maxTokens: 1000,
+                            temperature: 0.7,
+                            frequencyPenalty: 0.8,
+                        }
                     }
-                }
-                responseHandler={responseHandler}
-            />
-        </React.Fragment>
-    )
+                    responseHandler={responseHandler}
+                />
+            </React.Fragment>
+        )
+    } else {
+        return <h2>Please set an API key in order to see nutrition facts!</h2>
+    }
 }
 
 export default NutriFacts
