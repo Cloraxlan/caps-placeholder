@@ -4,6 +4,7 @@ import "./MonthsFilter.css";
 const MonthsFilter = (props: {
 	onFilterMonth: (arg0: any) => void;
 	month: string | number | readonly string[] | undefined;
+	year?: string | number | readonly string[] | undefined;
 }) => {
 	const filterChangeHandler = (event: { target: { value: any } }) => {
 		props.onFilterMonth(event.target.value);
@@ -11,7 +12,7 @@ const MonthsFilter = (props: {
 
 	const dropClickHandler = () => {
 		// (document.firstElementChild as HTMLElement)?.focus();
-	}
+	};
 
 	return (
 		<div className="months-filter">
