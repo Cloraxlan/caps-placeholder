@@ -23,13 +23,25 @@ td {
 	vertical-align: top;
 }
 caption {
-	font-size: 300%;
+	padding-left: 8rem;
+	font-size: 250%;
 	font-style: italic;
 }
 .card {
 	text-align: center;
 	padding: 0.25rem;
 }
+
+/* .calendarWrapper {
+	float: right;
+} */
+
+/* .searchBox {
+	float: left;
+	padding-left: 1rem;
+	padding-right: 5rem;
+} */
+
 .day {
 	text-align: left;
 }
@@ -83,3 +95,20 @@ caption {
 }
 /* .recipeOverlayText {
 } */
+
+.monthChangeButtons {
+	position: absolute;
+	top: 145px;
+}
+
+/* #wrapper {
+	padding: 1rem;
+	margin: 2rem auto;
+	width: 50rem;
+	max-width: 95%;
+} */
+
+/* 
+
+Check this blue out-->  #aec6cf; 
+*/

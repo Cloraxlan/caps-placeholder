@@ -1,20 +1,13 @@
-import React, { useImperativeHandle, useState } from "react";
+import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import "./SaveRecipe.css";
-import calendarSlice, {
+import {
 	addRecipeDate,
-	CalendarState,
+	// CalendarState,
 	RecipeDate,
 	selectRecipeDates,
 } from "./calendarSlice";
-import {
-	MASTER_VOLUME_METRIC,
-	MASTER_WEIGHT_METRIC,
-} from "../../Interfaces-Classes/MetricSystem";
-import BulkIngredient from "../../Interfaces-Classes/BulkIngredient";
-import { prototype } from "events";
-import { forwardRef } from "react";
 import "./AddCustomRecipe.tsx";
 
 interface Props {
@@ -29,7 +22,6 @@ const SaveRecipe = (props: Props, ref: any) => {
 	let [currentNote, setCurrentNote] = useState();
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
-	const calendarr: Array<RecipeDate> = useAppSelector(selectRecipeDates);
 	// console.log(props.recipe);
 	// console.log(props.buttonTyping);
 
@@ -122,7 +114,7 @@ const SaveRecipe = (props: Props, ref: any) => {
 							<input
 								onChange={changeNote}
 								className="SaveRecipeNote"
-								role="textbox"
+								// role="textbox"
 								contentEditable="true"
 								placeholder="Add a note"
 							></input>

@@ -12,13 +12,11 @@ export default class SearchQuery {
 	//Sees if recipe name ingidients or description contains the search term
 	public basicSearch(recipes: Array<Recipe>): Array<Recipe> {
 		let results: Array<Recipe> = [];
-		recipes.map((recipe) => {
-			console.log(this._searchString);
+		recipes.forEach((recipe) => {
+			// console.log(this._searchString);
 			let ingredientIncludes = false;
-			recipe.ingredients.map((ingredient) => {
-				if (
-					ingredient.ingredientName.toLowerCase().includes(this._searchString)
-				) {
+			recipe.ingredients.forEach((ingredient) => {
+				if (ingredient.ingredientName.toLowerCase().includes(this._searchString)) {
 					ingredientIncludes = true;
 				}
 			});

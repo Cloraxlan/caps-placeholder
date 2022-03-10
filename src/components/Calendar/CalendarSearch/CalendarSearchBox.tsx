@@ -1,13 +1,16 @@
 import React, { useRef } from "react";
 import Recipe, {
 	constructIngredientFromString,
-} from "../../Interfaces-Classes/Recipe";
-import SearchQuery, { Query } from "./SearchQuery";
-import "./SearchBox.css";
-// import Ingredient from "../../Interfaces-Classes/Ingredient";
+} from "../../../Interfaces-Classes/Recipe";
+import SearchQuery, { Query } from "./CalendarQuery";
+// import "./SearchBox.css";
+import Ingredient from "../../../Interfaces-Classes/Ingredient";
+// import { Day } from "../../../Interfaces-Classes/Day";
+import { RecipeDate } from "../../../features/recipeSearch/calendarSlice";
 
 interface Props {
-	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
+	setResults: React.Dispatch<React.SetStateAction<RecipeDate[]>>,
+	recipeList: Array<RecipeDate>;
 }
 const recipes = [
 	new Recipe(
@@ -23,7 +26,7 @@ const recipes = [
 		{},
 	),
 ];
-const SearchBox = (props: Props) => {
+const CalendarSearchBox = (props: Props) => {
 	const searchBox = useRef(null);
 	//Gets value in input and clears it
 	const getSearchValue: (clear: boolean) => string = (clear: boolean) => {
@@ -38,8 +41,7 @@ const SearchBox = (props: Props) => {
 			searchString: getSearchValue(clear),
 		};
 		let searchQ = new SearchQuery(query);
-		// console.log(getSearchValue(false));
-		props.setResults(searchQ.basicSearch(recipes));
+		props.setResults(searchQ.basicSearch(props.recipeList));
 	};
 	return (
 		<div className="Title">
@@ -53,10 +55,10 @@ const SearchBox = (props: Props) => {
 						}
 					}}
 					ref={searchBox}
-					onChange={() => {
-						//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
-						search(false);
-					}}
+					// onChange={() => {
+					// 	//Search in realtime, probably wanna remove later on when search is more complex but for now it fancy
+					// 	search(false);
+					// }}
 				></input>
 				<button
 					className="SearchButton"
@@ -71,4 +73,4 @@ const SearchBox = (props: Props) => {
 	);
 };
 
-export default SearchBox;
+export default CalendarSearchBox;

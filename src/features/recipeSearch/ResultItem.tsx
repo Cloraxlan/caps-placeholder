@@ -1,13 +1,17 @@
 import { stat } from "fs";
 import React, { useState } from "react";
-import Recipe from "../../Interfaces-Classes/Recipe";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { addRecipeDate } from "./calendarSlice";
+import FindRecipe from "../../components/Calendar/CalendarSearch/FindRecipe";
+import { RecipeDate } from "./calendarSlice";
+
 interface Props {
-	result: Recipe;
+	result: Recipe | serialRecipe;
+	onSwitchMonth?: (date: RecipeDate | undefined) => void;
 }
 
 const ResultItem = (props: Props) => {
@@ -18,6 +22,12 @@ const ResultItem = (props: Props) => {
 	let [currentDate, setCurrentDate] = useState("");
 	const dispatch = useAppDispatch();
 
+	let rec: Recipe | serialRecipe = props.result;
+	let showSave = true;
+	if (!(rec instanceof Recipe)) {
+		showSave = false;
+		rec = Recipe.constructFromInterface(rec);
+	}
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
 			case true:
@@ -37,6 +47,7 @@ const ResultItem = (props: Props) => {
 		d.setDate(d.getDate() + 1);
 		d.setHours(0, 0, 0, 0);
 	};
+
 	const submitSave = (event: any) => {
 		event.preventDefault();
 		let d = new Date(currentDate);
@@ -46,7 +57,7 @@ const ResultItem = (props: Props) => {
 		dispatch(
 			addRecipeDate({
 				date: d.toDateString(),
-				recipe: props.result.serialize(),
+				recipe: (props.result as Recipe).serialize(),
 				note: currentNote,
 			}),
 		);
@@ -65,18 +76,16 @@ const ResultItem = (props: Props) => {
 					>
 						X
 					</button>
-					<div className="OverlayName">{props.result.name}</div>
-					<div className="OverlayDescription">{props.result.description}</div>
+					<div className="OverlayName">{rec.name}</div>
+					<div className="OverlayDescription">{rec.description}</div>
 					<div className="OverlayListTitle"> Ingredient List </div>
 					<div className="OverlayIngredientItem">
-						{props.result.ingredients.map((ingredient) => {
-							return <li>{ingredient.fullName()}</li>;
+						{rec.ingredients.map((ingredient) => {
+							return <li key={uuidv4()}>{ingredient.fullName()}</li>;
 						})}
 					</div>
 					<div className="OverlayListTitle"> Instructions </div>
-					<div className="OverlayInstructions">
-						{props.result.listInstrutions()}
-					</div>
+					<div className="OverlayInstructions">{rec.listInstrutions()}</div>
 					<form
 						id="saveRecipeForm"
 						onSubmit={submitSave}
@@ -117,7 +126,7 @@ const ResultItem = (props: Props) => {
 							setSearchOverlayShown(true);
 						}}
 					>
-						{props.result.name}
+						{rec.name}
 					</p>
 				</div>
 				{/* <ul>
@@ -129,7 +138,7 @@ const ResultItem = (props: Props) => {
 										})}
 									</ul>
 								</ul> */}
-				<div className="Description">{props.result.description}</div>
+				<div className="Description">{rec.description}</div>
 				<p
 					className="DropDownButton "
 					onClick={() => {
@@ -143,7 +152,7 @@ const ResultItem = (props: Props) => {
 				</p>
 				{showIngredients && (
 					<ol>
-						{props.result.ingredients.map((ingredient) => {
+						{rec.ingredients.map((ingredient) => {
 							return (
 								<li
 									key={uuidv4()}
@@ -168,9 +177,8 @@ const ResultItem = (props: Props) => {
 					{arrowDirection(showInstructions)}
 				</p>
 				{showInstructions && (
-					<p className="DropDownText">{props.result.listInstrutions()}</p>
+					<p className="DropDownText">{rec.listInstrutions()}</p>
 				)}
-				<SaveRecipe recipe={props.result}></SaveRecipe>
 			</div>
 		</div>
 	);

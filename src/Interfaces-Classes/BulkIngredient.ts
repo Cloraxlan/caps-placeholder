@@ -13,8 +13,8 @@ export default class BulkIngredient extends Ingredient {
 	}
 	//Pluralizes units
 	public pluralizedName() {
-		console.log("oi");
-		console.log(typeof this.unit);
+		// console.log("oi");
+		// console.log(typeof this.unit);
 		if (this.magnitude != 1) {
 			return this.unit.fullName + "s" + " " + this.ingredientName;
 		} else {

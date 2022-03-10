@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { convertToDays, Day } from "./../../Interfaces-Classes/Day";
 import Card from "../UI/Card/Card";
 import CalendarDate from "./CalendarDay";
@@ -13,8 +13,9 @@ import {
 	selectRecipeDates,
 } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
-// import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
-import React from "react";
+
+import CalendarSearchBox from "./CalendarSearch/CalendarSearchBox";
+import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 
 interface Props {}
 
@@ -30,44 +31,19 @@ const testLeapYear = (year: number) => {
 	return 28;
 };
 
-const MONTHS = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December",
-];
+const MONTHS = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
 
-const MONTHSIZE = [
-	31,
-	testLeapYear(year),
-	31,
-	30,
-	31,
-	30,
-	31,
-	31,
-	30,
-	31,
-	30,
-	31,
-];
+const MONTHSIZE = [ 31, testLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, ];
 
 let MONTH = new Date().getMonth();
 
 const daysPre: Day[] = [];
 
-const Calendar = (props: Props) => {
+const Calendar = () => {
 	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
-	const [results, setResults] = useState<Recipe[]>([]);
+	// const [results, setResults] = useState<RecipeDate[]>([]);
+
 	let recipeDateList = useAppSelector(selectRecipeDates);
 	console.log(JSON.stringify(recipeDateList));
 	//convert to recipeDates into days
@@ -79,8 +55,35 @@ const Calendar = (props: Props) => {
 		return;
 	}, [recipeDateList]);
 
+	useEffect(() => {
+		let keyPressEvent: any = window.addEventListener(
+			"keydown",
+			(event: any) => {
+				let monthChanger: number = 0;
+				if (event.key === "ArrowLeft") {
+					monthChanger = -1;
+				} else if (event.key === "ArrowRight") {
+					monthChanger = 1;
+				}
+				monthChangeHandler(monthChanger);
+			},
+		);
+		return () => {
+			window.removeEventListener("keydown", keyPressEvent);
+		};
+	}, []);
+
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
+	};
+
+	const monthChangeHandler = (iterand: number) => {
+		setMonth((prevMonth) => {
+			let newMonth: number = Number(prevMonth) + iterand;
+			if (newMonth < 0) newMonth = 11;
+			if (newMonth > 11) newMonth = 0;
+			return newMonth;
+		});
 	};
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
@@ -145,7 +148,7 @@ const Calendar = (props: Props) => {
 		for (let i: number = 0; i < MONTHSIZE[month]; i++) {
 			// sets dayObj equal to the Day associated with 'i' day of MONTH. (if 'i' is 0, searches for a Day representing the first day of the MONTH)
 			let dayObj: Day | undefined = checkDay(i);
-			console.log(dayObj);
+			// console.log(dayObj);
 			// if no Day is found, set testDate to the Date associated with this value of 'i', and generate a Day object with no events using testDate
 			if (dayObj === undefined) {
 				testDate.setDate(i + 1);
@@ -167,56 +170,49 @@ const Calendar = (props: Props) => {
 
 		return weeks;
 	};
-	return (
-		<React.Fragment>
-			<Card className="card">
-				<Card className="drop">
-					<MonthsFilter onFilterMonth={filterMonthHandler} />
-				</Card>
-				{/* <MonthChangeButtons onMonthChange={monthChangeHandler} /> */}
-				{/* <div className="monthChangeButtons">
-					<MonthChangeButtons onMonthChange={monthChangeHandler} />
-				</div> */}
-				<table>
-					<caption>{MONTHS[month]}</caption>
-					<colgroup>
-						<col className="weekend" />
-						<col className="weekday" span={5} />
-						<col className="weekend" />
-					</colgroup>
-					<thead>
-						<tr id="days">
-							<th>Sun</th>
-							<th>Mon</th>
-							<th>Tue</th>
-							<th>Wed</th>
-							<th>Thu</th>
-							<th>Fri</th>
-							<th>Sat</th>
-						</tr>
-					</thead>
-					<tbody>
-						{generateRows(7).map((row, i) => {
-							//console.log(row);
-							return (
-								<tr key={uuidv4()}>
-									{row.map((day, j) => {
-										//console.log(day);
 
-										return (
-											<CalendarDate
-												key={uuidv4()}
-												day={day as Day}
-											></CalendarDate>
-										);
-									})}
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
-			</Card>
-		</React.Fragment>
+	return (
+		<Card className="card">
+			<MonthChangeButtons onMonthChange={monthChangeHandler} />
+			<table>
+				<caption>{<MonthsFilter onFilterMonth={filterMonthHandler} month={month}/>}</caption>
+				<colgroup>
+					<col className="weekend" />
+					<col className="weekday" span={5} />
+					<col className="weekend" />
+				</colgroup>
+				<thead>
+					<tr id="days">
+						<th>Sun</th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wed</th>
+						<th>Thu</th>
+						<th>Fri</th>
+						<th>Sat</th>
+					</tr>
+				</thead>
+				<tbody>
+					{generateRows(7).map((row, i) => {
+						//console.log(row);
+						return (
+							<tr key={uuidv4()}>
+								{row.map((day, j) => {
+									//console.log(day);
+
+									return (
+										<CalendarDate
+											key={uuidv4()}
+											day={day as Day}
+										></CalendarDate>
+									);
+								})}
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
+		</Card>
 	);
 };
 
