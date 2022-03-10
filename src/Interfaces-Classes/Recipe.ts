@@ -83,7 +83,7 @@ export default class Recipe {
 	public set ingredients(ingredients: Ingredient[]) {
 		this._ingredients = ingredients;
 		let serializedIngredients: serializedIngredient[] = [];
-		ingredients.map((ingredient) => {
+		ingredients.forEach((ingredient) => {
 			serializedIngredients.push(ingredient.serialize());
 		});
 		this._recipe.ingredients = serializedIngredients;
@@ -129,7 +129,7 @@ export default class Recipe {
 	}
 	public listInstrutions(): string {
 		let instructions: string = "";
-		this.instructions.map((instruction, i) => {
+		this.instructions.forEach((instruction, i) => {
 			instructions += i + ": " + instruction + "\n";
 		});
 		return instructions;
@@ -138,7 +138,7 @@ export default class Recipe {
 	public static constructFromInterface(recipe: serialRecipe): Recipe {
 		//Creates ingredients from serialized ingredients
 		let ingredients: Ingredient[] = [];
-		recipe.ingredients.map((ingredient) => {
+		recipe.ingredients.forEach((ingredient) => {
 			ingredients.push(Ingredient.constructFromInterface(ingredient));
 		});
 		return new Recipe(

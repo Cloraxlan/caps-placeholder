@@ -1,11 +1,9 @@
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
-import BulkIngredient from "./BulkIngredient";
 import { ALL_CUSTOMARY_UNITS } from "./CustomarySystem";
 import { ALL_METRIC_UNITS } from "./MetricSystem";
 import { constructIngredientFromString } from "./Recipe";
 import { identifyUnitsByString } from "./Unit";
-import UnitIngredient from "./UnitIngredient";
 
 export interface serializedIngredient {
 	magnitude: number;
@@ -15,7 +13,7 @@ export interface serializedIngredient {
 }
 
 //TODO ADD METRIC
-export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS)
+export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS);
 export default abstract class Ingredient {
 	private _ingredient: serializedIngredient;
 	protected constructor(
@@ -54,7 +52,7 @@ export default abstract class Ingredient {
 			cleanString = cleanString.replace(unit.fullName, "");
 
 			//Removes Abreviations
-			unit.abbreviations.map((abv) => {
+			unit.abbreviations.forEach((abv) => {
 				cleanString = cleanString.replace(abv + "s", "");
 				cleanString = cleanString.replace(abv, "");
 			});
@@ -64,7 +62,7 @@ export default abstract class Ingredient {
 		//Removes double spaces
 		cleanString = cleanString.replace("  ", "");
 		//Removes space in front of name
-		if (cleanString.charAt(0) == " ") {
+		if (cleanString.charAt(0) === " ") {
 			cleanString = cleanString.slice(1);
 		}
 		return cleanString;
@@ -89,7 +87,7 @@ export default abstract class Ingredient {
 	}
 	//Adds an s if magnitude not equal to 1
 	public pluralizedName() {
-		if (this.magnitude != 1) {
+		if (this.magnitude !== 1) {
 			return this.ingredientName + "s";
 		} else {
 			return this.ingredientName;
@@ -117,7 +115,9 @@ export default abstract class Ingredient {
 		this._ingredient.fullName = this.fullName();
 		return this._ingredient;
 	}
-	public static constructFromInterface(ingredient: serializedIngredient): Ingredient{
-		return constructIngredientFromString(ingredient.fullName)
+	public static constructFromInterface(
+		ingredient: serializedIngredient,
+	): Ingredient {
+		return constructIngredientFromString(ingredient.fullName);
 	}
 }

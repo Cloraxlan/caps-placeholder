@@ -23,15 +23,12 @@ const MONTHS = [
 ];
 
 const CalendarDay = (props: Props) => {
-	const monthNumToName: (num: number) => string = (num: number) => {
-		return MONTHS[num - 1];
-	};
 	//Value is the name, or eventually id for the event
 	const [overlayShown, setOverlayShown] = useState("");
 	let renderOverlay = () => {
 		for (let i = 0; i < props.day.events.length; i++) {
 			let event = props.day.events[i];
-			if (event.recipe.name == overlayShown) {
+			if (event.recipe.name === overlayShown) {
 				return (
 					<div className="recipeOverlayText">
 						<h1>{event.recipe.name}</h1>
@@ -56,7 +53,8 @@ const CalendarDay = (props: Props) => {
 					<div className="notes">
 						{props.day.events.map((event) => {
 							return (
-								<div key={uuidv4()}
+								<div
+									key={uuidv4()}
 									onClick={() => {
 										//Or whatever should be the id
 										setOverlayShown(event.recipe.name);

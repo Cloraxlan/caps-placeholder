@@ -15,14 +15,14 @@ export default class BulkIngredient extends Ingredient {
 	public pluralizedName() {
 		// console.log("oi");
 		// console.log(typeof this.unit);
-		if (this.magnitude != 1) {
-			return this.unit.fullName + "s" + " " + this.ingredientName;
+		if (this.magnitude !== 1) {
+			return `${this.unit.fullName}s ${this.ingredientName}`;
 		} else {
-			return this.unit.fullName + " " + this.ingredientName;
+			return `${this.unit.fullName} ${this.ingredientName}`;
 		}
 	}
 	public fullName(): string {
-		return this.magnitude + " " + this.pluralizedName();
+		return `${this.magnitude} ${this.pluralizedName()}`;
 	}
 	//Converts into diffrent units and changes the unit of the class
 	public convertUnits(unitToConvertInto: Unit) {

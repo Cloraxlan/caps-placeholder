@@ -1,5 +1,5 @@
 import { RecipeDate } from "../features/recipeSearch/calendarSlice";
-import Recipe, { serialRecipe } from "./Recipe";
+import { serialRecipe } from "./Recipe";
 
 export interface Day {
 	date?: Date;
@@ -10,7 +10,7 @@ export interface Day {
 //Converts a list of recipeDates into Days
 export const convertToDays = (recipeDates: Array<RecipeDate>) => {
 	let days: Array<Day> = [];
-	recipeDates.map((recipeDate) => {
+	recipeDates.forEach((recipeDate) => {
 		let date = recipeDate.date;
 		let found = false;
 		for (let i = 0; i < days.length; i++) {

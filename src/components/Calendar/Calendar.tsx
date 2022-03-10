@@ -6,18 +6,11 @@ import MonthsFilter from "./MonthsFilter/MonthsFilter";
 import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
-import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
-import {
-	addRecipeDate,
-	RecipeDate,
-	selectRecipeDates,
-} from "../../features/recipeSearch/calendarSlice";
+import { serialRecipe } from "../../Interfaces-Classes/Recipe";
+import { selectRecipeDates } from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
 
-import CalendarSearchBox from "./CalendarSearch/CalendarSearchBox";
 import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
-
-interface Props {}
 
 const year = new Date().getFullYear();
 
@@ -31,16 +24,24 @@ const testLeapYear = (year: number) => {
 	return 28;
 };
 
-const MONTHS = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
-
-const MONTHSIZE = [ 31, testLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31, ];
+const MONTHSIZE = [
+	31,
+	testLeapYear(year),
+	31,
+	30,
+	31,
+	30,
+	31,
+	31,
+	30,
+	31,
+	30,
+	31,
+];
 
 let MONTH = new Date().getMonth();
 
-const daysPre: Day[] = [];
-
 const Calendar = () => {
-	//eslint-disable-next-line
 	const [month, setMonth] = useState(MONTH);
 	// const [results, setResults] = useState<RecipeDate[]>([]);
 
@@ -51,7 +52,6 @@ const Calendar = () => {
 	// not sure how to use this hook as a fix to the rendering bug
 	useEffect(() => {
 		days = convertToDays(recipeDateList);
-		//console.log(generateRows(7));
 		return;
 	}, [recipeDateList]);
 
@@ -89,18 +89,12 @@ const Calendar = () => {
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
 		weekLength: number = 7,
 	) => {
-		// console.log(mth + ' ' + month)
-
 		// recieves a number representing the day of the month, and searches through the state
 		// for a day object on that day of MONTH. Returns the found day object
 		const checkDay = (day: number) => {
-			// console.log(days)
-			// console.log(day+1 + ' ' + mth)
-
-			/**/
 			return days.find(
 				(d) =>
-					d.date && d.date.getDate() - 1 === day && d.date.getMonth() == month,
+					d.date && d.date.getDate() - 1 === day && d.date.getMonth() === month,
 			);
 		};
 
@@ -175,7 +169,9 @@ const Calendar = () => {
 		<Card className="card">
 			<MonthChangeButtons onMonthChange={monthChangeHandler} />
 			<table>
-				<caption>{<MonthsFilter onFilterMonth={filterMonthHandler} month={month}/>}</caption>
+				<caption>
+					{<MonthsFilter onFilterMonth={filterMonthHandler} month={month} />}
+				</caption>
 				<colgroup>
 					<col className="weekend" />
 					<col className="weekday" span={5} />

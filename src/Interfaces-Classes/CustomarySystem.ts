@@ -1,7 +1,4 @@
 import Unit from "./Unit";
-import UnitSystem, {
-	KNOW_SYSTEM_MASTER_CONVERSION_FACTORS,
-} from "./UnitSystem";
 //!!!!
 //VOLUME MASTER CONVERTION FACTOR FOR CUSTOMARY IS THE GALLON
 //!!!!
@@ -13,12 +10,12 @@ export const MASTER_VOLUME_CUSTOMARY: Unit = {
 	convertionFactor: 1,
 };
 export const MASTER_WEIGHT_CUSTOMARY: Unit = {
-		fullName: "pound",
-		abbreviations: ["lb", "lbs", "lb.", "lbs."],
-		system: "CUSTOMARY",
-		measure: "WEIGHT",
-		convertionFactor: 1,
-	}
+	fullName: "pound",
+	abbreviations: ["lb", "lbs", "lb.", "lbs."],
+	system: "CUSTOMARY",
+	measure: "WEIGHT",
+	convertionFactor: 1,
+};
 const VOLUME_UNITS: Unit[] = [
 	{
 		fullName: "cup",
@@ -68,7 +65,7 @@ const VOLUME_UNITS: Unit[] = [
 		system: "CUSTOMARY",
 		measure: "VOLUME",
 		convertionFactor: 128,
-	}
+	},
 ];
 const WEIGHT_UNITS: Unit[] = [
 	{
@@ -84,10 +81,9 @@ const WEIGHT_UNITS: Unit[] = [
 		system: "CUSTOMARY",
 		measure: "WEIGHT",
 		convertionFactor: 16,
-	}
-]
+	},
+];
 export const ALL_CUSTOMARY_UNITS = VOLUME_UNITS.concat(WEIGHT_UNITS);
-
 
 /*export default class CustomarySystem extends UnitSystem {
 	constructor(unit: Unit) {

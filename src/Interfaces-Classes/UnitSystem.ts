@@ -1,4 +1,7 @@
-import { MASTER_VOLUME_CUSTOMARY, MASTER_WEIGHT_CUSTOMARY } from "./CustomarySystem";
+import {
+	MASTER_VOLUME_CUSTOMARY,
+	MASTER_WEIGHT_CUSTOMARY,
+} from "./CustomarySystem";
 import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "./MetricSystem";
 import Unit from "./Unit";
 export interface SystemConversion {
@@ -32,7 +35,6 @@ export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_VOLUME: SystemConversion[] =
 	];
 export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT: SystemConversion[] =
 	[
-		
 		{
 			baseSystem: "CUSTOMARY",
 			finalSystem: "METRIC",
@@ -50,7 +52,7 @@ export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT: SystemConversion[] =
 			finalMaster: MASTER_WEIGHT_CUSTOMARY,
 		},
 	];
-	
+
 export const KNOW_SYSTEM_MASTER_CONVERSION_FACTORS = {
 	VOLUME: KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_VOLUME,
 	WEIGHT: KNOW_SYSTEM_MASTER_CONVERSION_FACTORS_WEIGHT,
@@ -67,12 +69,14 @@ export default class UnitSystem {
 		magnitude: number,
 	): number {
 		//Check if same unit system is used
-		if (finalUnit.system != this._unit.system) {
+		if (finalUnit.system !== this._unit.system) {
 			//NOTE FOR TOMMOROW UNIT IS NOT BEING CONVERTED IN RIGHT ORDER!!!
 			console.log(finalUnit.system);
+			//eslint-disable-next-line
 			throw "Unit System Mismatch";
 		}
-		if (finalUnit.measure != this._unit.measure) {
+		if (finalUnit.measure !== this._unit.measure) {
+			//eslint-disable-next-line
 			throw (
 				"Unit measure cannot be converted. Attempted to convert " +
 				finalUnit.measure +
@@ -100,20 +104,20 @@ export default class UnitSystem {
 		let conversion: SystemConversion | undefined = undefined;
 		switch (this._unit.measure) {
 			case "VOLUME":
-				KNOW_SYSTEM_MASTER_CONVERSION_FACTORS.VOLUME.map((con) => {
+				KNOW_SYSTEM_MASTER_CONVERSION_FACTORS.VOLUME.forEach((con) => {
 					if (
-						con.baseSystem == this._unit.system &&
-						con.finalSystem == systemToConvertInto
+						con.baseSystem === this._unit.system &&
+						con.finalSystem === systemToConvertInto
 					) {
 						conversion = con;
 					}
 				});
 				break;
 			case "WEIGHT":
-				KNOW_SYSTEM_MASTER_CONVERSION_FACTORS.WEIGHT.map((con) => {
+				KNOW_SYSTEM_MASTER_CONVERSION_FACTORS.WEIGHT.forEach((con) => {
 					if (
-						con.baseSystem == this._unit.system &&
-						con.finalSystem == systemToConvertInto
+						con.baseSystem === this._unit.system &&
+						con.finalSystem === systemToConvertInto
 					) {
 						conversion = con;
 					}
@@ -121,6 +125,7 @@ export default class UnitSystem {
 				break;
 		}
 		if (!conversion) {
+			//eslint-disable-next-line
 			throw "Cannot convert, system conversion unknown";
 		} else {
 			// console.log(this._unit);
@@ -138,7 +143,7 @@ export default class UnitSystem {
 	}
 	//Converts between systems and units
 	public convert(magnitude: number, finalUnit: Unit) {
-		if (this._unit.system != finalUnit.system) {
+		if (this._unit.system !== finalUnit.system) {
 			magnitude = this.convertIntoSystem(
 				finalUnit.system as KNOWN_SYSTEMS,
 				magnitude,
