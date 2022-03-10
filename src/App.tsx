@@ -4,10 +4,7 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import LoginPage from "./components/LoginPage/LoginPage";
 import Search from "./features/recipeSearch/Search";
-import Calendar from "./components/Calendar/Calendar";
 import CalendarPage from "./components/Layout/CalendarPage";
-import Ingredient from "./Interfaces-Classes/Ingredient";
-import UnitSystem from "./Interfaces-Classes/UnitSystem";
 import Debug from "./Debug";
 import Landing from "./Landing/Landing";
 

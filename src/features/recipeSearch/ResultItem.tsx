@@ -179,6 +179,7 @@ const ResultItem = (props: Props) => {
 				{showInstructions && (
 					<p className="DropDownText">{rec.listInstrutions()}</p>
 				)}
+				<SaveRecipe recipe={props.result as Recipe}></SaveRecipe>
 			</div>
 		</div>
 	);

@@ -1,4 +1,3 @@
-import React from "react";
 import BulkIngredient from "./Interfaces-Classes/BulkIngredient";
 import Ingredient from "./Interfaces-Classes/Ingredient";
 import { constructIngredientFromString } from "./Interfaces-Classes/Recipe";
@@ -20,7 +19,7 @@ const Debug = (props: Props) => {
 		"fifty seven vanilla bean pods",
 	);
 	let ingredients: Ingredient[] = [x, y, z];
-	ingredients.map((i) => {
+	ingredients.forEach((i) => {
 		if (i.isBulk()) {
 			let c: BulkIngredient = i as BulkIngredient;
 			c.convertUnits(LITER);
