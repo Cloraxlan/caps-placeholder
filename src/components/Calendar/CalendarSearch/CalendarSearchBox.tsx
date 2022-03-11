@@ -1,31 +1,26 @@
 import React, { useRef } from "react";
-import Recipe, {
-	constructIngredientFromString,
-} from "../../../Interfaces-Classes/Recipe";
+
 import SearchQuery, { Query } from "./CalendarQuery";
-// import "./SearchBox.css";
-import Ingredient from "../../../Interfaces-Classes/Ingredient";
-// import { Day } from "../../../Interfaces-Classes/Day";
 import { RecipeDate } from "../../../features/recipeSearch/calendarSlice";
 
 interface Props {
-	setResults: React.Dispatch<React.SetStateAction<RecipeDate[]>>,
+	setResults: React.Dispatch<React.SetStateAction<RecipeDate[]>>;
 	recipeList: Array<RecipeDate>;
 }
-const recipes = [
-	new Recipe(
-		"Apple Pie",
-		"It is very good takes like an hour to make",
-		[
-			constructIngredientFromString("5 cups of apples"),
-			constructIngredientFromString("1 pie crust"),
+// const recipes = [
+// 	new Recipe(
+// 		"Apple Pie",
+// 		"It is very good takes like an hour to make",
+// 		[
+// 			constructIngredientFromString("5 cups of apples"),
+// 			constructIngredientFromString("1 pie crust"),
 
-			constructIngredientFromString("3 teaspoons of cinnamon"),
-		],
-		["combine ingredients", "bake"],
-		{},
-	),
-];
+// 			constructIngredientFromString("3 teaspoons of cinnamon"),
+// 		],
+// 		["combine ingredients", "bake"],
+// 		{},
+// 	),
+// ];
 const CalendarSearchBox = (props: Props) => {
 	const searchBox = useRef(null);
 	//Gets value in input and clears it

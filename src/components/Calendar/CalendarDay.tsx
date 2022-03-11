@@ -7,20 +7,6 @@ import "./Calendar.css";
 interface Props {
 	day: Day;
 }
-const MONTHS = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December",
-];
 
 const CalendarDay = (props: Props) => {
 	//Value is the name, or eventually id for the event

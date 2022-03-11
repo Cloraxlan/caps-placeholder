@@ -1,12 +1,10 @@
-import { stat } from "fs";
 import React, { useState } from "react";
 import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
 import { v4 as uuidv4 } from "uuid";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import { addRecipeDate } from "./calendarSlice";
-import FindRecipe from "../../components/Calendar/CalendarSearch/FindRecipe";
 import { RecipeDate } from "./calendarSlice";
 
 interface Props {
@@ -23,9 +21,9 @@ const ResultItem = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	let rec: Recipe | serialRecipe = props.result;
-	let showSave = true;
+	// let showSave = true;
 	if (!(rec instanceof Recipe)) {
-		showSave = false;
+		// showSave = false;
 		rec = Recipe.constructFromInterface(rec);
 	}
 	const arrowDirection = (state: boolean) => {
@@ -96,7 +94,6 @@ const ResultItem = (props: Props) => {
 							<input
 								onChange={changeNote}
 								className="SaveRecipeNoteResult"
-								role="textbox"
 								placeholder="Add a note"
 							></input>
 						</div>

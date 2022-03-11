@@ -1,23 +1,14 @@
-import { current } from "@reduxjs/toolkit";
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import { isIdentifier } from "typescript";
 import Recipe, {
 	constructIngredientFromString,
 	recipeMetadata,
 } from "../../Interfaces-Classes/Recipe";
-import SaveRecipe from "./SaveRecipe";
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 import UnitIngredient from "../../Interfaces-Classes/UnitIngredient";
-import calendarSlice, {
-	addRecipeDate,
-	CalendarState,
-	RecipeDate,
-	selectRecipeDates,
-} from "./calendarSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { addRecipeDate } from "./calendarSlice";
+import { useAppDispatch } from "../../app/hooks";
 import "./AddCustomRecipe.css";
 
 // interface Props {
@@ -28,7 +19,6 @@ import "./AddCustomRecipe.css";
 const AddCustomRecipe = () => {
 	//Defines all the different states used to store the input fields, as well as to save the recipe in the future
 	const [addRecipeOverlayShown, setAddRecipeOverlayShown] = useState(false);
-	const [saveRecipeOverlayShown, setSaveRecipeOverlayShown] = useState(false);
 	let [currentName, setCurrentName] = useState<string>("");
 	let [currentDescription, setCurrentDescription] = useState<string>("");
 	let [currentSingleIngredient, setCurrentSingleIngredient] =
@@ -84,7 +74,7 @@ const AddCustomRecipe = () => {
 	//If the enter key is pressed when there is no ingreient typed in the ingredient input, an alert pops up
 	const isEnter = (event: any) => {
 		if (event.key === "Enter") {
-			if (event.target.value != "") {
+			if (event.target.value !== "") {
 				changeIngredients(event.target.value);
 				setCurrentSingleIngredient("");
 			} else {
@@ -215,7 +205,6 @@ const AddCustomRecipe = () => {
 								<input
 									className="RemoveMargin"
 									onChange={changeNote}
-									role="textbox"
 									contentEditable="true"
 									placeholder="Add a note"
 								></input>

@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { useAppDispatch } from "../../app/hooks";
 import Recipe from "../../Interfaces-Classes/Recipe";
 import "./SaveRecipe.css";
 import {
 	addRecipeDate,
 	// CalendarState,
-	RecipeDate,
-	selectRecipeDates,
 } from "./calendarSlice";
 import "./AddCustomRecipe.tsx";
 
@@ -134,10 +132,10 @@ const SaveRecipe = (props: Props, ref: any) => {
 			)}
 			{/*When "Save Recipe" in the recipe overlay is clicked, show the recipe save*/}
 			{props.buttonTyping &&
-			(props.buttonTyping == "button" ||
-				props.buttonTyping == "submit" ||
-				props.buttonTyping == "reset" ||
-				props.buttonTyping == undefined) ? (
+			(props.buttonTyping === "button" ||
+				props.buttonTyping === "submit" ||
+				props.buttonTyping === "reset" ||
+				props.buttonTyping === undefined) ? (
 				<button
 					type={props.buttonTyping}
 					onClick={save}

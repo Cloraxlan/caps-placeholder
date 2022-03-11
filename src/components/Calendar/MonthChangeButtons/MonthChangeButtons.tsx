@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import "./MonthChangeButtons.css";
 
 const MonthChangeButtons = (props: any) => {

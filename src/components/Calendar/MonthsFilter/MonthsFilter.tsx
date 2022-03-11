@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./MonthsFilter.css";
 
 const MonthsFilter = (props: {
