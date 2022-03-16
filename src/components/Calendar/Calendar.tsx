@@ -84,45 +84,51 @@ const Calendar = (props: Props) => {
 	}, [recipeDateList]);
 	//Fetches from database saved recipes
 	useEffect(() => {
-		fetch("http://rozpadek.me/account/getSavedRecipes", {
-			method: "POST",
+		console.log("oitoken");
+		console.log(token);
+		if (token) {
+			fetch("http://rozpadek.me/account/getSavedRecipes", {
+				method: "POST",
 
-			body: new URLSearchParams({
-				token: token,
-			}),
-		}).then((res) => {
-			res.json().then((json) => {
-				let recipeDateStrings: string[] = json.responce;
-				let recipeDates: RecipeDate[] = [];
-				recipeDateStrings.map((s) => {
-					let dupe = false;
-					let newRDate: RecipeDate = JSON.parse(s);
-					recipeDateList.map((recipeDate) => {
-						if (
-							recipeDate.date == newRDate.date &&
-							recipeDate.recipe == newRDate.recipe
-						) {
-							dupe = true;
+				body: new URLSearchParams({
+					token: token,
+				}),
+			}).then((res) => {
+				res.json().then((json) => {
+					let recipeDateStrings: string[] = json.responce;
+					console.log(json);
+					console.log(token);
+					let recipeDates: RecipeDate[] = [];
+					recipeDateStrings.map((s) => {
+						let dupe = false;
+						let newRDate: RecipeDate = JSON.parse(s);
+						recipeDateList.map((recipeDate) => {
+							if (
+								recipeDate.date == newRDate.date &&
+								recipeDate.recipe == newRDate.recipe
+							) {
+								dupe = true;
+							}
+						});
+						if (!dupe) {
+							recipeDates.push(newRDate);
 						}
 					});
-					if (!dupe) {
-						recipeDates.push(newRDate);
-					}
-				});
-				//Combines and removes duplicates
-				recipeDates.map((recipeDate) => {
-					dispatch(
-						addRecipeDate({
-							date: recipeDate.date,
-							recipe: recipeDate.recipe,
-							note: recipeDate.note,
-						}),
-					);
-					console.log("added");
-					console.log(recipeDate);
+					//Combines and removes duplicates
+					recipeDates.map((recipeDate) => {
+						dispatch(
+							addRecipeDate({
+								date: recipeDate.date,
+								recipe: recipeDate.recipe,
+								note: recipeDate.note,
+							}),
+						);
+						console.log("added");
+						console.log(recipeDate);
+					});
 				});
 			});
-		});
+		}
 		return;
 	}, []);
 

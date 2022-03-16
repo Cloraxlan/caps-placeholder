@@ -9,7 +9,6 @@ export interface SessionState {
 const initialState: SessionState = {
 	loggedIn: false,
 	//FOR TESTING
-	token: "ef4e889b-448a-454b-bcc4-36ec70bb0216",
 };
 export const sessionSlice: Slice = createSlice({
 	name: "session",
