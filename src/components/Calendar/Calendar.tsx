@@ -74,6 +74,26 @@ const Calendar = (props: Props) => {
 	let recipeDateList: RecipeDate[] = useAppSelector(selectRecipeDates);
 	const token: string = useAppSelector(selectToken);
 	console.log(JSON.stringify(recipeDateList));
+	//sort and remove dupes
+	console.log(recipeDateList);
+	recipeDateList = recipeDateList.sort((a, b) => {
+		let dateA = new Date(a.date);
+		let dateB = new Date(b.date);
+		if (dateA.getTime() < dateB.getTime()) {
+			return -1;
+		} else if (dateA.getTime() > dateB.getTime()) {
+			return 1;
+		}
+		return 0;
+	});
+	if (recipeDateList.length > 1) {
+		for (let i = 1; i < recipeDateList.length; i++) {
+			console.log(recipeDateList[i]);
+			if (recipeDateList[i - 1] == recipeDateList[i]) {
+				recipeDateList = recipeDateList.splice(i, 1);
+			}
+		}
+	}
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
 	// not sure how to use this hook as a fix to the rendering bug
