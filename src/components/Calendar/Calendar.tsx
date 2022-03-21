@@ -76,7 +76,8 @@ const Calendar = (props: Props) => {
 	console.log(JSON.stringify(recipeDateList));
 	//sort and remove dupes
 	console.log(recipeDateList);
-	recipeDateList = recipeDateList.sort((a, b) => {
+	let newList = [...recipeDateList];
+	newList = newList.sort((a, b) => {
 		let dateA = new Date(a.date);
 		let dateB = new Date(b.date);
 		if (dateA.getTime() < dateB.getTime()) {
@@ -86,19 +87,27 @@ const Calendar = (props: Props) => {
 		}
 		return 0;
 	});
-	if (recipeDateList.length > 1) {
-		for (let i = 1; i < recipeDateList.length; i++) {
-			console.log(recipeDateList[i]);
-			if (recipeDateList[i - 1] == recipeDateList[i]) {
-				recipeDateList = recipeDateList.splice(i, 1);
+	if (newList.length > 1) {
+		for (let i = 1; i < newList.length; i++) {
+			console.log(
+				newList[i].date == newList[i - 1].date &&
+					newList[i].recipe.name == newList[i - 1].recipe.name,
+			);
+			console.log(newList[i - 1]);
+
+			if (
+				newList[i].date == newList[i - 1].date &&
+				newList[i].recipe.name == newList[i - 1].recipe.name
+			) {
+				newList = newList.splice(i, 1);
 			}
 		}
 	}
 	//convert to recipeDates into days
-	let days = convertToDays(recipeDateList);
+	let days = convertToDays(newList);
 	// not sure how to use this hook as a fix to the rendering bug
 	useEffect(() => {
-		days = convertToDays(recipeDateList);
+		days = convertToDays(newList);
 		//console.log(generateRows(7));
 		return;
 	}, [recipeDateList]);
