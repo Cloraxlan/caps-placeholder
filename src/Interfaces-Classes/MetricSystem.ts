@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Unit from "./Unit";
 export const MASTER_VOLUME_METRIC: Unit = {
 	fullName: "liter",

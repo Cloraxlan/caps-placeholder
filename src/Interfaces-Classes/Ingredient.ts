@@ -1,3 +1,4 @@
+/* eslint-disable */
 import nlp from "compromise";
 import nlpNumbers from "compromise-numbers";
 import { ALL_CUSTOMARY_UNITS } from "./CustomarySystem";

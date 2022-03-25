@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { createSlice, PayloadAction, Slice } from "@reduxjs/toolkit";
 // import { NotEmittedStatement } from "typescript";
 import { RootState } from "../../app/store";

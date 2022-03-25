@@ -1,3 +1,5 @@
+/* eslint-disable */
+import { stat } from "fs";
 import React, { useState } from "react";
 import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";

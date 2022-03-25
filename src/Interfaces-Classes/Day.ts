@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { RecipeDate } from "../features/recipeSearch/calendarSlice";
 import { serialRecipe } from "./Recipe";
 

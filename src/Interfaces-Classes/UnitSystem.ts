@@ -1,7 +1,5 @@
-import {
-	MASTER_VOLUME_CUSTOMARY,
-	MASTER_WEIGHT_CUSTOMARY,
-} from "./CustomarySystem";
+/* eslint-disable */
+import { MASTER_VOLUME_CUSTOMARY, MASTER_WEIGHT_CUSTOMARY } from "./CustomarySystem";
 import { MASTER_VOLUME_METRIC, MASTER_WEIGHT_METRIC } from "./MetricSystem";
 import Unit from "./Unit";
 export interface SystemConversion {

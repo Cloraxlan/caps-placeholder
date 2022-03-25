@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Unit from "./Unit";
 //!!!!
 //VOLUME MASTER CONVERTION FACTOR FOR CUSTOMARY IS THE GALLON
