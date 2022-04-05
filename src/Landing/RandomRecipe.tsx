@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Recipe, {
 	constructIngredientFromString,
+	serialRecipe,
 } from "../Interfaces-Classes/Recipe";
 import RecipeShowcase from "./RecipeShowcase";
-
+let r: Recipe[] = [];
 interface Props {}
-
 const RandomRecipe = (props: Props) => {
+	const [recipes, setRecipes] = useState(r);
+
+	useEffect(() => {
+		let r: Recipe[] = [];
+		let x = fetch("http://rozpadek.me/search/findAll/");
+		x.then((res) => {
+			res.json().then((json) => {
+				json.map((recipe: serialRecipe) => {
+					r.push(Recipe.constructFromInterface(recipe));
+				});
+				setRecipes(r);
+			});
+		});
+	}, []);
+	console.log(Math.floor(Math.random() * recipes.length));
+	console.log(recipes.length);
 	return (
 		<div>
-			<RecipeShowcase
-				recipe={
-					new Recipe(
-						"Apple Pie",
-						"It is very good takes like an hour to make",
-						[
-							constructIngredientFromString("5 cups of apples"),
-							constructIngredientFromString("1 pie crust"),
-
-							constructIngredientFromString("3 teaspoons of cinnamon"),
-						],
-						["combine ingredients", "bake"],
-						{},
-					)
-				}
-			></RecipeShowcase>
+			{recipes.length > 0 && (
+				<RecipeShowcase
+					recipe={recipes[Math.floor(Math.random() * recipes.length)]}
+				></RecipeShowcase>
+			)}
 		</div>
 	);
 };

@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import Recipe, {
 	constructIngredientFromString,
+	serialRecipe,
 } from "../../Interfaces-Classes/Recipe";
 import SearchQuery, { Query } from "./SearchQuery";
 import "./SearchBox.css";
@@ -10,20 +11,15 @@ import "./SearchBox.css";
 interface Props {
 	setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
 }
-const recipes = [
-	new Recipe(
-		"Apple Pie",
-		"It is very good takes like an hour to make",
-		[
-			constructIngredientFromString("5 cups of apples"),
-			constructIngredientFromString("1 pie crust"),
-
-			constructIngredientFromString("3 teaspoons of cinnamon"),
-		],
-		["combine ingredients", "bake"],
-		{},
-	),
-];
+const recipes: Recipe[] = [];
+let x = fetch("http://rozpadek.me/search/findAll/");
+x.then((res) => {
+	res.json().then((json) => {
+		json.map((recipe: serialRecipe) => {
+			recipes.push(Recipe.constructFromInterface(recipe));
+		});
+	});
+});
 const SearchBox = (props: Props) => {
 	const searchBox = useRef(null);
 	//Gets value in input and clears it

@@ -99,17 +99,20 @@ export default class Recipe {
 		this._recipe.metadata = metadata;
 	}
 	//converts the Ingredients into a single set of preffered units
-	public convertIntoSingleUnit(volume: Unit, weight: Unit) {
+	public convertIntoSingleUnit(volume: Unit | null, weight: Unit | null) {
 		for (let i = 0; i < this.ingredients.length; i++) {
 			switch (this.ingredients[i].measure) {
 				case "UNITLESS":
 					break;
 				case "VOLUME":
-					(this.ingredients[i] as BulkIngredient).convertUnits(volume);
+					if (volume) {
+						(this.ingredients[i] as BulkIngredient).convertUnits(volume);
+					}
 					break;
 				case "WEIGHT":
-					(this.ingredients[i] as BulkIngredient).convertUnits(weight);
-
+					if (weight) {
+						(this.ingredients[i] as BulkIngredient).convertUnits(weight);
+					}
 					break;
 			}
 		}
@@ -139,7 +142,7 @@ export default class Recipe {
 	public static constructFromInterface(recipe: serialRecipe): Recipe {
 		//Creates ingredients from serialized ingredients
 		let ingredients: Ingredient[] = [];
-		recipe.ingredients.forEach((ingredient) => {
+		recipe.ingredients.map((ingredient) => {
 			ingredients.push(Ingredient.constructFromInterface(ingredient));
 		});
 		return new Recipe(

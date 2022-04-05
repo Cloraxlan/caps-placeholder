@@ -6,9 +6,11 @@ import { ALL_METRIC_UNITS } from "./MetricSystem";
 import { constructIngredientFromString } from "./Recipe";
 import { identifyUnitsByString } from "./Unit";
 
+export type measure = "UNITLESS" | "WEIGHT" | "VOLUME";
+
 export interface serializedIngredient {
 	magnitude: number;
-	measure: "UNITLESS" | "WEIGHT" | "VOLUME";
+	measure: measure;
 	fullName: string;
 	ingredientName: string;
 }
@@ -17,10 +19,7 @@ export interface serializedIngredient {
 export const allUnits = ALL_CUSTOMARY_UNITS.concat(ALL_METRIC_UNITS);
 export default abstract class Ingredient {
 	private _ingredient: serializedIngredient;
-	protected constructor(
-		ingredientString: string,
-		measure: "UNITLESS" | "WEIGHT" | "VOLUME",
-	) {
+	protected constructor(ingredientString: string, measure: measure) {
 		this._ingredient = {
 			ingredientName: "",
 			fullName: "",
@@ -40,9 +39,14 @@ export default abstract class Ingredient {
 		//gets first number unit and sets that to be the amount of that ingredient
 		this._ingredient.magnitude = doc.numbers().get()[0];
 		//Gets the name of the ingredient
-		this._ingredient.ingredientName = this.cleanName(
-			nlp(ingredientString).nouns().out("array")[0],
-		);
+		let allNouns = "";
+		nlp(ingredientString)
+			.nouns()
+			.out("array")
+			.map((noun) => {
+				allNouns += noun + " ";
+			});
+		this._ingredient.ingredientName = this.cleanName(allNouns);
 	}
 	//Removes of and the units if found
 	private cleanName(cleanString: string): string {
@@ -78,9 +82,16 @@ export default abstract class Ingredient {
 		return this._ingredient.ingredientName;
 	}
 	public set magnitude(magnitude: number) {
-		this._ingredient.magnitude = magnitude;
+		console.log(this._ingredient);
+		console.log(magnitude);
+		try {
+			this._ingredient.magnitude = magnitude;
+			console.log("worked");
+		} catch (error) {
+			console.log(error);
+		}
 	}
-	public set measure(measure: "UNITLESS" | "WEIGHT" | "VOLUME") {
+	public set measure(measure: measure) {
 		this._ingredient.measure = measure;
 	}
 	public set ingredientName(ingredientName: string) {

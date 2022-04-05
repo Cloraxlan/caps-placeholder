@@ -7,9 +7,15 @@ import MonthsFilter from "./MonthsFilter/MonthsFilter";
 import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
-import { serialRecipe } from "../../Interfaces-Classes/Recipe";
-import { selectRecipeDates } from "../../features/recipeSearch/calendarSlice";
-import { useAppSelector } from "../../app/hooks";
+import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
+import {
+	addRecipeDate,
+	RecipeDate,
+	selectRecipeDates,
+} from "../../features/recipeSearch/calendarSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+// import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
+import { selectToken } from "../../sessionSlice";
 
 import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 
@@ -42,19 +48,103 @@ const MONTHSIZE = [
 
 let MONTH = new Date().getMonth();
 
-const Calendar = () => {
-	const [month, setMonth] = useState(MONTH);
-	// const [results, setResults] = useState<RecipeDate[]>([]);
+const daysPre: Day[] = [];
 
-	let recipeDateList = useAppSelector(selectRecipeDates);
+const Calendar = () => {
+	const dispatch = useAppDispatch();
+
+	//eslint-disable-next-line
+	const [month, setMonth] = useState(MONTH);
+	const [results, setResults] = useState<Recipe[]>([]);
+	let recipeDateList: RecipeDate[] = useAppSelector(selectRecipeDates);
+	const token: string = useAppSelector(selectToken);
 	console.log(JSON.stringify(recipeDateList));
+	//sort and remove dupes
+	console.log(recipeDateList);
+	let newList = [...recipeDateList];
+	newList = newList.sort((a, b) => {
+		let dateA = new Date(a.date);
+		let dateB = new Date(b.date);
+		if (dateA.getTime() < dateB.getTime()) {
+			return -1;
+		} else if (dateA.getTime() > dateB.getTime()) {
+			return 1;
+		}
+		return 0;
+	});
+	if (newList.length > 1) {
+		for (let i = 1; i < newList.length; i++) {
+			console.log(
+				newList[i].date == newList[i - 1].date &&
+					newList[i].recipe.name == newList[i - 1].recipe.name,
+			);
+			console.log(newList[i - 1]);
+
+			if (
+				newList[i].date == newList[i - 1].date &&
+				newList[i].recipe.name == newList[i - 1].recipe.name
+			) {
+				newList = newList.splice(i, 1);
+			}
+		}
+	}
 	//convert to recipeDates into days
-	let days = convertToDays(recipeDateList);
+	let days = convertToDays(newList);
 	// not sure how to use this hook as a fix to the rendering bug
 	useEffect(() => {
-		days = convertToDays(recipeDateList);
+		days = convertToDays(newList);
+		//console.log(generateRows(7));
 		return;
 	}, [recipeDateList]);
+	//Fetches from database saved recipes
+	useEffect(() => {
+		console.log("oitoken");
+		console.log(token);
+		if (token) {
+			fetch("http://rozpadek.me/account/getSavedRecipes", {
+				method: "POST",
+
+				body: new URLSearchParams({
+					token: token,
+				}),
+			}).then((res) => {
+				res.json().then((json) => {
+					let recipeDateStrings: string[] = json.responce;
+					console.log(json);
+					console.log(token);
+					let recipeDates: RecipeDate[] = [];
+					recipeDateStrings.map((s) => {
+						let dupe = false;
+						let newRDate: RecipeDate = JSON.parse(s);
+						recipeDateList.map((recipeDate) => {
+							if (
+								recipeDate.date == newRDate.date &&
+								recipeDate.recipe == newRDate.recipe
+							) {
+								dupe = true;
+							}
+						});
+						if (!dupe) {
+							recipeDates.push(newRDate);
+						}
+					});
+					//Combines and removes duplicates
+					recipeDates.map((recipeDate) => {
+						dispatch(
+							addRecipeDate({
+								date: recipeDate.date,
+								recipe: recipeDate.recipe,
+								note: recipeDate.note,
+							}),
+						);
+						console.log("added");
+						console.log(recipeDate);
+					});
+				});
+			});
+		}
+		return;
+	}, []);
 
 	useEffect(() => {
 		let keyPressEvent: any = window.addEventListener(

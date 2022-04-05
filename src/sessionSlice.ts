@@ -24,6 +24,6 @@ export const sessionSlice: Slice = createSlice({
 });
 
 export const { logIn } = sessionSlice.actions;
-export const selectToken = (state: SessionState) => state.token;
+export const selectToken = (state: RootState) => state.session.token;
 
 export default sessionSlice.reducer;

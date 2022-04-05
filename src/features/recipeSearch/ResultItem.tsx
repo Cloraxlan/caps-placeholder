@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
+import {
+	measureSetting,
+	selectDefaultVolume,
+	selectDefaultWeight,
+} from "../../prefrencesSlice";
+import { useAppSelector } from "../../app/hooks";
+import Unit from "../../Interfaces-Classes/Unit";
 import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch } from "../../app/hooks";
 import { addRecipeDate } from "./calendarSlice";
@@ -18,9 +25,19 @@ const ResultItem = (props: Props) => {
 	const [showIngredients, setShowIngredients] = useState(false);
 	const [showInstructions, setshowInstructions] = useState(false);
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
-	let [currentNote, setCurrentNote] = useState();
-	let [currentDate, setCurrentDate] = useState("");
-	const dispatch = useAppDispatch();
+	let defaultWeight: measureSetting = useAppSelector(selectDefaultWeight);
+	let defaultVolume: measureSetting = useAppSelector(selectDefaultVolume);
+
+	if (defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV") {
+		(props.result as Recipe).convertIntoSingleUnit(defaultVolume as Unit, null);
+	} else if (defaultWeight != "DEFAULTW" && defaultVolume == "DEFAULTV") {
+		(props.result as Recipe).convertIntoSingleUnit(null, defaultWeight as Unit);
+	} else if (defaultWeight != "DEFAULTW" && defaultVolume != "DEFAULTV") {
+		(props.result as Recipe).convertIntoSingleUnit(
+			defaultVolume as Unit,
+			defaultWeight as Unit,
+		);
+	}
 
 	let rec: Recipe | serialRecipe = props.result;
 	// let showSave = true;
