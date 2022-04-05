@@ -1,28 +1,28 @@
 .months-filter {
-    color: black;
-    padding: 0 3.2rem;
+	color: black;
+	padding: 0 0rem;
 }
-  
+
 .months-filter__control {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem 0;
-    z-index: 3;
-    position: sticky;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
+	margin: 1rem 0;
+	z-index: 3;
+	position: sticky;
 }
 
 .months-filter label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
 }
 
 .months-filter select {
-    text-align: center;
-    font: inherit;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-    border-radius: 6px;
-    background-color: #8fc0a9ff;
+	text-align: center;
+	font: inherit;
+	padding: 0.5rem 1rem;
+	font-weight: bold;
+	border-radius: 6px;
+	background-color: #8fc0a9ff;
 }

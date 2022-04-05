@@ -12,41 +12,44 @@ import { useAppSelector } from "../../app/hooks";
 
 import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
 
-const year = new Date().getFullYear();
-
-const testLeapYear = (year: number) => {
-	if (year % 4 === 0) {
-		if (year % 100 === 0 && year % 400 !== 0) {
-			return 28;
-		}
-		return 29;
-	}
-	return 28;
-};
-
-const MONTHSIZE = [
-	31,
-	testLeapYear(year),
-	31,
-	30,
-	31,
-	30,
-	31,
-	31,
-	30,
-	31,
-	30,
-	31,
-];
+const YEAR = new Date().getFullYear();
 
 let MONTH = new Date().getMonth();
 
 const Calendar = () => {
 	const [month, setMonth] = useState(MONTH);
+	console.log("JACKSON", month);
+	const [year, setYear] = useState(YEAR);
+	console.log(year);
+	console.log(month);
 	// const [results, setResults] = useState<RecipeDate[]>([]);
+	const testLeapYear = (year: number) => {
+		if (year % 4 === 0) {
+			if (year % 100 === 0 && year % 400 !== 0) {
+				return 28;
+			}
+			return 29;
+		}
+		return 28;
+	};
+
+	const MONTHSIZE = [
+		31,
+		testLeapYear(year),
+		31,
+		30,
+		31,
+		30,
+		31,
+		31,
+		30,
+		31,
+		30,
+		31,
+	];
 
 	let recipeDateList = useAppSelector(selectRecipeDates);
-	console.log(JSON.stringify(recipeDateList));
+	// console.log(JSON.stringify(recipeDateList));
 	//convert to recipeDates into days
 	let days = convertToDays(recipeDateList);
 	// not sure how to use this hook as a fix to the rendering bug
@@ -55,35 +58,55 @@ const Calendar = () => {
 		return;
 	}, [recipeDateList]);
 
-	useEffect(() => {
-		let keyPressEvent: any = window.addEventListener(
-			"keydown",
-			(event: any) => {
-				let monthChanger: number = 0;
-				if (event.key === "ArrowLeft") {
-					monthChanger = -1;
-				} else if (event.key === "ArrowRight") {
-					monthChanger = 1;
-				}
-				monthChangeHandler(monthChanger);
-			},
-		);
-		return () => {
-			window.removeEventListener("keydown", keyPressEvent);
-		};
-	}, []);
+	// useEffect(() => {
+	// 	let keyPressEvent: any = window.addEventListener(
+	// 		"keydown",
+	// 		(event: any) => {
+	// 			let monthChanger: number = 0;
+	// 			if (event.key === "ArrowLeft") {
+	// 				monthChanger = -1;
+	// 			} else if (event.key === "ArrowRight") {
+	// 				monthChanger = 1;
+	// 			}
+	// 			monthChangeHandler(monthChanger);
+	// 		},
+	// 	);
+	// 	return () => {
+	// 		window.removeEventListener("keydown", keyPressEvent);
+	// 	};
+	// }, []);
 
 	const filterMonthHandler = (selectedMonth: number) => {
 		setMonth(selectedMonth);
 	};
 
 	const monthChangeHandler = (iterand: number) => {
+		let newMonthCheck = month + iterand;
+		console.log(month + " month");
+		console.log(iterand + " iterand");
 		setMonth((prevMonth) => {
 			let newMonth: number = Number(prevMonth) + iterand;
-			if (newMonth < 0) newMonth = 11;
-			if (newMonth > 11) newMonth = 0;
+			if (newMonth < 0) {
+				newMonth = 11;
+			}
+			if (newMonth > 11) {
+				newMonth = 0;
+			}
 			return newMonth;
 		});
+		console.log(newMonthCheck + "newMonthCheck");
+		if (newMonthCheck < 0) {
+			setYear((prevYear) => {
+				let newYear: number = prevYear - 1;
+				return newYear;
+			});
+		}
+		if (newMonthCheck > 11) {
+			setYear((prevYear) => {
+				let newYear: number = prevYear + 1;
+				return newYear;
+			});
+		}
 	};
 
 	const generateRows: (weekLength: number) => Array<Array<Day>> = (
@@ -167,10 +190,16 @@ const Calendar = () => {
 
 	return (
 		<Card className="card">
-			<MonthChangeButtons onMonthChange={monthChangeHandler} />
+			<MonthChangeButtons onMonthChange={monthChangeHandler} month={month} />
 			<table>
 				<caption>
-					{<MonthsFilter onFilterMonth={filterMonthHandler} month={month} />}
+					{
+						<MonthsFilter
+							onFilterMonth={filterMonthHandler}
+							month={month}
+							year={year}
+						/>
+					}
 				</caption>
 				<colgroup>
 					<col className="weekend" />
