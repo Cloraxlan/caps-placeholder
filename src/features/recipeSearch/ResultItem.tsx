@@ -1,50 +1,19 @@
-/* eslint-disable */
 import { stat } from "fs";
 import React, { useState } from "react";
-import Recipe, { serialRecipe } from "../../Interfaces-Classes/Recipe";
+import Recipe from "../../Interfaces-Classes/Recipe";
 import SaveRecipe from "./SaveRecipe";
 import "../recipeSearch/ResultItem.css";
-import {
-	measureSetting,
-	selectDefaultVolume,
-	selectDefaultWeight,
-} from "../../prefrencesSlice";
-import { useAppSelector } from "../../app/hooks";
-import Unit from "../../Interfaces-Classes/Unit";
 import { v4 as uuidv4 } from "uuid";
-import { useAppDispatch } from "../../app/hooks";
-import { addRecipeDate } from "./calendarSlice";
-import { RecipeDate } from "./calendarSlice";
 
 interface Props {
-	result: Recipe | serialRecipe;
-	onSwitchMonth?: (date: RecipeDate | undefined) => void;
+	result: Recipe;
 }
 
 const ResultItem = (props: Props) => {
 	const [showIngredients, setShowIngredients] = useState(false);
 	const [showInstructions, setshowInstructions] = useState(false);
 	const [searchOverlayShown, setSearchOverlayShown] = useState(false);
-	let defaultWeight: measureSetting = useAppSelector(selectDefaultWeight);
-	let defaultVolume: measureSetting = useAppSelector(selectDefaultVolume);
 
-	if (defaultWeight == "DEFAULTW" && defaultVolume != "DEFAULTV") {
-		(props.result as Recipe).convertIntoSingleUnit(defaultVolume as Unit, null);
-	} else if (defaultWeight != "DEFAULTW" && defaultVolume == "DEFAULTV") {
-		(props.result as Recipe).convertIntoSingleUnit(null, defaultWeight as Unit);
-	} else if (defaultWeight != "DEFAULTW" && defaultVolume != "DEFAULTV") {
-		(props.result as Recipe).convertIntoSingleUnit(
-			defaultVolume as Unit,
-			defaultWeight as Unit,
-		);
-	}
-
-	let rec: Recipe | serialRecipe = props.result;
-	// let showSave = true;
-	if (!(rec instanceof Recipe)) {
-		// showSave = false;
-		rec = Recipe.constructFromInterface(rec);
-	}
 	const arrowDirection = (state: boolean) => {
 		switch (state) {
 			case true:
@@ -54,32 +23,6 @@ const ResultItem = (props: Props) => {
 				return "▼";
 		}
 	};
-
-	let changeNote = (event: any) => {
-		setCurrentNote(event.target.value);
-	};
-	let changeDate = (event: any) => {
-		setCurrentDate(event.target.value);
-		let d = new Date(event.target.value);
-		d.setDate(d.getDate() + 1);
-		d.setHours(0, 0, 0, 0);
-	};
-
-	const submitSave = (event: any) => {
-		event.preventDefault();
-		let d = new Date(currentDate);
-		d.setDate(d.getDate() + 1);
-		d.setHours(0, 0, 0, 0);
-		setSearchOverlayShown(false);
-		dispatch(
-			addRecipeDate({
-				date: d.toDateString(),
-				recipe: (props.result as Recipe).serialize(),
-				note: currentNote,
-			}),
-		);
-	};
-
 	return (
 		<div>
 			{/*Overlay system for recipe*/}
@@ -93,44 +36,23 @@ const ResultItem = (props: Props) => {
 					>
 						X
 					</button>
-					<div className="OverlayName">{rec.name}</div>
-					<div className="OverlayDescription">{rec.description}</div>
+					<div className="OverlayName">{props.result.name}</div>
+					<div className="OverlayDescription">{props.result.description}</div>
 					<div className="OverlayListTitle"> Ingredient List </div>
 					<div className="OverlayIngredientItem">
-						{rec.ingredients.map((ingredient) => {
-							return <li key={uuidv4()}>{ingredient.fullName()}</li>;
+						{props.result.ingredients.map((ingredient) => {
+							return <ul>{"• " + ingredient.fullName()}</ul>;
 						})}
 					</div>
 					<div className="OverlayListTitle"> Instructions </div>
-					<div className="OverlayInstructions">{rec.listInstrutions()}</div>
-					<form
-						id="saveRecipeForm"
-						onSubmit={submitSave}
-						className="SaveOverlayResult"
-					>
-						<div>
-							<div className="NoteStylingResult">Note: </div>
-							<input
-								onChange={changeNote}
-								className="SaveRecipeNoteResult"
-								placeholder="Add a note"
-							></input>
-						</div>
-						<div className="SaveRecipeDateResult">
-							<input onChange={changeDate} type="date"></input>
-						</div>
-						<button
-							form="saveRecipeForm"
-							type="submit"
-							className="SaveButtonOverlayResult"
-						>
-							Save
-						</button>
-					</form>
-					{/* <SaveRecipe
+					<div className="OverlayInstructions">
+						{props.result.listInstrutions()}
+					</div>
+
+					<SaveRecipe
 						className2="OverlaySaveRecipe"
 						recipe={props.result}
-					></SaveRecipe> */}
+					></SaveRecipe>
 				</div>
 			)}
 			{/*Displaying all the recipies when searches*/}
@@ -142,7 +64,7 @@ const ResultItem = (props: Props) => {
 							setSearchOverlayShown(true);
 						}}
 					>
-						{rec.name}
+						{props.result.name}
 					</p>
 				</div>
 				{/* <ul>
@@ -154,7 +76,7 @@ const ResultItem = (props: Props) => {
 										})}
 									</ul>
 								</ul> */}
-				<div className="Description">{rec.description}</div>
+				<div className="Description">{props.result.description}</div>
 				<p
 					className="DropDownButton "
 					onClick={() => {
@@ -168,7 +90,7 @@ const ResultItem = (props: Props) => {
 				</p>
 				{showIngredients && (
 					<ol>
-						{rec.ingredients.map((ingredient) => {
+						{props.result.ingredients.map((ingredient) => {
 							return (
 								<li
 									key={uuidv4()}
@@ -193,9 +115,9 @@ const ResultItem = (props: Props) => {
 					{arrowDirection(showInstructions)}
 				</p>
 				{showInstructions && (
-					<p className="DropDownText">{rec.listInstrutions()}</p>
+					<p className="DropDownText">{props.result.listInstrutions()}</p>
 				)}
-				<SaveRecipe recipe={props.result as Recipe}></SaveRecipe>
+				<SaveRecipe recipe={props.result}></SaveRecipe>
 			</div>
 		</div>
 	);
