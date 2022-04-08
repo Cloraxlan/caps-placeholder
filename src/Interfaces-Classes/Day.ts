@@ -3,6 +3,7 @@ import { serialRecipe } from "./Recipe";
 
 export interface Day {
 	date?: Date;
+	year?: any;
 	//Eventually will be expanded into more complex data, for now strings work
 	events: Array<{ recipe: serialRecipe; note: string }>;
 	holiday?: string;
