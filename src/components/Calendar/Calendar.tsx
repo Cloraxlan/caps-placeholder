@@ -7,7 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
 import { serialRecipe } from "../../Interfaces-Classes/Recipe";
-import { selectRecipeDates } from "../../features/recipeSearch/calendarSlice";
+import {
+	RecipeDate,
+	selectRecipeDates,
+} from "../../features/recipeSearch/calendarSlice";
 import { useAppSelector } from "../../app/hooks";
 
 import MonthChangeButtons from "./MonthChangeButtons/MonthChangeButtons";
@@ -40,8 +43,10 @@ const MONTHSIZE = [
 ];
 
 let MONTH = new Date().getMonth();
-
-const Calendar = () => {
+interface Props {
+	results: RecipeDate[];
+}
+const Calendar = (props: Props) => {
 	const [month, setMonth] = useState(MONTH);
 	// const [results, setResults] = useState<RecipeDate[]>([]);
 
@@ -200,6 +205,7 @@ const Calendar = () => {
 										<CalendarDate
 											key={uuidv4()}
 											day={day as Day}
+											results={props.results}
 										></CalendarDate>
 									);
 								})}

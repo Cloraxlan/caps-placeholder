@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { CSSProperties, useState } from "react";
 import { Day } from "../../Interfaces-Classes/Day";
 import { v4 as uuidv4 } from "uuid";
 
 import "./Calendar.css";
+import { RecipeDate } from "../../features/recipeSearch/calendarSlice";
+import ResultItem from "../../features/recipeSearch/ResultItem";
 
 interface Props {
 	day: Day;
+	results: RecipeDate[];
 }
-
+const highlight: CSSProperties = {
+	backgroundColor: "yellow",
+};
 const CalendarDay = (props: Props) => {
 	//Value is the name, or eventually id for the event
 	const [overlayShown, setOverlayShown] = useState("");
@@ -30,6 +35,14 @@ const CalendarDay = (props: Props) => {
 			}
 		}
 	};
+	let contains = false;
+	for (let i = 0; i < props.results.length; i++) {
+		for (let o = 0; o < props.day.events.length; o++) {
+			if (props.results[i].recipe.name == props.day.events[o].recipe.name) {
+				contains = true;
+			}
+		}
+	}
 	return (
 		<React.Fragment>
 			<td>
@@ -38,17 +51,32 @@ const CalendarDay = (props: Props) => {
 					<div>{props.day.date?.getDate()}</div>
 					<div className="notes">
 						{props.day.events.map((event) => {
-							return (
-								<div
-									key={uuidv4()}
-									onClick={() => {
-										//Or whatever should be the id
-										setOverlayShown(event.recipe.name);
-									}}
-								>
-									{event.recipe.name}
-								</div>
-							);
+							if (contains) {
+								return (
+									<div
+										style={highlight}
+										key={uuidv4()}
+										onClick={() => {
+											//Or whatever should be the id
+											setOverlayShown(event.recipe.name);
+										}}
+									>
+										{event.recipe.name}
+									</div>
+								);
+							} else {
+								return (
+									<div
+										key={uuidv4()}
+										onClick={() => {
+											//Or whatever should be the id
+											setOverlayShown(event.recipe.name);
+										}}
+									>
+										{event.recipe.name}
+									</div>
+								);
+							}
 						})}
 					</div>
 				</div>
