@@ -32,6 +32,7 @@ const itemStyle: CSSProperties = {
 const CalendarPage = () => {
 	const [results, setResults] = useState<RecipeDate[]>([]);
 	let recipeDateList = useAppSelector(selectRecipeDates);
+
 	return (
 		<React.Fragment>
 			<div style={searchBoxStyle}>
