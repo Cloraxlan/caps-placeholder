@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./MonthChangeButtons.css";
+import useArrowKeys from "use-arrow-keys";
 
 interface Props {
 	month: number;
@@ -7,6 +8,15 @@ interface Props {
 }
 
 const MonthChangeButtons = (props: Props) => {
+	const onLeftKey = () => {
+		monthChangeMerger(-1);
+	};
+	const onRightKey = () => {
+		monthChangeMerger(1);
+	};
+	//useArrowKeys({ left, right });
+	useArrowKeys({ onLeftKey, onRightKey });
+
 	const filterChangeHandler = (event: any) => {
 		const val = event.target.innerText === "ᐅ" ? 1 : -1;
 		console.log("ran");
@@ -16,6 +26,7 @@ const MonthChangeButtons = (props: Props) => {
 	const monthChangeMerger = (x: any) => {
 		props.onMonthChange(x);
 	};
+
 	/*let keyPressEvent: any = window.addEventListener("keydown", (event: any) => {
 		let monthChanger: number = 0;
 		if (event.key === "ArrowLeft") {
@@ -45,7 +56,7 @@ const MonthChangeButtons = (props: Props) => {
 			},
 		);
 	}, []);*/
-	useEffect(() => {
+	/*useEffect(() => {
 		let e = (event: any) => {
 			let monthChanger: number = 0;
 			if (event.key === "ArrowLeft") {
@@ -68,7 +79,7 @@ const MonthChangeButtons = (props: Props) => {
 			window.removeEventListener("keydown", event);
 		});
 		// keyPressEvent;
-	}, [props.month]);
+	}, [props.month]);*/
 	return (
 		<div className="monthChangeButtons">
 			<button type="submit" className="arrow" onClick={filterChangeHandler}>
